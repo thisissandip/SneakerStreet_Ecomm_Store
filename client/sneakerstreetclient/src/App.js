@@ -22,7 +22,6 @@ function App() {
 						<Navbar />
 						<SignupPage />
 					</Route>
-					s
 				</Switch>
 			</BrowserRouter>
 		</>

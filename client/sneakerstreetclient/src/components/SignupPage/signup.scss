@@ -1,0 +1,29 @@
+@import "../../index.scss";
+
+.signup-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	background-color: white;
+	.signup-container {
+		display: flex;
+		width: 80%;
+		max-width: 1300px;
+		.signup-left-cont {
+			flex: 1 0 200px;
+			border: 2px solid lightcoral;
+			.signup-left-title {
+				font-family: $primary-font;
+				font-weight: 200;
+				font-size: 4rem;
+				margin-left: 1rem;
+			}
+		}
+		.signup-right-cont {
+			flex: 1 0 200px;
+			border: 2px solid rebeccapurple;
+		}
+	}
+}
