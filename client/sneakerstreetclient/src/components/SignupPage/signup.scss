@@ -7,23 +7,216 @@
 	width: 100%;
 	height: 100vh;
 	background-color: white;
+
 	.signup-container {
+		font-family: $primary-font;
 		display: flex;
 		width: 80%;
 		max-width: 1300px;
 		.signup-left-cont {
 			flex: 1 0 200px;
-			border: 2px solid lightcoral;
+			//border: 2px solid lightcoral;
 			.signup-left-title {
+				margin-top: -15px;
 				font-family: $primary-font;
 				font-weight: 200;
 				font-size: 4rem;
-				margin-left: 1rem;
+				transition: all 0.2s ease;
+			}
+			.go-to-login {
+				cursor: pointer;
+				outline: none;
+				width: 270px;
+				font-family: $primary-font;
+				font-weight: 300;
+				font-size: 0.7rem;
+				margin-top: 35px;
+				margin-left: 2px;
+				padding: 12px 0;
+				border: 1px solid grey;
+				border-radius: 30px;
+				color: $black-color;
+				background-color: #fff;
+				transition: all 0.2s ease;
+				&:hover {
+					background-color: $black-color;
+					color: white;
+					font-weight: 500;
+				}
 			}
 		}
 		.signup-right-cont {
 			flex: 1 0 200px;
-			border: 2px solid rebeccapurple;
+			padding: 0 40px;
+			//border: 2px solid rebeccapurple;
+			.form-first-row {
+				width: 100%;
+				display: flex;
+				.input-wrapper {
+					color: grey;
+					flex: 1 0 80px;
+					margin: 0 0;
+					margin-bottom: 20px;
+					display: flex;
+					flex-direction: column;
+					#fname {
+						margin-right: 20px;
+					}
+				}
+			}
+			.input-wrapper {
+				color: grey;
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+				margin-bottom: 20px;
+				label {
+					font-family: $primary-font;
+					font-size: 0.9rem;
+				}
+				input {
+					font-family: $primary-font;
+					font-size: 1rem;
+					padding: 10px 0px 10px 0px;
+					background-color: transparent;
+					z-index: 1;
+					outline: none;
+					border: none;
+					border-bottom: 1px solid black;
+					&:focus ~ .placeholder {
+						transform: translateY(-100%);
+						opacity: 0;
+					}
+				}
+				.placeholder {
+					position: absolute;
+					z-index: 0;
+					bottom: 2rem;
+					font-family: $primary-font;
+					font-size: 0.9rem;
+					color: rgb(189, 189, 189);
+					transition: transform 0.3s ease, opacity 0.2s ease;
+				}
+
+				.error {
+					font-family: $primary-font;
+					height: 20px;
+					//	background-color: turquoise;
+					font-size: 0.8rem;
+					font-style: italic;
+					color: brown;
+					padding: 5px 0px;
+				}
+			}
+			.form-last-row {
+				margin-top: 50px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.terms {
+					font-size: 0.9rem;
+					label {
+						margin-left: 10px;
+					}
+					.error {
+						font-family: $primary-font;
+						height: 20px;
+						//	background-color: turquoise;
+						font-size: 0.8rem;
+						font-style: italic;
+						color: brown;
+						padding: 5px 0px;
+					}
+				}
+				.submit-button {
+					cursor: pointer;
+					outline: none;
+					width: 40%;
+					font-family: $primary-font;
+					font-weight: 300;
+					font-size: 0.8rem;
+					padding: 12px 0;
+					border: 1px solid $black-color;
+					border-radius: 30px;
+					color: white;
+					background-color: $black-color;
+					transition: all 0.2s ease;
+					&:hover {
+						background-color: transparent;
+						color: $black-color;
+						font-weight: 500;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.signup-page {
+		.signup-container {
+			.signup-left-cont {
+				.signup-left-title {
+					font-size: 2.8rem;
+				}
+				.go-to-login {
+					width: 190px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.signup-page {
+		height: auto;
+		padding-bottom: 50px;
+		.signup-container {
+			margin-top: 80px; //space for navbar
+			align-items: initial;
+			flex-direction: column;
+			.signup-left-cont {
+				.signup-left-title {
+					margin-top: 10px;
+					font-size: 2.8rem;
+				}
+				.go-to-login {
+					margin-top: 20px;
+					width: 200px;
+				}
+			}
+			.signup-right-cont {
+				padding: 0 0px;
+				.form-first-row {
+					display: flex;
+					flex-direction: column;
+					.input-wrapper {
+						margin: 0 0;
+						margin-bottom: 10px;
+						display: flex;
+						flex-direction: column;
+						#fname {
+							margin-right: 0px;
+						}
+					}
+				}
+				.input-wrapper {
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 10px;
+				}
+				.form-last-row {
+					margin-top: 10px;
+					display: flex;
+					flex-direction: column;
+					align-items: initial;
+					.submit-button {
+						width: 100%;
+						margin-top: 20px;
+					}
+				}
+			}
 		}
 	}
 }
