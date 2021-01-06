@@ -1,22 +1,21 @@
 @import "../../index.scss";
 
-.signup-page {
+.login-page {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	height: 100vh;
 	background-color: white;
-
-	.signup-container {
+	.login-container {
 		font-family: $primary-font;
 		display: flex;
 		width: 80%;
 		max-width: 1300px;
-		.signup-left-cont {
+		.login-left-cont {
 			flex: 1 0 200px;
 			//border: 2px solid lightcoral;
-			.signup-left-title {
+			.login-left-title {
 				margin-top: -15px;
 				font-family: $primary-font;
 				font-weight: 200;
@@ -45,8 +44,8 @@
 				}
 			}
 		}
-		.signup-right-cont {
-			flex: 1 0 200px;
+		.login-right-cont {
+			flex: 1 0 300px;
 			padding: 0 40px;
 			//border: 2px solid rebeccapurple;
 			.form-first-row {
@@ -122,6 +121,9 @@
 					label {
 						margin-left: 10px;
 					}
+					a {
+						color: gray;
+					}
 					.error {
 						font-family: $primary-font;
 						height: 20px;
@@ -156,11 +158,11 @@
 	}
 }
 
-@media screen and (max-width: 900px) {
-	.signup-page {
-		.signup-container {
-			.signup-left-cont {
-				.signup-left-title {
+@media screen and (max-width: 1100px) {
+	.login-page {
+		.login-container {
+			.login-left-cont {
+				.login-left-title {
 					font-size: 2.8rem;
 				}
 				.go-to-login {
@@ -172,16 +174,16 @@
 }
 
 @media screen and (max-width: 750px) {
-	.signup-page {
+	.login-page {
 		height: auto;
 		padding-bottom: 50px;
-		.signup-container {
+		.login-container {
 			width: 85%;
 			margin-top: 80px; //space for navbar
 			align-items: initial;
 			flex-direction: column;
-			.signup-left-cont {
-				.signup-left-title {
+			.login-left-cont {
+				.login-left-title {
 					margin-top: 10px;
 					font-size: 2.8rem;
 				}
@@ -190,7 +192,7 @@
 					width: 200px;
 				}
 			}
-			.signup-right-cont {
+			.login-right-cont {
 				padding: 0 0px;
 				.form-first-row {
 					display: flex;

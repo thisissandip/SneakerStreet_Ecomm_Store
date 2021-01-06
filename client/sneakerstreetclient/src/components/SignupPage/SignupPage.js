@@ -2,6 +2,8 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./signup.scss";
+import { Link } from "react-router-dom";
+import { url } from "../../api";
 
 function SignupPage() {
 	let initialValues = {
@@ -12,8 +14,15 @@ function SignupPage() {
 		cpassword: "",
 		terms: false,
 	};
-	const onSubmit = (values) => {
+	const onSubmit = async (values) => {
 		console.log("Form Values", values);
+		const response = await fetch(`${url}/signup`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(values),
+		});
+		const data = await response.json();
+		console.log("Sign up server data", data);
 	};
 
 	let passwordregex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
@@ -55,7 +64,9 @@ function SignupPage() {
 						Create an
 						<br /> account
 					</div>
-					<button className='go-to-login'>I ALREADY HAVE AN ACCOUNT</button>
+					<Link to='/login'>
+						<button className='go-to-login'>I ALREADY HAVE AN ACCOUNT</button>
+					</Link>
 				</div>
 				<div className='signup-right-cont'>
 					<form onSubmit={formik.handleSubmit}>
