@@ -35,13 +35,12 @@
 				padding: 12px 0;
 				border: 1px solid grey;
 				border-radius: 30px;
-				color: $black-color;
-				background-color: #fff;
+				color: black;
+				background-color: transparent;
 				transition: all 0.2s ease;
 				&:hover {
-					background-color: $black-color;
+					background-color: gray;
 					color: white;
-					font-weight: 500;
 				}
 			}
 		}
@@ -85,7 +84,7 @@
 					border: none;
 					border-bottom: 1px solid grey;
 					&:focus {
-						border-bottom: 1px solid blueviolet;
+						border-bottom: 1px solid $primary-color;
 					}
 					&:focus ~ .placeholder {
 						transform: translateY(-100%);
@@ -95,7 +94,7 @@
 				.placeholder {
 					position: absolute;
 					z-index: 0;
-					bottom: 2rem;
+					bottom: 2.9rem;
 					font-family: $primary-font;
 					font-size: 0.9rem;
 					color: rgb(189, 189, 189);
@@ -104,7 +103,7 @@
 
 				.error {
 					font-family: $primary-font;
-					height: 20px;
+					height: 35px;
 					//	background-color: turquoise;
 					font-size: 0.8rem;
 					font-style: italic;
@@ -140,14 +139,14 @@
 					font-weight: 300;
 					font-size: 0.8rem;
 					padding: 12px 0;
-					border: 1px solid $black-color;
+					border: 1px solid $primary-color;
 					border-radius: 30px;
 					color: white;
-					background-color: $black-color;
+					background-color: $primary-color;
 					transition: all 0.2s ease;
 					&:hover {
 						background-color: transparent;
-						color: $black-color;
+						color: $primary-color;
 						font-weight: 500;
 					}
 				}
@@ -202,6 +201,9 @@
 						flex-direction: column;
 						#fname {
 							margin-right: 0px;
+						}
+						.placeholder {
+							bottom: 2.1rem;
 						}
 					}
 				}

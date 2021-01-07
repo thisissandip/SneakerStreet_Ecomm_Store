@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./signup.scss";
 import { Link } from "react-router-dom";
 import { url } from "../../api";
+import { Redirect } from "react-router";
 
 function SignupPage() {
+	const [emailError, setemailError] = useState("");
+
 	let initialValues = {
 		fname: "",
 		lname: "",
@@ -15,14 +18,25 @@ function SignupPage() {
 		terms: false,
 	};
 	const onSubmit = async (values) => {
-		console.log("Form Values", values);
+		let valuestobesend = {
+			fname: values.fname,
+			lname: values.lname,
+			email: values.email,
+			password: values.password,
+		};
+		//console.log("Form Values", valuestobesend);
+
 		const response = await fetch(`${url}/signup`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(values),
+			body: JSON.stringify(valuestobesend),
 		});
 		const data = await response.json();
-		console.log("Sign up server data", data);
+		if (data.errors) {
+			setemailError(data.errors.email);
+		} else if (data.userid) {
+			setemailError("");
+		}
 	};
 
 	let passwordregex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
@@ -133,6 +147,7 @@ function SignupPage() {
 									{formik.errors.email &&
 										formik.touched.email &&
 										formik.errors.email}
+									{emailError}
 								</div>
 							}
 						</div>
