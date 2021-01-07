@@ -26,3 +26,22 @@ module.exports.signupPost = async (req, res) => {
 		res.json({ errors });
 	}
 };
+
+module.exports.loginPost = async (req, res) => {
+	const logindata = req.body;
+	try {
+		const userdata = await User.find({ email: logindata.loginemail });
+		if (
+			userdata.length > 0 &&
+			userdata[0].password === logindata.loginpassword
+		) {
+			res.json({ userid: userdata[0]._id });
+		} else {
+			res.json({
+				errors: "Username or Password is Invalid",
+			});
+		}
+	} catch (err) {
+		console.log(err);
+	}
+};

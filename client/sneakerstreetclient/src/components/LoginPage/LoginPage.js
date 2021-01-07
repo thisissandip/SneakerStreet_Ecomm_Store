@@ -1,25 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./login.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { url } from "../../api";
 
 function LoginPage() {
+	const history = useHistory();
+	const [LoginError, setLoginError] = useState("");
+	const [user, setuser] = useState(null); // implement redux // encrypt password using bcrypt
 	let initialValues = {
 		Email: "",
 		loginpassword: "",
 	};
+	useEffect(() => {
+		if (user) {
+			history.push({
+				pathname: "/",
+			});
+		}
+	}, [user]);
 
 	const onSubmit = async (values) => {
 		//		console.log("Login Details", values);
+
+		let userlogindata = {
+			loginemail: values.Email,
+			loginpassword: values.loginpassword,
+		};
+
 		const res = await fetch(`${url}/login`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(values),
+			body: JSON.stringify(userlogindata),
 		});
 		const data = await res.json();
-		console.log("Login server data", data);
+		if (data.errors) {
+			setLoginError(data.errors);
+		} else {
+			setLoginError("");
+			setuser(data.userid);
+			//console.log(data.userid);
+		}
 	};
 
 	const validationSchema = Yup.object({
@@ -99,13 +121,7 @@ function LoginPage() {
 									target='_blank'>
 									Forgot Your Password?
 								</a>
-								{
-									<div className='error'>
-										{formik.errors.terms &&
-											formik.touched.terms &&
-											formik.errors.terms}
-									</div>
-								}
+								{<div className='error'>{LoginError}</div>}
 							</div>
 							<button className='submit-button' type='submit'>
 								LOGIN

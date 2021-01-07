@@ -3,11 +3,21 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./signup.scss";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 import { url } from "../../api";
-import { Redirect } from "react-router";
 
 function SignupPage() {
+	const history = useHistory();
 	const [emailError, setemailError] = useState("");
+	const [user, setuser] = useState(null); // implement redux
+
+	useEffect(() => {
+		if (user) {
+			history.push({
+				pathname: "/",
+			});
+		}
+	}, [user]);
 
 	let initialValues = {
 		fname: "",
@@ -35,7 +45,9 @@ function SignupPage() {
 		if (data.errors) {
 			setemailError(data.errors.email);
 		} else if (data.userid) {
+			console.log(data.userid);
 			setemailError("");
+			setuser(data.userid);
 		}
 	};
 
