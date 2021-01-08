@@ -1,5 +1,6 @@
 const User = require("../models/UserModel");
-const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { create } = require("../models/UserModel");
 
 const handleErrors = (err) => {
 	let errors = {
@@ -14,49 +15,42 @@ const handleErrors = (err) => {
 	return errors;
 };
 
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (id) => {
+	return jwt.sign({ id }, "sneakerstoreserver", {
+		expiresIn: maxAge,
+	});
+};
+
 module.exports.signupPost = async (req, res) => {
 	const userdata = req.body;
 	try {
 		const newuser = await User.create(userdata);
+		const userid = newuser._id;
 		//console.log(newuser);
-		res.json({
-			userid: newuser._id,
+		const token = createToken(userid);
+		res.cookie("jwt", token, { httpOnly: false, maxAge: maxAge * 1000 });
+		res.status(201).json({
+			userid,
 		});
 	} catch (err) {
 		let errors = handleErrors(err);
 		res.json({ errors });
 	}
 };
-/* 
-module.exports.loginPost = async (req, res) => {
-	const logindata = req.body;
-	try {
-		const userdata = await User.find({ email: logindata.loginemail });
-		if (
-			userdata.length > 0 &&
-			userdata[0].password === logindata.loginpassword
-		) {
-			res.json({ userid: userdata[0]._id });
-		} else {
-			res.json({
-				errors: "Username or Password is Invalid",
-			});
-		}
-	} catch (err) {
-		console.log(err);
-	}
-}; */
 
 module.exports.loginPost = async (req, res) => {
 	const logindata = req.body;
 	let email = logindata.loginemail;
 	let password = logindata.loginpassword;
-
 	try {
 		const user = await User.login(email, password);
 		if (user) {
-			res.json({
-				userid: user._id,
+			const userid = user._id;
+			const token = createToken(userid);
+			res.cookie("jwt", token, { maxAge: maxAge * 1000 });
+			res.status(201).json({
+				userid,
 			});
 		} else {
 			res.json({

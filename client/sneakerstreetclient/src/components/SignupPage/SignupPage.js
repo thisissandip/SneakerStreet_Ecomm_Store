@@ -38,6 +38,7 @@ function SignupPage() {
 
 		const response = await fetch(`${url}/signup`, {
 			method: "POST",
+			credentials: "include",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(valuestobesend),
 		});
