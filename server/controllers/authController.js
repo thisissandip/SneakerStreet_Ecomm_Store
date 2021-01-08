@@ -1,4 +1,5 @@
 const User = require("../models/UserModel");
+const bcrypt = require("bcrypt");
 
 const handleErrors = (err) => {
 	let errors = {
@@ -26,7 +27,7 @@ module.exports.signupPost = async (req, res) => {
 		res.json({ errors });
 	}
 };
-
+/* 
 module.exports.loginPost = async (req, res) => {
 	const logindata = req.body;
 	try {
@@ -36,6 +37,27 @@ module.exports.loginPost = async (req, res) => {
 			userdata[0].password === logindata.loginpassword
 		) {
 			res.json({ userid: userdata[0]._id });
+		} else {
+			res.json({
+				errors: "Username or Password is Invalid",
+			});
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}; */
+
+module.exports.loginPost = async (req, res) => {
+	const logindata = req.body;
+	let email = logindata.loginemail;
+	let password = logindata.loginpassword;
+
+	try {
+		const user = await User.login(email, password);
+		if (user) {
+			res.json({
+				userid: user._id,
+			});
 		} else {
 			res.json({
 				errors: "Username or Password is Invalid",

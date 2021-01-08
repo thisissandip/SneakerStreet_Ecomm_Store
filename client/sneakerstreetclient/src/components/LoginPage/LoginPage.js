@@ -40,7 +40,7 @@ function LoginPage() {
 		} else {
 			setLoginError("");
 			setuser(data.userid);
-			//console.log(data.userid);
+			console.log(data.userid);
 		}
 	};
 
