@@ -1,52 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./login.scss";
 import { Link, useHistory } from "react-router-dom";
-import { url } from "../../api";
+
+import { fetchUser } from "../../redux/actions/authActions";
 
 function LoginPage() {
+	const user = useSelector((state) => state.authR.user);
+	const authError = useSelector((state) => state.authR.error);
+	const dispatch = useDispatch();
+
 	const history = useHistory();
-	const [LoginError, setLoginError] = useState("");
-	const [user, setuser] = useState(null); // implement redux // encrypt password using bcrypt
+
 	let initialValues = {
 		Email: "",
 		loginpassword: "",
 	};
+
 	useEffect(() => {
 		if (user) {
 			history.push({
 				pathname: "/",
 			});
 		}
+		console.log(user);
 	}, [user]);
 
 	const onSubmit = async (values) => {
-		//		console.log("Login Details", values);
-
+		//	console.log("Login Details", values);
 		let userlogindata = {
 			loginemail: values.Email,
 			loginpassword: values.loginpassword,
 		};
-
-		const res = await fetch(`${url}/login`, {
-			method: "POST",
-			credentials: "include",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(userlogindata),
-		});
-		const data = await res.json();
-		if (data.errors) {
-			setLoginError(data.errors);
-		} else {
-			setLoginError("");
-			setuser(data.userid);
-			console.log(data.userid);
-		}
+		dispatch(fetchUser(userlogindata));
 	};
 
 	const validationSchema = Yup.object({
-		Email: Yup.string().email().required("Email is Required"),
+		Email: Yup.string()
+			.email("Please enter a valid email")
+			.required("Email is Required"),
 		loginpassword: Yup.string().required("Password is Required"),
 	});
 
@@ -122,7 +116,7 @@ function LoginPage() {
 									target='_blank'>
 									Forgot Your Password?
 								</a>
-								{<div className='error'>{LoginError}</div>}
+								{<div className='error'>{authError}</div>}
 							</div>
 							<button className='submit-button' type='submit'>
 								LOGIN

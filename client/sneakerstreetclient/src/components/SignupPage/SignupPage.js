@@ -4,12 +4,15 @@ import * as Yup from "yup";
 import "./signup.scss";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { url } from "../../api";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../redux/actions/authActions";
 
 function SignupPage() {
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.authR.user);
+	const emailError = useSelector((state) => state.authR.regerror);
+
 	const history = useHistory();
-	const [emailError, setemailError] = useState("");
-	const [user, setuser] = useState(null); // implement redux
 
 	useEffect(() => {
 		if (user) {
@@ -34,22 +37,7 @@ function SignupPage() {
 			email: values.email,
 			password: values.password,
 		};
-		//console.log("Form Values", valuestobesend);
-
-		const response = await fetch(`${url}/signup`, {
-			method: "POST",
-			credentials: "include",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(valuestobesend),
-		});
-		const data = await response.json();
-		if (data.errors) {
-			setemailError(data.errors.email);
-		} else if (data.userid) {
-			console.log(data.userid);
-			setemailError("");
-			setuser(data.userid);
-		}
+		dispatch(registerUser(valuestobesend));
 	};
 
 	let passwordregex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
@@ -57,7 +45,9 @@ function SignupPage() {
 	const validationSchema = Yup.object({
 		fname: Yup.string().required("First Name Required"),
 		lname: Yup.string().required("Last Name Required"),
-		email: Yup.string().email().required("Email is Required"),
+		email: Yup.string()
+			.email("Please enter a valid email")
+			.required("Email is Required"),
 		password: Yup.string()
 			.required("Password is Required")
 			.matches(
