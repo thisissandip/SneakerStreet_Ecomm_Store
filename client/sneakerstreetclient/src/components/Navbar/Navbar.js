@@ -11,18 +11,26 @@ function Navbar() {
 		const mobilemenu = document.querySelector(".navbar-inner");
 		const hamburger = document.querySelector(".hamburger-icon");
 		const closemenu = document.querySelector(".close-btn");
+		const navitems = document.querySelectorAll(".nav-item");
 		mobilemenu.style.left = "0%";
 		hamburger.style.display = "none";
 		closemenu.style.display = "initial";
+		navitems.forEach((item) => {
+			item.classList.add("openmenu");
+		});
 	};
 
 	const CloseMobileMenu = () => {
 		const mobilemenu = document.querySelector(".navbar-inner");
 		const hamburger = document.querySelector(".hamburger-icon");
 		const closemenu = document.querySelector(".close-btn");
+		const navitems = document.querySelectorAll(".nav-item");
 		mobilemenu.style.left = "-100%";
 		hamburger.style.display = "initial";
 		closemenu.style.display = "none";
+		navitems.forEach((item) => {
+			item.classList.remove("openmenu");
+		});
 	};
 
 	return (
@@ -51,7 +59,7 @@ function Navbar() {
 							onClick={(e) => {
 								CloseMobileMenu(e);
 							}}>
-							Logo
+							LOGO
 						</div>
 					</li>
 					<li>

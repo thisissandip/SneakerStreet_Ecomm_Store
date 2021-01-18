@@ -1,0 +1,12 @@
+@import "../../index.scss";
+.homepage {
+	width: 100%;
+	//margin-top: 80px; // space for navbar in desktops
+}
+
+@media screen and (max-width: 750px) {
+	.homepage {
+		width: 100%;
+		margin-top: 70px; // space for navbar in mobile
+	}
+}

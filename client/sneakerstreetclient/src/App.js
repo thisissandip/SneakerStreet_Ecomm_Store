@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
 import SignupPage from "./components/SignupPage/SignupPage";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/HomePage/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {
