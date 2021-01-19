@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { HiOutlineChevronLeft, HiChevronRight } from "react-icons/hi";
 import { fetchall } from "../../../redux/actions/productActions";
+import SliderItem from "../SliderItem/SliderItem";
 import "./slider.scss";
 
 function Slider() {
@@ -42,7 +43,7 @@ function Slider() {
 		const slider = document.querySelector(".slider");
 		let slideamt = (count - 2) * 20;
 		if (count === 2) {
-			slider.style.transform = `translate(2%)`;
+			slider.style.transform = `translate(1%)`;
 		} else {
 			slider.style.transform = `translate(-${slideamt}%)`;
 		}
@@ -51,6 +52,15 @@ function Slider() {
 		}
 		//	console.log(slideamt);
 	};
+
+	const allsliders = allproducts.map((item) => (
+		<SliderItem
+			key={item._id}
+			allimages={item.Images}
+			Name={item.Name}
+			Price={item.BuyNew}
+		/>
+	));
 
 	return (
 		<div className='slider-container'>
@@ -69,17 +79,7 @@ function Slider() {
 				<HiChevronRight />
 			</div>
 			<div className='slider-wrapper'>
-				<div className='slider'>
-					<div className='slide-item'></div>
-					<div className='slide-item'></div>
-					<div className='slide-item'></div>
-					<div className='slide-item'></div>
-					<div className='slide-item'></div>
-					<div className='slide-item'></div>
-					<div className='slide-item'></div>
-					<div className='slide-item'></div>
-					<div className='slide-item'></div>
-				</div>
+				<div className='slider'>{allsliders}</div>
 			</div>
 		</div>
 	);

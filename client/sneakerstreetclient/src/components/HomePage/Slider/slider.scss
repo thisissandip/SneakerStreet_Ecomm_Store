@@ -4,7 +4,7 @@
 	position: relative;
 	//padding: 0 80px;
 	width: 100%;
-	border: 1px solid blue;
+	//	border: 1px solid blue;
 	.slide-left-btn,
 	.slide-right-btn {
 		cursor: pointer;
@@ -29,25 +29,18 @@
 	}
 	.slider-wrapper {
 		position: relative;
-		min-height: 350px;
+		min-height: 340px;
 		overflow: hidden;
-		border: 2px dotted green;
+		//	border: 2px dotted green;
 		.slider {
 			position: absolute;
 			display: flex;
 			align-items: center;
-			border: 1px solid peru;
-			transform: translateX(2%);
+			//	border: 1px solid peru;
+			transform: translateX(1%);
 			transition: 2s transform ease;
 			&::-webkit-scrollbar {
 				width: 0px;
-			}
-			.slide-item {
-				cursor: pointer;
-				min-width: 370px;
-				min-height: 300px;
-				margin-right: 50px;
-				border: 1px solid black;
 			}
 		}
 	}
@@ -66,26 +59,11 @@
 			position: relative;
 			overflow: hidden;
 			.slider {
-				margin: 5px 5px;
-				border: 1px solid peru;
+				//	border: 1px solid peru;
 				transform: translateX(0%);
 				position: relative;
 				flex-wrap: nowrap;
 				overflow-x: auto;
-				.slide-item {
-					cursor: pointer;
-					border: 3px solid slateblue;
-					min-width: 91vw;
-					min-height: 260px;
-					margin: 0 10px;
-					border: 2px solid black;
-					&:first-child {
-						margin-left: 0px;
-					}
-					&:last-child {
-						margin-right: 20px;
-					}
-				}
 			}
 		}
 	}
