@@ -6,3 +6,8 @@ export {
 	REGISTER_USER_SUCCESS,
 	REGISTER_USER,
 } from "./authTypes";
+export {
+	FETCH_ALL_PRODUCTS,
+	FETCH_ALL_PRODUCTS_SUCCESS,
+	FETCH_ALL_PRODUCTS_FAILURE,
+} from "./productTypes";

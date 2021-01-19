@@ -8,5 +8,36 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	transition: 1s background-image ease-in-out;
+	transition: 0.2s background-image ease;
+	animation: crossfade 20s infinite forwards;
+}
+
+@keyframes crossfade {
+	0% {
+		background-image: url("../../../images/header1.jpg");
+	}
+	40% {
+		background-image: url("../../../images/header1.jpg");
+	}
+	50% {
+		background-image: url("../../../images/header2.jpg");
+	}
+	90% {
+		background-image: url("../../../images/header2.jpg");
+	}
+}
+
+.header::before {
+	position: absolute;
+	overflow: hidden;
+	width: 0px;
+	height: 0px;
+	z-index: -1;
+	content: url("../../../images/header2.jpg");
+}
+
+@media screen and (max-width: 750px) {
+	.header {
+		margin-top: 70px;
+	}
 }

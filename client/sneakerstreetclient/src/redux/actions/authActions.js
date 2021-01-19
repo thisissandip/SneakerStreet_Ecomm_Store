@@ -22,6 +22,7 @@ export const fetchUserFailure = (data) => {
 
 export const fetchUser = (userdata) => {
 	return async function (dispatch) {
+		console.log("Hi");
 		dispatch(fetchUserLoading());
 
 		const res = await fetch(`${url}/login`, {
@@ -42,20 +43,20 @@ export const fetchUser = (userdata) => {
 
 export const registeruserloading = () => {
 	return {
-		type: "REGISTER_USER",
+		type: REGISTER_USER,
 	};
 };
 
 export const registerusersuccess = (userdata) => {
 	return {
-		type: "REGISTER_USER_SUCCESS",
+		type: REGISTER_USER_SUCCESS,
 		payload: userdata,
 	};
 };
 
 export const registeruserfailure = (emailerror) => {
 	return {
-		type: "REGISTER_USER_FAILURE",
+		type: REGISTER_USER_FAILURE,
 		payload: emailerror,
 	};
 };
