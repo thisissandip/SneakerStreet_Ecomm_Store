@@ -31,7 +31,8 @@
 		position: relative;
 		min-height: 340px;
 		overflow: hidden;
-		//	border: 2px dotted green;
+		//border: 2px dotted green;
+		//padding-left: 50px;
 		.slider {
 			position: absolute;
 			display: flex;
@@ -46,7 +47,7 @@
 	}
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 460px) {
 	.slider-container {
 		position: relative;
 		//padding: 0 80px;

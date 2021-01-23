@@ -1,15 +1,26 @@
 @import "../../../index.scss";
 
 .header {
+	position: relative;
 	margin-top: 80px; // space for navbar in desktops
 	width: 100%;
-	min-height: 90vh;
+	min-height: 80vh;
 	background-image: url("../../../images/header1.jpg");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
 	transition: 0.2s background-image ease;
 	animation: crossfade 20s infinite forwards;
+	.header-card {
+		position: absolute;
+		bottom: 1rem;
+		left: 3rem;
+		width: 30%;
+		min-width: 200px;
+		height: 400px;
+		background-color: white;
+		box-shadow: 0px 0px 20px rgba($color: #000000, $alpha: 0.1);
+	}
 }
 
 @keyframes crossfade {

@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./slideritem.scss";
 
 function SliderItem({ allimages, Name, Price }) {
+	const [Img, setImg] = useState(allimages[0]);
+
 	return (
-		<div className='slide-item'>
+		<div
+			className='slide-item'
+			/* 		onMouseEnter={() => {
+				setImg(allimages[1]);
+			}}
+			onMouseLeave={() => {
+				setImg(allimages[0]);
+			}} */
+		>
 			<div className='slide-item-img-wrapper'>
-				<img src={allimages[0]} alt={Name} />
+				<img src={Img} alt={Name} />
 			</div>
 			<div className='slide-item-details'>
 				{" "}

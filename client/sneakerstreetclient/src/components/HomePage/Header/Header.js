@@ -4,7 +4,9 @@ import header2 from "../../../images/header2.jpg";
 import "./Header.scss";
 
 function Header() {
-	return <div className='header'></div>;
+	return (
+		<div className='header'>{/* <div className='header-card'></div> */}</div>
+	);
 }
 
 export default Header;

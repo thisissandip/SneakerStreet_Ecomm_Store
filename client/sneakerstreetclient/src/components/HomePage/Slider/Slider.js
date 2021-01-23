@@ -4,12 +4,19 @@ import { HiOutlineChevronLeft, HiChevronRight } from "react-icons/hi";
 import { fetchall } from "../../../redux/actions/productActions";
 import SliderItem from "../SliderItem/SliderItem";
 import "./slider.scss";
+import useWidth from "../../../Hooks/useWidth";
 
-function Slider() {
+function SliderHome() {
 	const allproducts = useSelector((state) => state.productR.allproducts);
 	const isloading = useSelector((state) => state.productR.isloading);
 
 	const dispatch = useDispatch();
+
+	const [width] = useWidth();
+
+	useEffect(() => {
+		console.log(width);
+	}, [width]);
 
 	useEffect(() => {
 		dispatch(fetchall());
@@ -24,6 +31,7 @@ function Slider() {
 	}, [isloading]);
 
 	const [count, setCount] = useState(1);
+	const [count800, setCount800] = useState(1);
 
 	const SlideRight = () => {
 		const slider = document.querySelector(".slider");
@@ -39,6 +47,21 @@ function Slider() {
 		}
 	};
 
+	const SlideRightOne = () => {
+		const slider = document.querySelector(".slider");
+		let slideamt;
+		if (width < 600) {
+			slideamt = count800 * 8;
+		} else {
+			slideamt = count800 * 7;
+		}
+		if (slideamt < 95) {
+			console.log(count800);
+			slider.style.transform = `translate(-${slideamt}%)`;
+			setCount800(count800 + 1);
+		}
+	};
+
 	const SlideLeft = () => {
 		const slider = document.querySelector(".slider");
 		let slideamt = (count - 2) * 20;
@@ -50,7 +73,19 @@ function Slider() {
 		if (count !== 2) {
 			setCount(count - 1);
 		}
-		//	console.log(slideamt);
+	};
+
+	const SlideLeftOne = () => {
+		const slider = document.querySelector(".slider");
+		let slideamt = (count800 - 2) * 7;
+		console.log(count800);
+		if (slideamt > 0) {
+			slider.style.transform = `translate(-${slideamt}%)`;
+			setCount800(count800 - 1);
+		} else if (slideamt == 0) {
+			slider.style.transform = `translate(0%)`;
+			setCount800(count800 - 1);
+		}
 	};
 
 	const allsliders = allproducts.map((item) => (
@@ -67,22 +102,31 @@ function Slider() {
 			<div
 				className='slide-left-btn'
 				onClick={() => {
-					SlideLeft();
+					if (width > 800) {
+						SlideLeft();
+					} else {
+						SlideLeftOne();
+					}
 				}}>
 				<HiOutlineChevronLeft />{" "}
 			</div>
 			<div
 				className='slide-right-btn'
 				onClick={() => {
-					SlideRight();
+					if (width > 800) {
+						SlideRight();
+					} else {
+						SlideRightOne();
+					}
 				}}>
 				<HiChevronRight />
 			</div>
 			<div className='slider-wrapper'>
+				{/* <Slider {...setting}> {allsliders} </Slider> */}
 				<div className='slider'>{allsliders}</div>
 			</div>
 		</div>
 	);
 }
 
-export default Slider;
+export default SliderHome;
