@@ -15,10 +15,6 @@ function SliderHome() {
 	const [width] = useWidth();
 
 	useEffect(() => {
-		console.log(width);
-	}, [width]);
-
-	useEffect(() => {
 		dispatch(fetchall());
 	}, []);
 

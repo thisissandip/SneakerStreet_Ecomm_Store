@@ -1,0 +1,235 @@
+@import "../../../index.scss";
+
+.coming-soon-container {
+	font-family: $primary-font;
+	margin: 0 auto;
+	width: 90%;
+	.coming-soon-title {
+		width: 100%;
+		//text-align: center;
+		margin: 5px 0;
+		margin-bottom: 60px;
+		font-size: 3rem;
+		font-weight: 700;
+		transition: 0.5s all cubic-bezier(0.55, 0.085, 0.68, 0.53);
+	}
+	.travis-container {
+		position: relative;
+		//	border: 3px solid goldenrod;
+		margin: 0 auto;
+		width: 100%;
+		margin-bottom: 130px;
+		.travis-box {
+			opacity: 0;
+			position: absolute;
+			right: 1rem;
+			bottom: -9rem;
+			width: 45%;
+			height: 40%;
+			background-color: rgba($color: rgb(0, 3, 19), $alpha: 1);
+			font-family: $primary-font;
+			color: white;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			font-size: 3rem;
+			font-weight: 700;
+			transition: 0.7s opacity cubic-bezier(0.165, 0.84, 0.44, 1),
+				1s bottom cubic-bezier(0.165, 0.84, 0.44, 1);
+			div:first-child {
+				font-size: 2rem;
+				font-weight: 300;
+			}
+			.pre-book {
+				cursor: pointer;
+				outline: none;
+				width: 270px;
+				font-family: $primary-font;
+				font-weight: 400;
+				font-size: 0.8rem;
+				margin-top: 15px;
+				margin-left: 2px;
+				padding: 10px 0;
+				border: 1px solid $primary-color;
+				border-radius: 30px;
+				color: black;
+				background-color: $primary-color;
+				transition: all 0.2s ease;
+				&:hover {
+					border: 1px solid $accent-color;
+					background-color: $accent-color;
+					color: white;
+				}
+			}
+		}
+		.travis-img-wrappper {
+			background-color: yellow;
+			width: 90%;
+			height: 80vh;
+			min-height: 300px;
+			max-height: 600px;
+			overflow: hidden;
+			display: flex;
+			justify-content: flex-start;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+	}
+	.runimg-container {
+		position: relative;
+		//border: 3px solid red;
+		margin: 0 auto;
+		width: 100%;
+		margin-bottom: 110px;
+		.run-box {
+			opacity: 0;
+			position: absolute;
+			left: 1rem;
+			bottom: -9rem;
+			width: 45%;
+			height: 40%;
+			background-color: rgba($color: black, $alpha: 1);
+			font-family: $primary-font;
+			color: white;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			font-size: 3rem;
+			font-weight: 700;
+			transition: 0.7s opacity cubic-bezier(0.165, 0.84, 0.44, 1),
+				1s bottom cubic-bezier(0.165, 0.84, 0.44, 1);
+			div:first-child {
+				font-size: 2rem;
+				font-weight: 300;
+			}
+			.pre-book {
+				cursor: pointer;
+				outline: none;
+				width: 270px;
+				font-family: $primary-font;
+				font-weight: 400;
+				font-size: 0.8rem;
+				margin-top: 15px;
+				margin-left: 2px;
+				padding: 10px 0;
+				border: 1px solid $primary-color;
+				border-radius: 30px;
+				color: black;
+				background-color: $primary-color;
+				transition: all 0.2s ease;
+				&:hover {
+					border: 1px solid $accent-color;
+					background-color: $accent-color;
+					color: white;
+				}
+			}
+		}
+		.runimg-img-wrappper {
+			width: 100%;
+			height: 80vh;
+			overflow: hidden;
+			min-height: 300px;
+			max-height: 600px;
+			display: flex;
+			justify-content: flex-end;
+			img {
+				width: 90%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+	}
+}
+
+@media screen and(max-width: 850px) {
+	.coming-soon-container {
+		margin: 0 auto;
+		width: 90%;
+		.coming-soon-title {
+			width: 100%;
+			margin: 5px 0;
+			margin-bottom: 20px;
+			font-size: 1.6rem;
+		}
+		.travis-container {
+			margin: 0 auto;
+			width: 100%;
+			margin-bottom: 80px;
+			.travis-box {
+				opacity: 1;
+				bottom: -3rem;
+				right: 0rem;
+				width: 100%;
+				height: 35%;
+				font-size: 2rem;
+				font-weight: 700;
+				div:first-child {
+					font-size: 1.2rem;
+					font-weight: 300;
+				}
+				.pre-book {
+					width: 180px;
+					font-weight: 400;
+					font-size: 0.8rem;
+					margin-top: 10px;
+					margin-left: 0px;
+					padding: 8px 0;
+				}
+			}
+			.travis-img-wrappper {
+				width: 100%;
+				height: none;
+				min-height: 300px;
+				max-height: 400px;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+		}
+		.runimg-container {
+			position: relative;
+			margin: 0 auto;
+			width: 100%;
+			margin-bottom: 80px;
+			.run-box {
+				opacity: 1;
+				bottom: -3rem;
+				left: 0rem;
+				width: 100%;
+				height: 35%;
+				font-size: 2rem;
+				font-weight: 700;
+				div:first-child {
+					font-size: 1.2rem;
+					font-weight: 300;
+				}
+				.pre-book {
+					width: 180px;
+					font-weight: 400;
+					font-size: 0.8rem;
+					margin-top: 10px;
+					margin-left: 0px;
+					padding: 8px 0;
+				}
+			}
+			.runimg-img-wrappper {
+				width: 100%;
+				height: none;
+				min-height: 300px;
+				max-height: 400px;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+		}
+	}
+}
