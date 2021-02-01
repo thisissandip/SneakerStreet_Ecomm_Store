@@ -1,17 +1,38 @@
-import React, { useEffect } from "react";
-import "./footer.scss";
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import React, { useEffect, useRef } from 'react';
+import './footer.scss';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { gsap } from 'gsap';
+import useWidth from '../../Hooks/useWidth';
 
 function Footer() {
 	const initialValues = {
-		NewsEmail: "",
+		NewsEmail: '',
 	};
+
+	const FooterMailRef = useRef(null);
+
+	const [width] = useWidth();
+
+	useEffect(() => {
+		if (width > 750) {
+			gsap.to(FooterMailRef.current, {
+				css: {
+					opacity: 1,
+					width: '100%',
+				},
+				scrollTrigger: {
+					trigger: FooterMailRef.current,
+					start: 'top-=400 center',
+				},
+			});
+		}
+	}, [width]);
 
 	const ValidationSchema = () => {
 		NewsEmail: Yup.string()
-			.email("Please enter a valid email")
-			.required("Email is Required");
+			.email('Please enter a valid email')
+			.required('Email is Required');
 	};
 
 	const onSubmit = (values) => {
@@ -56,7 +77,7 @@ function Footer() {
 				<section className='footer-right'>
 					<div className='newsletter-wrapper'>
 						<div className='letter-title'>Newsletter</div>
-						<div className='footer-letter-container'>
+						<div ref={FooterMailRef} className='footer-letter-container'>
 							<form
 								onSubmit={formik.handleSubmit}
 								className='footer-input-wrapper'>

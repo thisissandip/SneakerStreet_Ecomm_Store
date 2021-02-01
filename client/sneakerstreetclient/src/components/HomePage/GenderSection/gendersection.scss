@@ -1,4 +1,4 @@
-@import "../../../index.scss";
+@import '../../../index.scss';
 
 .gender-section {
 	width: 90%;
@@ -10,7 +10,7 @@
 	.gender-section-title-wrapper {
 		overflow: hidden;
 		opacity: 0;
-		transition: 0.5s opacity ease-in-out;
+		transition: 0.2s opacity ease-in-out;
 		.gender-section-title {
 			width: 90%;
 			margin-bottom: 60px;
@@ -38,7 +38,7 @@
 			height: 100%;
 			overflow: hidden;
 			opacity: 0;
-			margin-top: 190px;
+			margin-top: 120px;
 			transition: 0.7s opacity cubic-bezier(0.165, 0.84, 0.44, 1),
 				1s margin-top cubic-bezier(0.165, 0.84, 0.44, 1);
 			&:nth-of-type(2) {
@@ -52,15 +52,15 @@
 				width: 100%;
 				height: 100%;
 				transition: 0.4s all cubic-bezier(0.075, 0.82, 0.165, 1);
-			&::before {
-					content: "";
+				&::before {
+					content: '';
 					z-index: 2;
 					position: absolute;
 					width: 100%;
 					height: 100%;
 					background-color: black;
 					opacity: 0.4;
-				} 
+				}
 				h3 {
 					position: absolute;
 					z-index: 5;
@@ -78,9 +78,8 @@
 					transition: 0.4s all ease;
 					overflow: hidden;
 					will-change: opacity;
-					
 				}
-				&:hover  {
+				&:hover img {
 					transform: scale(1.1);
 				}
 			}

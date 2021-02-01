@@ -1,11 +1,13 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import LoginPage from "./components/LoginPage/LoginPage";
-import SignupPage from "./components/SignupPage/SignupPage";
-import HomePage from "./components/HomePage/HomePage";
-import Navbar from "./components/Navbar/Navbar";
-import ShopAll from "./components/ShopAll/ShopAll";
-
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import LoginPage from './components/LoginPage/LoginPage';
+import SignupPage from './components/SignupPage/SignupPage';
+import HomePage from './components/HomePage/HomePage';
+import Navbar from './components/Navbar/Navbar';
+import ShopAll from './components/ShopAll/ShopAll';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 function App() {
 	return (
 		<>
