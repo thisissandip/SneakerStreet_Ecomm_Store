@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./footer.scss";
 import * as Yup from "yup";
 import { useFormik } from "formik";

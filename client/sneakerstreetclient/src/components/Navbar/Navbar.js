@@ -87,7 +87,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link to='/'>
+						<Link to='/shopall'>
 							<div
 								className='nav-item'
 								onClick={(e) => {
