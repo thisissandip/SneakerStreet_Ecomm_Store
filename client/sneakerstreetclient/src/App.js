@@ -4,6 +4,7 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import SignupPage from "./components/SignupPage/SignupPage";
 import HomePage from "./components/HomePage/HomePage";
 import Navbar from "./components/Navbar/Navbar";
+import ShopAll from "./components/ShopAll/ShopAll";
 
 function App() {
 	return (
@@ -13,6 +14,10 @@ function App() {
 					<Route exact path='/'>
 						<Navbar />
 						<HomePage />
+					</Route>
+					<Route path='/shopall'>
+						<Navbar />
+						<ShopAll />
 					</Route>
 					<Route exact path='/login'>
 						<Navbar />
