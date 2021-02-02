@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { HiOutlineChevronLeft, HiChevronRight } from "react-icons/hi";
-import { fetchall } from "../../../redux/actions/productActions";
-import SliderItem from "../SliderItem/SliderItem";
-import "./slider.scss";
-import useWidth from "../../../Hooks/useWidth";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { HiOutlineChevronLeft, HiChevronRight } from 'react-icons/hi';
+import { fetchall } from '../../../redux/actions/productActions';
+import ProductItem from '../../ProductItem/ProductItem';
+import './slider.scss';
+import useWidth from '../../../Hooks/useWidth';
 
 function SliderHome() {
 	const allproducts = useSelector((state) => state.productR.allproducts);
@@ -14,13 +14,22 @@ function SliderHome() {
 
 	const [width] = useWidth();
 
+	const [didMount, SetdidMount] = useState(false);
+
 	useEffect(() => {
-		dispatch(fetchall());
+		SetdidMount(true);
+		if (didMount) {
+			dispatch(fetchall());
+		}
+
+		return () => {
+			SetdidMount(false);
+		};
 	}, []);
 
 	useEffect(() => {
 		if (isloading == true) {
-			console.log("Loading");
+			console.log('Loading');
 		} else {
 			console.log(allproducts);
 		}
@@ -30,7 +39,7 @@ function SliderHome() {
 	const [count800, setCount800] = useState(1);
 
 	const SlideRight = () => {
-		const slider = document.querySelector(".slider");
+		const slider = document.querySelector('.slider');
 		if (count < 4) {
 			setCount(count + 1);
 		}
@@ -44,7 +53,7 @@ function SliderHome() {
 	};
 
 	const SlideRightOne = () => {
-		const slider = document.querySelector(".slider");
+		const slider = document.querySelector('.slider');
 		let slideamt;
 		if (width < 600) {
 			slideamt = count800 * 8;
@@ -59,7 +68,7 @@ function SliderHome() {
 	};
 
 	const SlideLeft = () => {
-		const slider = document.querySelector(".slider");
+		const slider = document.querySelector('.slider');
 		let slideamt = (count - 2) * 20;
 		if (count === 2) {
 			slider.style.transform = `translate(1%)`;
@@ -72,7 +81,7 @@ function SliderHome() {
 	};
 
 	const SlideLeftOne = () => {
-		const slider = document.querySelector(".slider");
+		const slider = document.querySelector('.slider');
 		let slideamt = (count800 - 2) * 7;
 		console.log(count800);
 		if (slideamt > 0) {
@@ -85,11 +94,12 @@ function SliderHome() {
 	};
 
 	const allsliders = allproducts.map((item) => (
-		<SliderItem
+		<ProductItem
 			key={item._id}
 			allimages={item.Images}
 			Name={item.Name}
 			Price={item.BuyNew}
+			pagename='homepage'
 		/>
 	));
 
@@ -104,7 +114,7 @@ function SliderHome() {
 						SlideLeftOne();
 					}
 				}}>
-				<HiOutlineChevronLeft />{" "}
+				<HiOutlineChevronLeft />{' '}
 			</div>
 			<div
 				className='slide-right-btn'
@@ -118,7 +128,6 @@ function SliderHome() {
 				<HiChevronRight />
 			</div>
 			<div className='slider-wrapper'>
-				{/* <Slider {...setting}> {allsliders} </Slider> */}
 				<div className='slider'>{allsliders}</div>
 			</div>
 		</div>

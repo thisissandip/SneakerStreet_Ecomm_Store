@@ -15,7 +15,8 @@ function Footer() {
 	const [width] = useWidth();
 
 	useEffect(() => {
-		if (width > 750) {
+		let Mounted = true;
+		if (Mounted && width > 750) {
 			gsap.to(FooterMailRef.current, {
 				css: {
 					opacity: 1,
@@ -27,6 +28,10 @@ function Footer() {
 				},
 			});
 		}
+
+		return () => {
+			Mounted = false;
+		};
 	}, [width]);
 
 	const ValidationSchema = () => {

@@ -1,6 +1,6 @@
-@import "../../../index.scss";
+@import '../../index.scss';
 
-.slide-item {
+.product-item {
 	cursor: pointer;
 	width: 370px;
 	height: 300px;
@@ -15,10 +15,10 @@
 	font-family: $primary-font;
 	overflow: hidden;
 	transition: 0.05s all cubic-bezier(0.55, 0.085, 0.68, 0.53);
-	&:hover .slide-item-img-wrapper > img {
+	&:hover .product-item-img-wrapper > img {
 		transform: scale(1.06);
 	}
-	.slide-item-img-wrapper {
+	.product-item-img-wrapper {
 		position: relative;
 		overflow: hidden;
 		display: flex;
@@ -32,26 +32,26 @@
 			transition: 0.9s all cubic-bezier(0.165, 0.84, 0.44, 1);
 		}
 	}
-	.slide-item-details {
+	.product-item-details {
 		display: flex;
 		width: 85%;
 		font-weight: 600;
 		justify-content: space-between;
 		padding-bottom: 10px;
-		.slide-item-name {
+		.product-item-name {
 			max-width: 70%;
 		}
 	}
 	&:hover {
 		border: 1px solid black;
-		.slide-item-details {
+		.product-item-details {
 			color: $accent-color;
 		}
 	}
 }
 
 @media screen and(max-width: 460px) {
-	.slide-item {
+	.product-item {
 		cursor: pointer;
 		min-width: 91vw;
 		min-height: 260px;
@@ -63,7 +63,7 @@
 		&:last-child {
 			margin-right: 20px;
 		}
-		.slide-item-img-wrapper {
+		.product-item-img-wrapper {
 			overflow: hidden;
 			display: flex;
 			justify-content: center;

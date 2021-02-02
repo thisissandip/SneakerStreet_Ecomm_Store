@@ -16,7 +16,9 @@ function GenderSection() {
 	const [width] = useWidth();
 
 	useEffect(() => {
-		if (width > 750) {
+		let Mounted = true;
+
+		if (Mounted && width > 750) {
 			allcolwrappersRef.current.forEach((el) => {
 				gsap.fromTo(
 					el,
@@ -49,6 +51,9 @@ function GenderSection() {
 				});
 			});
 		}
+		return () => {
+			Mounted = false;
+		};
 	}, [width]);
 
 	const addToRefs = (el) => {

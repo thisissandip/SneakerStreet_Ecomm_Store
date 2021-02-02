@@ -12,7 +12,9 @@ function ComingSoon() {
 	const [width] = useWidth();
 
 	useEffect(() => {
-		if (width > 750) {
+		let Mounted = true;
+
+		if (Mounted && width > 750) {
 			gsap.to(TravisRef.current, {
 				css: {
 					opacity: 1,
@@ -35,6 +37,10 @@ function ComingSoon() {
 				},
 			});
 		}
+
+		return () => {
+			Mounted = false;
+		};
 	}, [width]);
 
 	return (

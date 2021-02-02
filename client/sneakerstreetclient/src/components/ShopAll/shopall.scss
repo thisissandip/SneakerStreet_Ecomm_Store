@@ -1,15 +1,93 @@
-@import "../../index.scss";
+@import '../../index.scss';
 
 .shopall {
 	width: 100%;
-	height: 100vh;
-	border: 5px solid red;
-	margin-top: 80px; // space for navbar in desktops
+	.all-products-container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		//	border: 3px solid green;
+		display: flex;
+		justify-content: center;
+		padding: 40px 30px;
+
+		.all-products-wrapper {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, 33.33%);
+			width: 75%;
+			margin: 10px;
+			//border: 3px solid red;
+			.single-product-container {
+				cursor: pointer;
+				overflow: hidden;
+				border: 1px solid rgb(216, 216, 216);
+				.single-product-wrapper {
+					.shop-item {
+						height: 300px;
+						font-family: $primary-font;
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+						border: 1px solid transparent;
+						transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+						.product-item-img-wrapper {
+							height: 180px;
+							display: flex;
+							flex-direction: column;
+							justify-content: center;
+							align-items: center;
+							img {
+								width: 80%;
+								max-width: 240px;
+							}
+						}
+						.product-item-details {
+							display: flex;
+							width: 85%;
+							justify-content: space-between;
+							transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+							.product-item-name {
+								width: 70%;
+							}
+						}
+						&:hover {
+							border: 1px solid black;
+							.product-item-details {
+								color: $accent-color;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and(max-width: 850px) {
+	.shopall {
+		//	border: 5px solid red;
+		.all-products-container {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			border: 3px solid green;
+			display: flex;
+			justify-content: flex-end;
+			padding: 40px 2px;
+			.all-products-wrapper {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, 50%);
+				width: 100%;
+				margin: 10px;
+			}
+		}
+	}
 }
 
 @media screen and(max-width: 750px) {
 	.shopall {
 		border: 5px solid red;
-		margin-top: 70px; // space for navbar in desktops
 	}
 }

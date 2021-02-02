@@ -1,18 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import Header from './Header/Header';
+import Header from '../Header/Header';
 import Slider from './Slider/Slider';
 import './Homepage.scss';
 import GenderSection from './GenderSection/GenderSection';
 import ComingSoon from './ComingSoon/ComingSoon';
 import OurBrands from './Our Brands/OurBrands';
 import Footer from '../Footer/Footer';
-import { useLocation } from 'react-router-dom';
 
 function HomePage() {
 	return (
 		<>
 			<div className='homepage'>
-				<Header />
+				<Header pagename={'homepage'} />
 				<div className='home-slider-section'>
 					<div className='home-slider-title-section'>
 						<div className='home-slider-title'>Just Dropped</div>
