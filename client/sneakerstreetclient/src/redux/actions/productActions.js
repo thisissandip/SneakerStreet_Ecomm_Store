@@ -2,9 +2,9 @@ import {
 	FETCH_ALL_PRODUCTS,
 	FETCH_ALL_PRODUCTS_SUCCESS,
 	FETCH_ALL_PRODUCTS_FAILURE,
-} from "../types";
-import { fetchallproducts } from "../.././api/index";
-import axios from "axios";
+} from '../types';
+import { fetchallproducts } from '../.././api/index';
+import axios from 'axios';
 
 export const fetchall = () => {
 	return async function (dispatch) {
@@ -25,5 +25,13 @@ export const fetchall = () => {
 			});
 			console.log(err);
 		}
+	};
+};
+
+export const stopfetch = () => {
+	return function (dispatch) {
+		dispatch({
+			type: FETCH_ALL_PRODUCTS_FAILURE,
+		});
 	};
 };

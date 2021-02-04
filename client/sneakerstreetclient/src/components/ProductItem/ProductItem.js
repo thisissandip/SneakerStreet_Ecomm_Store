@@ -8,7 +8,18 @@ function ProductItem({ allimages, Name, Price, pagename }) {
 		pagename === 'homepage' ? 'product-item' : 'shop-item';
 
 	return (
-		<div className={`${productClassname}`}>
+		<div
+			onMouseOver={() => {
+				if (pagename === 'shopall') {
+					setImg(allimages[2]);
+				}
+			}}
+			onMouseLeave={() => {
+				if (pagename === 'shopall') {
+					setImg(allimages[0]);
+				}
+			}}
+			className={`${productClassname}`}>
 			<div className='product-item-img-wrapper'>
 				<img src={Img} alt={Name} />
 			</div>

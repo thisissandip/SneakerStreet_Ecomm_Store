@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { HiOutlineChevronLeft, HiChevronRight } from 'react-icons/hi';
-import { fetchall } from '../../../redux/actions/productActions';
+import { fetchall, stopfetch } from '../../../redux/actions/productActions';
 import ProductItem from '../../ProductItem/ProductItem';
 import './slider.scss';
 import useWidth from '../../../Hooks/useWidth';
@@ -24,14 +24,16 @@ function SliderHome() {
 
 		return () => {
 			SetdidMount(false);
+			dispatch(stopfetch());
 		};
-	}, []);
+	}, [didMount]);
 
 	useEffect(() => {
 		if (isloading == true) {
 			console.log('Loading');
 		} else {
-			console.log(allproducts);
+			//console.log(allproducts);
+			console.log('home loaded');
 		}
 	}, [isloading]);
 

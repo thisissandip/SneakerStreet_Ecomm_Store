@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './footer.scss';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -13,26 +13,29 @@ function Footer() {
 	const FooterMailRef = useRef(null);
 
 	const [width] = useWidth();
+	const [didMount, SetdidMount] = useState(false);
 
 	useEffect(() => {
-		let Mounted = true;
-		if (Mounted && width > 750) {
-			gsap.to(FooterMailRef.current, {
-				css: {
-					opacity: 1,
-					width: '100%',
-				},
-				scrollTrigger: {
-					trigger: FooterMailRef.current,
-					start: 'top-=400 center',
-				},
-			});
+		SetdidMount(true);
+		if (didMount) {
+			if (width > 750) {
+				gsap.to(FooterMailRef.current, {
+					css: {
+						opacity: 1,
+						width: '100%',
+					},
+					scrollTrigger: {
+						trigger: FooterMailRef.current,
+						start: 'top-=400 center',
+					},
+				});
+			}
 		}
 
 		return () => {
-			Mounted = false;
+			SetdidMount(false);
 		};
-	}, [width]);
+	}, [width, didMount]);
 
 	const ValidationSchema = () => {
 		NewsEmail: Yup.string()

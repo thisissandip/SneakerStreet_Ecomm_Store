@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Travis_Img from '../../../images/home_travis.jpg';
 import Run_Img from '../../../images/home_run.jpg';
 import './comingsoon.scss';
@@ -10,38 +10,41 @@ function ComingSoon() {
 	const RunRef = useRef(null);
 
 	const [width] = useWidth();
+	const [didMount, SetdidMount] = useState(false);
 
 	useEffect(() => {
-		let Mounted = true;
+		SetdidMount(true);
 
-		if (Mounted && width > 750) {
-			gsap.to(TravisRef.current, {
-				css: {
-					opacity: 1,
-					bottom: '-3rem',
-				},
-				scrollTrigger: {
-					trigger: TravisRef.current,
-					start: 'top-=350 center',
-				},
-			});
+		if (didMount) {
+			if (width > 750) {
+				gsap.to(TravisRef.current, {
+					css: {
+						opacity: 1,
+						bottom: '-3rem',
+					},
+					scrollTrigger: {
+						trigger: TravisRef.current,
+						start: 'top-=350 center',
+					},
+				});
 
-			gsap.to(RunRef.current, {
-				css: {
-					opacity: 1,
-					bottom: '-3rem',
-				},
-				scrollTrigger: {
-					trigger: RunRef.current,
-					start: 'top-=350 center',
-				},
-			});
+				gsap.to(RunRef.current, {
+					css: {
+						opacity: 1,
+						bottom: '-3rem',
+					},
+					scrollTrigger: {
+						trigger: RunRef.current,
+						start: 'top-=350 center',
+					},
+				});
+			}
 		}
 
 		return () => {
-			Mounted = false;
+			SetdidMount(false);
 		};
-	}, [width]);
+	}, [width, didMount]);
 
 	return (
 		<section className='coming-soon-container'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Gender_Men from '../../../images/gender_men.jpg';
 import Gender_Women from '../../../images/gender_women.jpg';
 import Gender_Uni from '../../../images/gender_unisex.jpg';
@@ -15,46 +15,50 @@ function GenderSection() {
 
 	const [width] = useWidth();
 
-	useEffect(() => {
-		let Mounted = true;
+	const [didMount, SetdidMount] = useState(false);
 
-		if (Mounted && width > 750) {
-			allcolwrappersRef.current.forEach((el) => {
-				gsap.fromTo(
-					el,
-					{
-						css: {
-							opacity: 0,
-							marginTop: 120,
+	useEffect(() => {
+		SetdidMount(true);
+
+		if (didMount) {
+			if (width > 750) {
+				allcolwrappersRef.current.forEach((el) => {
+					gsap.fromTo(
+						el,
+						{
+							css: {
+								opacity: 0,
+								marginTop: 120,
+							},
 						},
-					},
-					{
+						{
+							css: {
+								opacity: 1,
+								marginTop: 0,
+							},
+							scrollTrigger: {
+								trigger: genderSectionRef.current,
+								start: 'top-=340 top+=100',
+							},
+						}
+					);
+
+					gsap.to(TitleRef.current, {
 						css: {
 							opacity: 1,
-							marginTop: 0,
 						},
 						scrollTrigger: {
-							trigger: genderSectionRef.current,
-							start: 'top-=340 top+=100',
+							trigger: TitleRef.current,
+							start: 'top-=300 center',
 						},
-					}
-				);
-
-				gsap.to(TitleRef.current, {
-					css: {
-						opacity: 1,
-					},
-					scrollTrigger: {
-						trigger: TitleRef.current,
-						start: 'top-=300 center',
-					},
+					});
 				});
-			});
+			}
 		}
 		return () => {
-			Mounted = false;
+			SetdidMount(false);
 		};
-	}, [width]);
+	}, [width, didMount]);
 
 	const addToRefs = (el) => {
 		if (el && !allcolwrappersRef.current.includes(el)) {
