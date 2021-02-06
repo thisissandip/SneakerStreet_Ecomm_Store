@@ -5,6 +5,7 @@ import SignupPage from './components/SignupPage/SignupPage';
 import HomePage from './components/HomePage/HomePage';
 import Navbar from './components/Navbar/Navbar';
 import ShopAll from './components/ShopAll/ShopAll';
+import ItemPage from './components/ItemPage/ItemPage';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
@@ -28,6 +29,10 @@ function App() {
 					<Route exact path='/signup'>
 						<Navbar />
 						<SignupPage />
+					</Route>
+					<Route exact path='/:itemid'>
+						{/* 		<Navbar /> */}
+						<ItemPage />
 					</Route>
 				</Switch>
 			</BrowserRouter>

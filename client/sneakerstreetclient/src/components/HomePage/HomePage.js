@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import Header from '../Header/Header';
+import { Link } from 'react-router-dom';
 import Slider from './Slider/Slider';
 import './Homepage.scss';
 import GenderSection from './GenderSection/GenderSection';
@@ -15,7 +16,9 @@ function HomePage() {
 				<div className='home-slider-section'>
 					<div className='home-slider-title-section'>
 						<div className='home-slider-title'>Just Dropped</div>
-						<div className='showall-btn'>SHOW ALL</div>
+						<Link to='/shopall'>
+							<div className='showall-btn'>SHOW ALL</div>
+						</Link>
 					</div>
 					<Slider />
 				</div>

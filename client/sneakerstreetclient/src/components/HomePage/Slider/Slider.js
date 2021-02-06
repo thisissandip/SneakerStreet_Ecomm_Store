@@ -98,6 +98,7 @@ function SliderHome() {
 	const allsliders = allproducts.map((item) => (
 		<ProductItem
 			key={item._id}
+			id={item._id}
 			allimages={item.Images}
 			Name={item.Name}
 			Price={item.BuyNew}

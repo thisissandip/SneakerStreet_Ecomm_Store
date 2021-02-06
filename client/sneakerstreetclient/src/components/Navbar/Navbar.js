@@ -1,35 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { CgMenuLeftAlt } from "react-icons/cg";
-import { MdClose } from "react-icons/md";
-import { FiShoppingCart } from "react-icons/fi";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { CgMenuLeftAlt } from 'react-icons/cg';
+import { MdClose } from 'react-icons/md';
+import { FiShoppingCart } from 'react-icons/fi';
 
-import "./Navbar.scss";
+import './Navbar.scss';
 
 function Navbar() {
 	const OpenmMobileMenu = () => {
-		const mobilemenu = document.querySelector(".navbar-inner");
-		const hamburger = document.querySelector(".hamburger-icon");
-		const closemenu = document.querySelector(".close-btn");
-		const navitems = document.querySelectorAll(".nav-item");
-		mobilemenu.style.left = "0%";
-		hamburger.style.display = "none";
-		closemenu.style.display = "initial";
+		const mobilemenu = document.querySelector('.navbar-inner');
+		const hamburger = document.querySelector('.hamburger-icon');
+		const closemenu = document.querySelector('.close-btn');
+		const navitems = document.querySelectorAll('.nav-item');
+		mobilemenu.style.left = '0%';
+		hamburger.style.display = 'none';
+		closemenu.style.display = 'initial';
 		navitems.forEach((item) => {
-			item.classList.add("openmenu");
+			item.classList.add('openmenu');
 		});
 	};
 
 	const CloseMobileMenu = () => {
-		const mobilemenu = document.querySelector(".navbar-inner");
-		const hamburger = document.querySelector(".hamburger-icon");
-		const closemenu = document.querySelector(".close-btn");
-		const navitems = document.querySelectorAll(".nav-item");
-		mobilemenu.style.left = "-100%";
-		hamburger.style.display = "initial";
-		closemenu.style.display = "none";
+		const mobilemenu = document.querySelector('.navbar-inner');
+		const hamburger = document.querySelector('.hamburger-icon');
+		const closemenu = document.querySelector('.close-btn');
+		const navitems = document.querySelectorAll('.nav-item');
+		mobilemenu.style.left = '-100%';
+		hamburger.style.display = 'initial';
+		closemenu.style.display = 'none';
 		navitems.forEach((item) => {
-			item.classList.remove("openmenu");
+			item.classList.remove('openmenu');
 		});
 	};
 
@@ -98,7 +98,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link to='/'>
+						<Link to='/gallery'>
 							<div
 								className='nav-item'
 								onClick={(e) => {
@@ -109,7 +109,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link to='/'>
+						<Link to='/about'>
 							<div
 								className='nav-item'
 								onClick={(e) => {
@@ -142,7 +142,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link to='/login'>
+						<Link to='/cart'>
 							<div
 								className='nav-item'
 								onClick={(e) => {

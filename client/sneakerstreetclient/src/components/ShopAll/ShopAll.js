@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchall, stopfetch } from '../../redux/actions/productActions';
 import Header from '../Header/Header';
 import Productitem from '../ProductItem/ProductItem';
+import Filter from './Filter/Filter';
+import useWidth from '../../Hooks/useWidth';
 
 function ShopAll() {
 	const dispatch = useDispatch();
@@ -14,11 +16,8 @@ function ShopAll() {
 	const [priceOrderopt, SetpriceOrderopt] = useState('');
 	const [arrayToMap, SetarrayToMap] = useState([]);
 	const [displayProducts, SetdisplayProducts] = useState();
-
-	/* Array for Filters */
-	const [categoryCheckboxes, SetcategoryCheckboxes] = useState([]);
-	const [brandCheckboxes, SetbrandCheckboxes] = useState([]);
-	const [genderCheckboxes, SetgenderCheckboxes] = useState([]);
+	const [isOpen, SetisOpen] = useState(false);
+	const [width] = useWidth();
 
 	useEffect(() => {
 		SetdidMount(true);
@@ -43,7 +42,6 @@ function ShopAll() {
 			SetarrayToMap(popularity);
 			SetpriceOrderopt('Popularity');
 			console.log('shop all loaded', allproducts);
-			FillFiltersArray();
 		}
 	}, [isloading]);
 
@@ -56,37 +54,19 @@ function ShopAll() {
 		ChangeDisplayProducts();
 	}, [arrayToMap]);
 
-	/* 	Manipulate Allproducts */
-	useEffect(() => {
-		let checkedGender = genderCheckboxes
-			.filter((item) => {
-				if (item.isChecked) {
-					return item;
-				}
-			})
-			.map((item) => item.name);
-
-		let newArraytoMap = arrayToMap.filter((product) => {
-			if (checkedGender.includes(product.Details.Gender[0])) {
-				return product;
-			}
-		});
-		console.log(newArraytoMap);
-	}, [genderCheckboxes, brandCheckboxes, categoryCheckboxes]);
-
 	const OptionChanged = () => {
 		if (priceOrderopt === 'LowToHigh') {
-			const lowtohigh = allproducts.sort(
+			const lowtohigh = arrayToMap.sort(
 				(a, b) => parseInt(a.BuyNew) - parseInt(b.BuyNew)
 			);
 			SetarrayToMap(lowtohigh);
 		} else if (priceOrderopt === 'HighToLow') {
-			const hightolow = allproducts.sort(
+			const hightolow = arrayToMap.sort(
 				(a, b) => parseInt(b.BuyNew) - parseInt(a.BuyNew)
 			);
 			SetarrayToMap(hightolow);
 		} else if (priceOrderopt === 'Popularity') {
-			let popularity = allproducts.sort(
+			let popularity = arrayToMap.sort(
 				(a, b) =>
 					parseInt(a.Details.releasedate) - parseInt(b.Details.releasedate)
 			);
@@ -99,6 +79,7 @@ function ShopAll() {
 			<div key={item._id} className='single-product-container'>
 				<div className='single-product-wrapper'>
 					<Productitem
+						id={item._id}
 						allimages={item.Images}
 						Name={item.Name}
 						Price={item.BuyNew}
@@ -110,161 +91,80 @@ function ShopAll() {
 		SetdisplayProducts(todisplay);
 	};
 
-	const FillFiltersArray = () => {
-		let allcat = allproducts.map((item) => item.Details.Category);
-		let uniquecat = allcat.reduce(
-			(accumulator, currentValue) =>
-				accumulator.includes(currentValue)
-					? accumulator
-					: [...accumulator, currentValue],
-			[]
-		);
-		let checkcat = uniquecat.map((item) => {
-			return {
-				name: item,
-				isChecked: false,
-			};
-		});
-		SetcategoryCheckboxes(checkcat);
-
-		let allbrands = allproducts.map((item) => item.Details.Brand);
-		let uniquebrand = allbrands.reduce(
-			(accumulator, currentValue) =>
-				accumulator.includes(currentValue)
-					? accumulator
-					: [...accumulator, currentValue],
-			[]
-		);
-		let checkbrand = uniquebrand.map((item) => {
-			return {
-				name: item,
-				isChecked: false,
-			};
-		});
-		SetbrandCheckboxes(checkbrand);
-
-		let allgenders = allproducts.map((item) => item.Details.Gender[0]);
-		let uniquegender = allgenders.reduce(
-			(accumulator, currentValue) =>
-				accumulator.includes(currentValue)
-					? accumulator
-					: [...accumulator, currentValue],
-			[]
-		);
-		let checkgender = uniquegender.map((item) => {
-			return {
-				name: item,
-				isChecked: false,
-			};
-		});
-		SetgenderCheckboxes(checkgender);
-
-		//console.log('unique', uniquecat, uniquebrand, uniquegender);
-	};
-
 	const handleChange = (e) => {
 		SetpriceOrderopt(e.target.value);
 	};
 
-	const handleCheckbox = (e) => {
-		if (e.target.className === 'brand') {
-			let newbrandCheckboxes = brandCheckboxes.filter((item) => {
-				if (item.name === e.target.id) {
-					item.isChecked = !item.isChecked;
-				}
-				return item;
-			});
-			SetbrandCheckboxes(newbrandCheckboxes);
-		} else if (e.target.className === 'gender') {
-			let newgenderCheckboxes = genderCheckboxes.filter((item) => {
-				if (item.name === e.target.id) {
-					item.isChecked = !item.isChecked;
-				}
-				return item;
-			});
-			SetgenderCheckboxes(newgenderCheckboxes);
-		} else if (e.target.className === 'category') {
-			let newcatCheckboxes = categoryCheckboxes.filter((item) => {
-				if (item.name === e.target.id) {
-					item.isChecked = !item.isChecked;
-				}
-				return item;
-			});
-			SetcategoryCheckboxes(newcatCheckboxes);
+	useEffect(() => {
+		const filtercont = document.querySelector('.filters-container');
+		if (width > 1000) {
+			if (isOpen) {
+				filtercont.style.width = '0px';
+				filtercont.style.marginRight = '0px';
+				filtercont.style.border = 'none';
+				/* filtercont.style.display = 'none'; */
+			} else {
+				filtercont.style.width = '400px';
+				filtercont.style.display = 'initial';
+				filtercont.style.marginRight = '20px';
+				filtercont.style.border = '1px solid rgb(218, 218, 218)';
+			}
+		}
+	}, [isOpen]);
+
+	useEffect(() => {
+		ToggleFilterDIV();
+	}, [width]);
+
+	const ToggleFilterDIV = () => {
+		if (width > 1000) {
+			SetisOpen(!isOpen);
+		} else {
+			const filtercont = document.querySelector('.filters-container');
+			filtercont.style.width = '100%';
+			filtercont.style.marginRight = '0px';
 		}
 	};
-
-	const allbrandsDIV = brandCheckboxes.map((item, i) => (
-		<div key={i} className='input-div'>
-			<input
-				className='brand'
-				id={item.name}
-				checked={item.isChecked}
-				type='checkbox'
-				onChange={handleCheckbox}
-			/>
-			<label htmlFor={`#${item.name}`}>{item.name}</label>
-		</div>
-	));
-
-	const allgendersDIV = genderCheckboxes.map((item, i) => (
-		<div key={i} className='input-div'>
-			<input
-				className='gender'
-				id={item.name}
-				checked={item.isChecked}
-				type='checkbox'
-				onChange={handleCheckbox}
-			/>
-			<label htmlFor={`#${item.name}`}>{item.name}</label>
-		</div>
-	));
-
-	const allcatDIV = categoryCheckboxes.map((item, i) => (
-		<div key={i} className='input-div'>
-			<input
-				className='category'
-				id={item.name}
-				checked={item.isChecked}
-				type='checkbox'
-				onChange={handleCheckbox}
-			/>
-			<label htmlFor={`#${item.name}`}>{item.name}</label>
-		</div>
-	));
 
 	return (
 		<div className='shopall'>
 			<Header pagename={'shopall'} />
 			<div className='shopall-content'>
 				<div className='row1-filter-cont'>
-					<select
-						onChange={handleChange}
-						value={priceOrderopt}
-						name='OrderOfPrice'
-						id='OrderOfPrice'>
-						<option value='Popularity'>Popularity</option>
-						<option value='LowToHigh'>Low To High</option>
-						<option value='HighToLow'>High To Low</option>
-					</select>
+					<div
+						onClick={() => {
+							ToggleFilterDIV();
+							if (width < 1000) {
+								const filtercont = document.querySelector('.filters-container');
+								filtercont.style.display = 'initial';
+							}
+						}}
+						className='filters-title'>
+						Customize Search
+					</div>
+					<div className='no-of-results'>
+						Showing {arrayToMap.length} Results
+					</div>
+					<div className='select'>
+						<label htmlFor='#OrderOfPrice'>Sort By</label>
+						<select
+							onChange={handleChange}
+							value={priceOrderopt}
+							name='OrderOfPrice'
+							id='OrderOfPrice'>
+							<option value='Popularity'>Popularity</option>
+							<option value='LowToHigh'>Low To High</option>
+							<option value='HighToLow'>High To Low</option>
+						</select>
+					</div>
 				</div>
 				<div className='row-2-filter-content'>
 					<div className='all-products-container'>
-						<div className='filters-container'>
-							<div className='filter-cont-title'>Filters </div>
-							<div className='single-filter-container'>
-								<div className='filter-title'>Brands</div>
-								{allbrandsDIV}
-							</div>
-							<div className='single-filter-container'>
-								<div className='filter-title'>Gender</div>
-								{allgendersDIV}
-							</div>
-							<div className='single-filter-container'>
-								<div className='filter-title'>Categories</div>
-								{allcatDIV}
-							</div>
-						</div>
+						<Filter
+							OptionChanged={OptionChanged}
+							arrayToMap={arrayToMap}
+							SetarrayToMap={SetarrayToMap}
+						/>
 						<div className='all-products-wrapper'>{displayProducts}</div>
 					</div>
 				</div>

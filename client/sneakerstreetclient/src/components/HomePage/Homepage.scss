@@ -1,4 +1,4 @@
-@import "../../index.scss";
+@import '../../index.scss';
 .homepage {
 	width: 100%;
 	//margin-top: 80px; // space for navbar in desktops
@@ -17,6 +17,10 @@
 			font-weight: 600;
 			margin: 0 80px;
 			margin-bottom: 20px;
+			text-decoration: none;
+			a {
+				text-decoration: none;
+			}
 			.showall-btn {
 				cursor: pointer;
 				color: grey;
@@ -27,6 +31,7 @@
 				padding: 10px 30px;
 				border-radius: 30px;
 				transition: 0.1s all ease-in-out;
+
 				&:hover {
 					color: white;
 					background-color: grey;
