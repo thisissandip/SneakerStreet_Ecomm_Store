@@ -1,0 +1,148 @@
+@import '../../index.scss';
+
+.product-page {
+	width: 100%;
+	margin-top: 80px;
+	.product-container {
+		display: flex;
+		margin: 0 auto;
+		width: 100%;
+		font-family: $primary-font;
+		//	border: 1px solid red;
+		.product-left,
+		.product-right {
+			width: 50%;
+			height: 90vh;
+			overflow-y: scroll;
+			//	border-right: 1px solid grey;
+		}
+		.product-left {
+			position: relative;
+			border-right: 1px solid rgb(216, 216, 216);
+			.product-img-container {
+				position: relative;
+				.product-img-wrapper {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					width: 100%;
+					height: 80vh;
+					img {
+						width: 70%;
+					}
+				}
+			}
+		}
+		.product-right {
+			border-left: 0px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			.product-right-cont {
+				margin-top: 80px;
+				width: 80%;
+				//	border: 1px solid burlywood;
+				.product-main {
+					.product-name {
+						font-weight: 600;
+						font-size: 2rem;
+					}
+					.product-price {
+						margin-top: 20px;
+						font-size: 1.5rem;
+					}
+					.add-to-cart {
+						cursor: pointer;
+						margin-top: 20px;
+						width: 300px;
+						padding: 10px 10px;
+						background-color: $accent-color;
+						border-radius: 20px;
+						color: white;
+						font-weight: 200;
+						border: 1px solid $accent-color;
+						outline: none;
+						transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+						&:hover {
+							background-color: transparent;
+							color: $accent-color;
+						}
+					}
+				}
+
+				.product-details,
+				.product-des {
+					.details-title,
+					.des-title {
+						font-weight: 600;
+						margin: 20px 0;
+					}
+					.single-deets {
+						margin: 5px 0;
+						.single-deets-left {
+							font-weight: 500;
+						}
+					}
+				}
+				.product-des {
+					padding-bottom: 40px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 850px) {
+	.product-page {
+		margin-top: 70px;
+		.product-container {
+			display: flex;
+			flex-direction: column;
+			.product-left,
+			.product-right {
+				width: 100%;
+				height: auto;
+				//	border-right: 1px solid grey;
+			}
+			.product-left {
+				height: 400px;
+				border-right: 0px solid rgb(216, 216, 216);
+				.product-img-container {
+					position: relative;
+					.product-img-wrapper {
+						display: flex;
+						flex-direction: column;
+						/* 	Try making a slider here */
+						align-items: center;
+						justify-content: center;
+						height: 400px;
+						img {
+							width: 70%;
+						}
+					}
+				}
+			}
+			.product-right {
+				border-left: 0px;
+				border-top: 1px solid rgb(216, 216, 216);
+				.product-right-cont {
+					margin-top: 40px;
+					width: 90%;
+					.product-main {
+						.product-name {
+							font-size: 1.7rem;
+						}
+						.product-price {
+							font-size: 1.5rem;
+						}
+						.add-to-cart {
+							width: 100%;
+							padding: 10px 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

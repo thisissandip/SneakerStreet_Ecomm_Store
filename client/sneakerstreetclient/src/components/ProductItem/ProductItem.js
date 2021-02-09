@@ -9,7 +9,7 @@ function ProductItem({ allimages, Name, Price, pagename, id }) {
 		pagename === 'homepage' ? 'product-item' : 'shop-item';
 
 	return (
-		<Link to={`/${id}`}>
+		<Link to={`/sneaker/${id}`}>
 			<div
 				onMouseOver={() => {
 					if (pagename === 'shopall') {

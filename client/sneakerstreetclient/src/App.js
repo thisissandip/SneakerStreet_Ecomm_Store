@@ -30,8 +30,8 @@ function App() {
 						<Navbar />
 						<SignupPage />
 					</Route>
-					<Route exact path='/:itemid'>
-						{/* 		<Navbar /> */}
+					<Route exact path='/sneaker/:itemid'>
+						<Navbar />
 						<ItemPage />
 					</Route>
 				</Switch>

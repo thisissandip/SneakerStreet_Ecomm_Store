@@ -113,7 +113,8 @@ function ShopAll() {
 	}, [isOpen]);
 
 	useEffect(() => {
-		ToggleFilterDIV();
+		const filtercont = document.querySelector('.filters-container');
+		filtercont.style.display = 'initial';
 	}, [width]);
 
 	const ToggleFilterDIV = () => {

@@ -185,11 +185,20 @@ function Filter({ arrayToMap, SetarrayToMap, OptionChanged }) {
 		filterCont.style.display = 'none';
 	};
 
+	const [didMount, SetdidMount] = useState(false);
+
 	useEffect(() => {
-		if (width < 1000) {
-			const filterCont = document.querySelector('.filters-container');
-			filterCont.style.display = 'none';
+		SetdidMount(true);
+
+		if (didMount) {
+			if (width < 1000) {
+				const filterCont = document.querySelector('.filters-container');
+				filterCont.style.display = 'none';
+			}
 		}
+		return () => {
+			SetdidMount(false);
+		};
 	}, [width]);
 
 	return (
