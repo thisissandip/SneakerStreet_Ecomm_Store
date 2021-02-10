@@ -8,11 +8,23 @@ function ItemPage() {
 	const { itemid } = useParams();
 	console.log(itemid);
 
+	const [didMount, SetdidMount] = useState(false);
+
 	const [productdata, Setproductdata] = useState({});
 	const [displayImgs, SetdisplayImgs] = useState();
 	const [displaydetails, Setdisplaydetails] = useState();
 	let allimagesarr;
 	let details;
+
+	useEffect(() => {
+		SetdidMount(true);
+		if (didMount) {
+			window.scrollTo(0, 0);
+		}
+		return () => {
+			SetdidMount(false);
+		};
+	}, [didMount]);
 
 	useEffect(async () => {
 		try {

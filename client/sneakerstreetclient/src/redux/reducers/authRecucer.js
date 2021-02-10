@@ -5,12 +5,13 @@ import {
 	REGISTER_USER_FAILURE,
 	REGISTER_USER_SUCCESS,
 	REGISTER_USER,
-} from "../types/authTypes";
+	LOGOUT_USER,
+} from '../types/authTypes';
 
 const authState = {
-	user: "",
-	error: "",
-	regerror: "",
+	user: '',
+	error: '',
+	regerror: '',
 	isloading: false,
 };
 
@@ -43,8 +44,8 @@ export const authReducer = (state = authState, action) => {
 		case REGISTER_USER_FAILURE:
 			return {
 				...state,
-				user: "",
-				error: "",
+				user: null,
+				error: '',
 				regerror: action.payload,
 				isloading: false,
 			};
@@ -52,7 +53,15 @@ export const authReducer = (state = authState, action) => {
 			return {
 				...state,
 				user: action.payload,
-				regerror: "",
+				regerror: '',
+				isloading: false,
+			};
+		case LOGOUT_USER:
+			return {
+				...state,
+				user: '',
+				error: '',
+				regerror: '',
 				isloading: false,
 			};
 		default:

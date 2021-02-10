@@ -5,8 +5,11 @@ import {
 	REGISTER_USER_FAILURE,
 	REGISTER_USER_SUCCESS,
 	REGISTER_USER,
-} from "../types";
-import { url } from "../../api";
+	LOGOUT_USER,
+} from '../types';
+import { url } from '../../api';
+import { checkuser, logoutuser } from '../../api';
+import axios from 'axios';
 
 export const fetchUserLoading = () => {
 	return { type: FETCH_USER };
@@ -22,13 +25,13 @@ export const fetchUserFailure = (data) => {
 
 export const fetchUser = (userdata) => {
 	return async function (dispatch) {
-		console.log("Hi");
+		console.log('Hi');
 		dispatch(fetchUserLoading());
 
 		const res = await fetch(`${url}/login`, {
-			method: "POST",
-			credentials: "include",
-			headers: { "Content-Type": "application/json" },
+			method: 'POST',
+			credentials: 'include',
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(userdata),
 		});
 		const data = await res.json();
@@ -65,9 +68,9 @@ export const registerUser = (userdata) => {
 	return async function (dispatch) {
 		dispatch(registeruserloading());
 		const response = await fetch(`${url}/signup`, {
-			method: "POST",
-			credentials: "include",
-			headers: { "Content-Type": "application/json" },
+			method: 'POST',
+			credentials: 'include',
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(userdata),
 		});
 		const data = await response.json();
@@ -76,6 +79,35 @@ export const registerUser = (userdata) => {
 			dispatch(registeruserfailure(data.errors.email));
 		} else if (data.userid) {
 			dispatch(registerusersuccess(data.userid));
+		}
+	};
+};
+
+export const isUserloggedIn = () => {
+	return async function (dispatch) {
+		try {
+			const res = await axios.get(checkuser, {
+				withCredentials: true,
+			});
+
+			if (res.data.userid) {
+				dispatch(fetchUserSuccess(res.data));
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const logoutUser = () => {
+	return async function (dispatch) {
+		try {
+			const logoutres = await axios.get(logoutuser, { withCredentials: true });
+			dispatch({
+				type: LOGOUT_USER,
+			});
+		} catch (err) {
+			console.log(err);
 		}
 	};
 };

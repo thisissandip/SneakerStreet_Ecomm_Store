@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CgMenuLeftAlt } from 'react-icons/cg';
 import { MdClose } from 'react-icons/md';
 import { FiShoppingCart } from 'react-icons/fi';
+import { useSelector, useDispatch } from 'react-redux';
+import { isUserloggedIn, logoutUser } from '../../redux/actions/authActions';
 
 import './Navbar.scss';
 
 function Navbar() {
+	const user = useSelector((state) => state.authR.user);
+
+	useEffect(() => {
+		console.log('user', user);
+	}, [user]);
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(isUserloggedIn());
+	}, []);
+
 	const OpenmMobileMenu = () => {
 		const mobilemenu = document.querySelector('.navbar-inner');
 		const hamburger = document.querySelector('.hamburger-icon');
@@ -121,26 +135,32 @@ function Navbar() {
 					</li>
 				</ul>
 				<ul className='right-nav'>
-					<li>
-						<div
-							className='nav-item'
-							onClick={(e) => {
-								CloseMobileMenu(e);
-							}}>
-							Search
-						</div>
-					</li>
-					<li>
-						<Link to='/login'>
-							<div
-								className='nav-item'
-								onClick={(e) => {
-									CloseMobileMenu(e);
-								}}>
-								Account
-							</div>
-						</Link>
-					</li>
+					{user == '' ? (
+						<li>
+							<Link to='/login'>
+								<div
+									className='nav-item'
+									onClick={(e) => {
+										CloseMobileMenu(e);
+									}}>
+									Account
+								</div>
+							</Link>
+						</li>
+					) : (
+						<li>
+							<Link to='/'>
+								<div
+									className='nav-item'
+									onClick={(e) => {
+										dispatch(logoutUser());
+									}}>
+									Logout
+								</div>
+							</Link>
+						</li>
+					)}
+
 					<li>
 						<Link to='/cart'>
 							<div
