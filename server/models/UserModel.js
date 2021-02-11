@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
 	fname: {
@@ -20,9 +20,12 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	Cart: {
+		type: Array,
+	},
 });
 
-UserSchema.pre("save", async function (next) {
+UserSchema.pre('save', async function (next) {
 	const salt = await bcrypt.genSalt();
 	this.password = await bcrypt.hash(this.password, salt);
 	next();
@@ -42,6 +45,6 @@ UserSchema.statics.login = async function (email, password) {
 	}
 };
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

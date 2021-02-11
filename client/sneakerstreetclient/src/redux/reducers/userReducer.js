@@ -1,0 +1,46 @@
+import {
+	ADD_TO_CART,
+	REMOVE_FROM_CART,
+	EMPTY_CART,
+	FETCH_USER_DETAILS_FAILURE,
+	FETCH_USER_DETAILS_SUCCESS,
+} from '../types';
+
+const initialstate = {
+	fname: '',
+	lname: '',
+	cart: [],
+	email: '',
+};
+
+export const userReducer = (state = initialstate, action) => {
+	switch (action.type) {
+		case ADD_TO_CART:
+			return {
+				...state,
+				cart: [...state.cart, action.payload],
+			};
+		case REMOVE_FROM_CART:
+			return {
+				...state,
+				/* 			FILTER OUT THAT PRODUCT */
+			};
+		case EMPTY_CART:
+			return {
+				...state,
+				cart: [],
+			};
+		case FETCH_USER_DETAILS_SUCCESS:
+			return {
+				...state,
+				fname: action.payload.fname,
+				lname: action.payload.lname,
+				email: action.payload.email,
+				cart: action.payload.cart,
+			};
+		case FETCH_USER_DETAILS_FAILURE:
+			return state;
+		default:
+			return state;
+	}
+};

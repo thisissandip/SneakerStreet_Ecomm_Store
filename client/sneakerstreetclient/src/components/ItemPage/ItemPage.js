@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { fetchsingleproduct } from '../../api/index';
 import './itempage.scss';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/actions/userActions';
 
 function ItemPage() {
 	const { itemid } = useParams();
-	console.log(itemid);
+
+	const dispatch = useDispatch();
 
 	const [didMount, SetdidMount] = useState(false);
 
@@ -68,9 +71,9 @@ function ItemPage() {
 		}
 	}, [productdata]);
 
-	useEffect(() => {
+	/* 	useEffect(() => {
 		console.log(displayImgs);
-	}, [displayImgs]);
+	}, [displayImgs]); */
 
 	return (
 		<div className='product-page'>
@@ -83,7 +86,13 @@ function ItemPage() {
 						<div className='product-main'>
 							<div className='product-name'>{productdata.Name}</div>
 							<div className='product-price'>Rs. {productdata.BuyNew}</div>
-							<button className='add-to-cart'>ADD TO CART</button>
+							<button
+								className='add-to-cart'
+								onClick={(e) => {
+									dispatch(addToCart(itemid));
+								}}>
+								ADD TO CART
+							</button>
 						</div>
 						<div className='product-details'>
 							<div className='details-title'>Details</div>

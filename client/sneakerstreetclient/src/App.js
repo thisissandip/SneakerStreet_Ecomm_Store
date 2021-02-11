@@ -5,7 +5,9 @@ import SignupPage from './components/SignupPage/SignupPage';
 import HomePage from './components/HomePage/HomePage';
 import Navbar from './components/Navbar/Navbar';
 import ShopAll from './components/ShopAll/ShopAll';
+import CartPage from './components/CartPage/CartPage';
 import ItemPage from './components/ItemPage/ItemPage';
+import ProtectedRoute from './ProtectedRoute';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -15,25 +17,22 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
+				<Navbar />
 				<Switch>
 					<Route exact path='/'>
-						<Navbar />
 						<HomePage />
 					</Route>
 					<Route path='/shopall'>
-						<Navbar />
 						<ShopAll />
 					</Route>
 					<Route exact path='/login'>
-						<Navbar />
 						<LoginPage />
 					</Route>
 					<Route exact path='/signup'>
-						<Navbar />
 						<SignupPage />
 					</Route>
+					<ProtectedRoute exact path='/cart' component={CartPage} />
 					<Route exact path='/sneaker/:itemid'>
-						<Navbar />
 						<ItemPage />
 					</Route>
 				</Switch>

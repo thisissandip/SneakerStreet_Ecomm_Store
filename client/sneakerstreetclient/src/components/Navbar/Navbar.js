@@ -5,15 +5,24 @@ import { MdClose } from 'react-icons/md';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import { isUserloggedIn, logoutUser } from '../../redux/actions/authActions';
+import { fetchUserDetails } from '../../redux/actions/userActions';
 
 import './Navbar.scss';
 
 function Navbar() {
 	const user = useSelector((state) => state.authR.user);
+	const cart = useSelector((state) => state.userR.cart);
 
 	useEffect(() => {
 		console.log('user', user);
+		if (user !== '') {
+			dispatch(fetchUserDetails(user));
+		}
 	}, [user]);
+
+	useEffect(() => {
+		console.log(cart);
+	}, [cart]);
 
 	const dispatch = useDispatch();
 
@@ -68,22 +77,29 @@ function Navbar() {
 						</div>
 					</li>
 					<li>
-						<div
-							className='logo'
-							onClick={(e) => {
-								CloseMobileMenu(e);
-							}}>
-							LOGO
-						</div>
+						<Link to='/'>
+							<div
+								className='logo'
+								onClick={(e) => {
+									CloseMobileMenu(e);
+									window.scrollTo(0, 0);
+								}}>
+								LOGO
+							</div>
+						</Link>
 					</li>
 					<li>
-						<div
-							className='cart-wrapper'
-							onClick={(e) => {
-								CloseMobileMenu(e);
-							}}>
-							<FiShoppingCart className='cart' />
-						</div>
+						<Link to='/cart'>
+							<div
+								className='cart-wrapper'
+								onClick={(e) => {
+									CloseMobileMenu(e);
+								}}>
+								<FiShoppingCart className='cart' />
+								{/* For Time Being Display None it */}
+								<div className='cart-item-count'>{cart?.length}</div>
+							</div>
+						</Link>
 					</li>
 				</ul>
 			</div>
@@ -95,6 +111,7 @@ function Navbar() {
 								className='logo'
 								onClick={(e) => {
 									CloseMobileMenu(e);
+									window.scrollTo(0, 0);
 								}}>
 								Logo
 							</div>
@@ -170,6 +187,7 @@ function Navbar() {
 								}}>
 								<div className='cart-wrapper'>
 									<FiShoppingCart className='cart' />
+									<div className='cart-item-count'>{cart?.length}</div>
 								</div>
 							</div>
 						</Link>
