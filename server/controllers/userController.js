@@ -4,6 +4,7 @@ const User = require('../models/UserModel');
 module.exports.updateCart = async (req, res) => {
 	const uemail = req.body.uemail;
 	const productid = req.body.productid;
+	const type = req.body.type;
 
 	try {
 		let oldcart = [];
@@ -12,12 +13,21 @@ module.exports.updateCart = async (req, res) => {
 			oldcart = userexist.Cart;
 		}
 
-		let newcart = [...oldcart, productid];
-		const updateddata = await User.findOneAndUpdate(
-			{ email: uemail },
-			{ Cart: newcart },
-			{ new: true }
-		);
+		if (type === 'ADD') {
+			let newcart = [...oldcart, productid];
+			const updateddata = await User.findOneAndUpdate(
+				{ email: uemail },
+				{ Cart: newcart },
+				{ new: true }
+			);
+		} else if (type === 'REMOVE') {
+			let newcart = oldcart.filter((item) => item !== productid);
+			const updateddata = await User.findOneAndUpdate(
+				{ email: uemail },
+				{ Cart: newcart },
+				{ new: true }
+			);
+		}
 	} catch (err) {
 		console.log(err);
 	}

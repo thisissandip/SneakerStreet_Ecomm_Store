@@ -23,9 +23,12 @@ export const userReducer = (state = initialstate, action) => {
 				cart: [...state.cart, action.payload],
 			};
 		case REMOVE_FROM_CART:
+			let thecart = state.cart;
+			let newcart = thecart.filter((item) => item !== action.payload);
+
 			return {
 				...state,
-				/* 			FILTER OUT THAT PRODUCT */
+				cart: [...newcart],
 			};
 		case EMPTY_CART:
 			return {

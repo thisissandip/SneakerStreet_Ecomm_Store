@@ -48,3 +48,20 @@ export const addToCart = (details) => {
 		}
 	};
 };
+
+export const RemovefromCart = (details) => {
+	return async function (dispatch) {
+		try {
+			dispatch({
+				type: REMOVE_FROM_CART,
+				payload: details.productid,
+			});
+			const headeroptions = {
+				'Content-Type': 'application/json',
+			};
+			const response = await axios.post(updatecart, details, headeroptions);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};

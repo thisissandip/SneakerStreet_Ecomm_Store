@@ -104,6 +104,7 @@ function ItemPage() {
 										const requireddetails = {
 											uemail,
 											productid: itemid,
+											type: 'ADD',
 										};
 
 										dispatch(addToCart(requireddetails));

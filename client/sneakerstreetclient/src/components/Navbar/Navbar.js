@@ -13,6 +13,7 @@ import './Navbar.scss';
 function Navbar() {
 	const user = useSelector((state) => state.authR.user);
 	const cart = useSelector((state) => state.userR.cart);
+	const fname = useSelector((state) => state.userR.fname);
 
 	/* 	Fetch all products to Display */
 	useEffect(() => {
@@ -162,30 +163,39 @@ function Navbar() {
 				</ul>
 				<ul className='right-nav'>
 					{user == '' ? (
-						<li>
-							<Link to='/login'>
-								<div
-									className='nav-item'
-									onClick={(e) => {
-										CloseMobileMenu(e);
-									}}>
-									Account
-								</div>
-							</Link>
-						</li>
+						<>
+							<li>
+								<Link to='/login'>
+									<div
+										className='nav-item'
+										onClick={(e) => {
+											CloseMobileMenu(e);
+										}}>
+										Account
+									</div>
+								</Link>
+							</li>
+						</>
 					) : (
-						<li>
-							<Link to='/'>
-								<div
-									className='nav-item'
-									onClick={(e) => {
-										dispatch(logoutUser());
-										window.location.reload();
-									}}>
-									Logout
-								</div>
-							</Link>
-						</li>
+						<>
+							<li>
+								<Link to='/login'>
+									<div className='nav-item'>Hi, {fname}</div>
+								</Link>
+							</li>
+							<li>
+								<Link to='/'>
+									<div
+										className='nav-item'
+										onClick={(e) => {
+											dispatch(logoutUser());
+											window.location.reload();
+										}}>
+										Logout
+									</div>
+								</Link>
+							</li>
+						</>
 					)}
 
 					<li>

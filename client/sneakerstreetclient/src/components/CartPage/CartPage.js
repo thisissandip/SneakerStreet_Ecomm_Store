@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './cartpage.scss';
 import { useSelector, useDispatch } from 'react-redux';
+import { RemovefromCart } from '../../redux/actions/userActions';
 
 function CartPage() {
+	const uemail = useSelector((state) => state.userR.email);
 	const allproducts = useSelector((state) => state.productR.allproducts);
 	const cart = useSelector((state) => state.userR.cart);
 
 	const [Cartproducts, setCartproducts] = useState([]);
 	let allcartproducts = [];
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	useEffect(() => {
 		console.log(cart);
@@ -25,6 +33,15 @@ function CartPage() {
 		console.log(Cartproducts);
 	}, [Cartproducts]);
 
+	const Remove = (itemid) => {
+		const requireddetails = {
+			uemail,
+			productid: itemid,
+			type: 'REMOVE',
+		};
+		dispatch(RemovefromCart(requireddetails));
+	};
+
 	const displayALLproductDIV = Cartproducts.map((product) => (
 		<div key={product._id} className='product-container'>
 			<div className='product-left'>
@@ -39,7 +56,12 @@ function CartPage() {
 					<div>
 						<span>Brand :</span> {product.Details.Brand}
 					</div>
-					<button>Remove</button>
+					<button
+						onClick={(e) => {
+							Remove(product._id);
+						}}>
+						Remove
+					</button>
 				</div>
 			</div>
 
