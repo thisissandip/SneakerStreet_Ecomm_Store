@@ -80,20 +80,3 @@ module.exports.logoutUser = async (req, res) => {
 	res.clearCookie('jwt');
 	res.status(201).send('logout successful');
 };
-
-module.exports.GetUserDetails = async (req, res) => {
-	const userid = req.params.id;
-	try {
-		const userexist = await User.findOne({ _id: userid });
-		if (userexist) {
-			res.json({
-				fname: userexist.fname,
-				lname: userexist.lname,
-				email: userexist.email,
-				cart: userexist.Cart,
-			});
-		}
-	} catch (err) {
-		res.send('User Does not Exist');
-	}
-};

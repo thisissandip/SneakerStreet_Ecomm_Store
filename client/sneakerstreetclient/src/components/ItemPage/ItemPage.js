@@ -3,11 +3,14 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { fetchsingleproduct } from '../../api/index';
 import './itempage.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/actions/userActions';
 
 function ItemPage() {
 	const { itemid } = useParams();
+	const user = useSelector((state) => state.authR.user);
+	const uemail = useSelector((state) => state.userR.email);
+	const cart = useSelector((state) => state.userR.cart);
 
 	const dispatch = useDispatch();
 
@@ -31,6 +34,19 @@ function ItemPage() {
 
 	useEffect(async () => {
 		try {
+			/* FETCH DETAILS FROM GLOBAL STATE CONTAINER */
+
+			/* 		if (allproducts !== null) {
+				const Requiredproduct = allproducts.filter((item) => {
+					if (item._id === itemid) {
+						return item;
+					}
+				});
+				Setproductdata(Requiredproduct[0]);
+			} */
+
+			/* FETCH PRODUCTS DETAILS FROM SERVER (BENEFICIAL FOR LARGE APPLICTAIONS) */
+
 			const response = await axios.get(`${fetchsingleproduct}/${itemid}`);
 			if (response.data !== null) {
 				Setproductdata(response.data);
@@ -41,7 +57,6 @@ function ItemPage() {
 	}, []);
 
 	useEffect(() => {
-		console.log(productdata);
 		allimagesarr = productdata.Images;
 		details = productdata.Details;
 
@@ -71,10 +86,6 @@ function ItemPage() {
 		}
 	}, [productdata]);
 
-	/* 	useEffect(() => {
-		console.log(displayImgs);
-	}, [displayImgs]); */
-
 	return (
 		<div className='product-page'>
 			<div className='product-container'>
@@ -89,7 +100,16 @@ function ItemPage() {
 							<button
 								className='add-to-cart'
 								onClick={(e) => {
-									dispatch(addToCart(itemid));
+									if (!cart.includes(itemid)) {
+										const requireddetails = {
+											uemail,
+											productid: itemid,
+										};
+
+										dispatch(addToCart(requireddetails));
+									} else {
+										alert('Item already in cart');
+									}
 								}}>
 								ADD TO CART
 							</button>

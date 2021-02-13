@@ -6,19 +6,22 @@ import {
 	FETCH_USER_DETAILS_SUCCESS,
 } from '../types';
 import axios from 'axios';
-import { fetchuserdata } from '../../api/index';
+import { fetchuserdata, updatecart } from '../../api/index';
 
 export const fetchUserDetails = (userid) => {
 	return async function (dispatch) {
 		try {
-			const response = await axios(`${fetchuserdata}/${userid}`);
+			const response = await axios.get(`${fetchuserdata}/${userid}`);
 			const userdata = await response.data;
 
-			if (userdata) {
+			if (userdata !== 'User Does not Exist') {
 				dispatch({
 					type: FETCH_USER_DETAILS_SUCCESS,
 					payload: userdata,
 				});
+				console.log(userdata);
+			} else {
+				console.log('failed to fetch user data');
 			}
 		} catch (err) {
 			console.log(err);
@@ -29,11 +32,19 @@ export const fetchUserDetails = (userid) => {
 	};
 };
 
-export const addToCart = (itemid) => {
-	return function (dispatch) {
-		dispatch({
-			type: ADD_TO_CART,
-			payload: itemid,
-		});
+export const addToCart = (details) => {
+	return async function (dispatch) {
+		try {
+			dispatch({
+				type: ADD_TO_CART,
+				payload: details.productid,
+			});
+			const headeroptions = {
+				'Content-Type': 'application/json',
+			};
+			const response = await axios.post(updatecart, details, headeroptions);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 };

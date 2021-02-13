@@ -10,23 +10,7 @@ function SliderHome() {
 	const allproducts = useSelector((state) => state.productR.allproducts);
 	const isloading = useSelector((state) => state.productR.isloading);
 
-	const dispatch = useDispatch();
-
 	const [width] = useWidth();
-
-	const [didMount, SetdidMount] = useState(false);
-
-	useEffect(() => {
-		SetdidMount(true);
-		if (didMount) {
-			dispatch(fetchall());
-		}
-
-		return () => {
-			SetdidMount(false);
-			dispatch(stopfetch());
-		};
-	}, [didMount]);
 
 	useEffect(() => {
 		if (isloading == true) {

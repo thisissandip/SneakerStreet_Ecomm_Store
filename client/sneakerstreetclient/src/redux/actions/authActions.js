@@ -25,7 +25,6 @@ export const fetchUserFailure = (data) => {
 
 export const fetchUser = (userdata) => {
 	return async function (dispatch) {
-		console.log('Hi');
 		dispatch(fetchUserLoading());
 
 		const res = await fetch(`${url}/login`, {
@@ -103,6 +102,7 @@ export const logoutUser = () => {
 	return async function (dispatch) {
 		try {
 			const logoutres = await axios.get(logoutuser, { withCredentials: true });
+			localStorage.removeItem('ss_cart');
 			dispatch({
 				type: LOGOUT_USER,
 			});

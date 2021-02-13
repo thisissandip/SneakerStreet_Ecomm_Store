@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CgMenuLeftAlt } from 'react-icons/cg';
 import { MdClose } from 'react-icons/md';
@@ -6,6 +6,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import { isUserloggedIn, logoutUser } from '../../redux/actions/authActions';
 import { fetchUserDetails } from '../../redux/actions/userActions';
+import { fetchall } from '../../redux/actions/productActions';
 
 import './Navbar.scss';
 
@@ -13,6 +14,19 @@ function Navbar() {
 	const user = useSelector((state) => state.authR.user);
 	const cart = useSelector((state) => state.userR.cart);
 
+	/* 	Fetch all products to Display */
+	useEffect(() => {
+		dispatch(fetchall());
+	}, []);
+
+	const dispatch = useDispatch();
+
+	/* 	Check if the User is logged In */
+	useEffect(() => {
+		dispatch(isUserloggedIn());
+	}, []);
+
+	/* If User is Logged in, fetch User Details */
 	useEffect(() => {
 		console.log('user', user);
 		if (user !== '') {
@@ -20,15 +34,10 @@ function Navbar() {
 		}
 	}, [user]);
 
+	/* User Cart Console Log */
 	useEffect(() => {
 		console.log(cart);
 	}, [cart]);
-
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(isUserloggedIn());
-	}, []);
 
 	const OpenmMobileMenu = () => {
 		const mobilemenu = document.querySelector('.navbar-inner');
@@ -171,6 +180,7 @@ function Navbar() {
 									className='nav-item'
 									onClick={(e) => {
 										dispatch(logoutUser());
+										window.location.reload();
 									}}>
 									Logout
 								</div>

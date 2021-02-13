@@ -22,11 +22,9 @@ function ShopAll() {
 	useEffect(() => {
 		SetdidMount(true);
 		if (didMount) {
-			dispatch(fetchall());
 			window.scrollTo(0, 0);
 		}
 		return () => {
-			dispatch(stopfetch());
 			SetdidMount(false);
 		};
 	}, [didMount]);

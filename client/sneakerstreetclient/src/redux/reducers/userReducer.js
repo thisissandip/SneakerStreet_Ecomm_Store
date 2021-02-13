@@ -16,6 +16,8 @@ const initialstate = {
 export const userReducer = (state = initialstate, action) => {
 	switch (action.type) {
 		case ADD_TO_CART:
+			let lscart = [...state.cart, action.payload];
+			localStorage.setItem('ss_cart', JSON.stringify(lscart));
 			return {
 				...state,
 				cart: [...state.cart, action.payload],
