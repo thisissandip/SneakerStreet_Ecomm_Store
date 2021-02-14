@@ -7,6 +7,7 @@
 		display: flex;
 		flex-direction: column;
 		padding: 20px;
+		margin-bottom: 20px;
 		.row1-filter-cont {
 			width: 100%;
 			font-family: $primary-font;
@@ -155,6 +156,7 @@
 		//	border: 5px solid red;
 		.shopall-content {
 			padding: 0px;
+			margin-bottom: 0px;
 			.row1-filter-cont {
 				padding-top: 10px;
 				padding: 7px 10px;

@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import Productitem from '../ProductItem/ProductItem';
 import Filter from './Filter/Filter';
 import useWidth from '../../Hooks/useWidth';
+import Footer from '../Footer/Footer';
 
 function ShopAll() {
 	const dispatch = useDispatch();
@@ -168,6 +169,7 @@ function ShopAll() {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }
