@@ -44,7 +44,12 @@ export const userReducer = (state = initialstate, action) => {
 				cart: action.payload.cart,
 			};
 		case FETCH_USER_DETAILS_FAILURE:
-			return state;
+			return {
+				fname: '',
+				lname: '',
+				cart: [],
+				email: '',
+			};
 		default:
 			return state;
 	}

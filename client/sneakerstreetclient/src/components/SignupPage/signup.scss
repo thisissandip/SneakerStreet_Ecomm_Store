@@ -1,13 +1,13 @@
-@import "../../index.scss";
+@import '../../index.scss';
 
 .signup-page {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	min-height: 100vh;
+	min-height: 80vh;
 	background-color: white;
-	margin-top: 20px;
+	margin-top: 80px;
 
 	.signup-container {
 		font-family: $primary-font;

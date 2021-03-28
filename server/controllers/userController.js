@@ -13,6 +13,11 @@ module.exports.updateCart = async (req, res) => {
 			oldcart = userexist.Cart;
 		}
 
+		/* 	Model.findOneAndUpdate(conditions, update, options, (error, doc) => {
+			// error: any errors that occurred
+			// doc: the document before updates are applied if `new: false`, or after updates if `new = true`
+		  }); */
+
 		if (type === 'ADD') {
 			let newcart = [...oldcart, productid];
 			const updateddata = await User.findOneAndUpdate(

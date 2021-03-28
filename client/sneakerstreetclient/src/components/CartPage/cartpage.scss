@@ -9,6 +9,7 @@
 	margin-top: 140px;
 	margin-bottom: 50px;
 	font-family: $primary-font;
+	min-height: 90vh;
 	.cart-page-left {
 		width: 75%;
 		padding-right: 50px;
@@ -99,26 +100,29 @@
 				font-weight: 600;
 			}
 		}
-		button {
-			margin-bottom: 20px;
-			margin-top: 40px;
+		a {
 			width: 100%;
-			padding: 10px;
-			outline: none;
-			cursor: pointer;
-			font-family: $primary-font;
-			font-weight: 300;
-			font-size: 0.8rem;
-			padding: 12px 0;
-			border: 1px solid $accent-color;
-			border-radius: 30px;
-			color: white;
-			background-color: $accent-color;
-			transition: all 0.2s ease;
-			&:hover {
-				background-color: transparent;
-				color: $accent-color;
-				font-weight: 500;
+			button {
+				width: 100%;
+				margin-bottom: 20px;
+				margin-top: 40px;
+				padding: 10px;
+				outline: none;
+				cursor: pointer;
+				font-family: $primary-font;
+				font-weight: 300;
+				font-size: 0.8rem;
+				padding: 12px 0;
+				border: 1px solid $accent-color;
+				border-radius: 30px;
+				color: white;
+				background-color: $accent-color;
+				transition: all 0.2s ease;
+				&:hover {
+					background-color: transparent;
+					color: $accent-color;
+					font-weight: 500;
+				}
 			}
 		}
 	}

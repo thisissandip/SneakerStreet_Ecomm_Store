@@ -46,28 +46,31 @@ function CartPage() {
 
 	const displayALLproductDIV = Cartproducts.map((product) => (
 		<div key={product._id} className='product-container'>
-			<Link to={`/sneaker/${product._id}`}>
-				<div className='product-left'>
+			<div className='product-left'>
+				<Link to={`/sneaker/${product._id}`}>
 					<div className='product-img'>
 						<img src={product.Images[0]} alt={product.Name} />{' '}
 					</div>
-					<div className='product-deets'>
+				</Link>
+				<div className='product-deets'>
+					<Link to={`/sneaker/${product._id}`}>
 						<div className='name'>{product.Name}</div>
-						<div>
-							<span>Color :</span> {product.Details.Color}
-						</div>
-						<div>
-							<span>Brand :</span> {product.Details.Brand}
-						</div>
-						<button
-							onClick={(e) => {
-								Remove(product._id);
-							}}>
-							Remove
-						</button>
+					</Link>
+					<div>
+						<span>Color :</span> {product.Details.Color}
 					</div>
+					<div>
+						<span>Brand :</span> {product.Details.Brand}
+					</div>
+
+					<button
+						onClick={(e) => {
+							Remove(product._id);
+						}}>
+						Remove
+					</button>
 				</div>
-			</Link>
+			</div>
 
 			<div className='product-right'>Rs. {product.BuyNew}</div>
 		</div>
@@ -99,7 +102,7 @@ function CartPage() {
 					</div>
 					<div className='order-details'>
 						<div>Tax (18%)</div>
-						<div>{Math.round(tax)}</div>
+						<div>Rs. {Math.round(tax)}</div>
 					</div>
 					<div className='order-details'>
 						<div>Shipping</div>
@@ -109,7 +112,9 @@ function CartPage() {
 						<div className='total'>Total</div>
 						<div className='total'>Rs. {Math.round(totalorder)}</div>
 					</div>
-					<button className='checkout-btn'>PROCEED TO CHECKOUT</button>
+					<Link to='/checkout'>
+						<button className='checkout-btn'>PROCEED TO CHECKOUT</button>
+					</Link>
 				</div>
 			</div>
 			<Footer />

@@ -5,6 +5,8 @@ import { fetchsingleproduct } from '../../api/index';
 import './itempage.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/actions/userActions';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ItemPage() {
 	const { itemid } = useParams();
@@ -34,17 +36,6 @@ function ItemPage() {
 
 	useEffect(async () => {
 		try {
-			/* FETCH DETAILS FROM GLOBAL STATE CONTAINER */
-
-			/* 		if (allproducts !== null) {
-				const Requiredproduct = allproducts.filter((item) => {
-					if (item._id === itemid) {
-						return item;
-					}
-				});
-				Setproductdata(Requiredproduct[0]);
-			} */
-
 			/* FETCH PRODUCTS DETAILS FROM SERVER (BENEFICIAL FOR LARGE APPLICTAIONS) */
 
 			const response = await axios.get(`${fetchsingleproduct}/${itemid}`);
@@ -86,47 +77,79 @@ function ItemPage() {
 		}
 	}, [productdata]);
 
-	return (
-		<div className='product-page'>
-			<div className='product-container'>
-				<div className='product-left'>
-					<div className='product-img-container'>{displayImgs}</div>
-				</div>
-				<div className='product-right'>
-					<div className='product-right-cont'>
-						<div className='product-main'>
-							<div className='product-name'>{productdata.Name}</div>
-							<div className='product-price'>Rs. {productdata.BuyNew}</div>
-							<button
-								className='add-to-cart'
-								onClick={(e) => {
-									if (!cart.includes(itemid)) {
-										const requireddetails = {
-											uemail,
-											productid: itemid,
-											type: 'ADD',
-										};
+	const AddToCart = (itemid, itemname) => {
+		if (!cart.includes(itemid)) {
+			const requireddetails = {
+				uemail,
+				productid: itemid,
+				type: 'ADD',
+			};
+			dispatch(addToCart(requireddetails));
+			addedNotify(itemname);
+		} else {
+			alreadyNotify(itemname);
+		}
+	};
 
-										dispatch(addToCart(requireddetails));
-									} else {
-										alert('Item already in cart');
-									}
-								}}>
-								ADD TO CART
-							</button>
-						</div>
-						<div className='product-details'>
-							<div className='details-title'>Details</div>
-							{displaydetails}
-						</div>
-						<div className='product-des'>
-							<div className='des-title'>Product Description</div>
-							{displaydetails && productdata.Details.des}
+	/* Method for Handling Toasts */
+	const addedNotify = (itemname) => {
+		toast.success(`${itemname} Added To Cart`, {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+	};
+
+	const alreadyNotify = (itemname) => {
+		toast.warn(`Item is already in Cart`, {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+	};
+
+	return (
+		<>
+			<div className='product-page'>
+				<div className='product-container'>
+					<div className='product-left'>
+						<div className='product-img-container'>{displayImgs}</div>
+					</div>
+					<div className='product-right'>
+						<div className='product-right-cont'>
+							<div className='product-main'>
+								<div className='product-name'>{productdata.Name}</div>
+								<div className='product-price'>Rs. {productdata.BuyNew}</div>
+								<button
+									className='add-to-cart'
+									onClick={(e) => {
+										AddToCart(itemid, productdata.Name);
+									}}>
+									ADD TO CART
+								</button>
+							</div>
+							<div className='product-details'>
+								<div className='details-title'>Details</div>
+								{displaydetails}
+							</div>
+							<div className='product-des'>
+								<div className='des-title'>Product Description</div>
+								{displaydetails && productdata.Details.des}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<ToastContainer />
+		</>
 	);
 }
 

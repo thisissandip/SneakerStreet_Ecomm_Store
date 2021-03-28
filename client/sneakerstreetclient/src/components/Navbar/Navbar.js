@@ -15,12 +15,12 @@ function Navbar() {
 	const cart = useSelector((state) => state.userR.cart);
 	const fname = useSelector((state) => state.userR.fname);
 
+	const dispatch = useDispatch();
+
 	/* 	Fetch all products to Display */
 	useEffect(() => {
 		dispatch(fetchall());
 	}, []);
-
-	const dispatch = useDispatch();
 
 	/* 	Check if the User is logged In */
 	useEffect(() => {
@@ -29,7 +29,7 @@ function Navbar() {
 
 	/* If User is Logged in, fetch User Details */
 	useEffect(() => {
-		console.log('user', user);
+		//console.log('user', user);
 		if (user !== '') {
 			dispatch(fetchUserDetails(user));
 		}
@@ -37,7 +37,7 @@ function Navbar() {
 
 	/* User Cart Console Log */
 	useEffect(() => {
-		console.log(cart);
+		console.log('Cart', cart);
 	}, [cart]);
 
 	const OpenmMobileMenu = () => {
@@ -178,11 +178,11 @@ function Navbar() {
 						</>
 					) : (
 						<>
-							<li>
+							{/* 	<li>
 								<Link to='/login'>
 									<div className='nav-item'>Hi, {fname}</div>
 								</Link>
-							</li>
+							</li> */}
 							<li>
 								<Link to='/'>
 									<div

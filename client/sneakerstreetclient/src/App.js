@@ -7,9 +7,11 @@ import Navbar from './components/Navbar/Navbar';
 import ShopAll from './components/ShopAll/ShopAll';
 import CartPage from './components/CartPage/CartPage';
 import ItemPage from './components/ItemPage/ItemPage';
+import Checkout from './components/Checkout/Checkout';
 import ProtectedRoute from './ProtectedRoute';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { toast, ToastContainer } from 'react-toastify';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,6 +37,7 @@ function App() {
 					<Route exact path='/sneaker/:itemid'>
 						<ItemPage />
 					</Route>
+					<ProtectedRoute exact path='/checkout' component={Checkout} />
 				</Switch>
 			</BrowserRouter>
 		</>
