@@ -27,7 +27,7 @@ function ProductItem({ allimages, Name, Price, pagename, id }) {
 				</div>
 				<div className='product-item-details'>
 					<div className='product-item-name'>{Name}</div>
-					<div className='product-item-price'>$ {Price}</div>
+					<div className='product-item-price'>Rs. {Price}</div>
 				</div>
 			</div>
 		</Link>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './cartpage.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { RemovefromCart } from '../../redux/actions/userActions';
+import { RemovefromCart, NewCartTotal } from '../../redux/actions/userActions';
 import { Link } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 
@@ -84,6 +84,14 @@ function CartPage() {
 
 	const totalorder = ordervalue + tax;
 
+	const newCartTotal = () => {
+		let finalamt = {
+			value: Math.round(totalorder),
+			user: uemail,
+		};
+		dispatch(NewCartTotal(finalamt));
+	};
+
 	return (
 		<>
 			<div className='cart-page'>
@@ -113,7 +121,9 @@ function CartPage() {
 						<div className='total'>Rs. {Math.round(totalorder)}</div>
 					</div>
 					<Link to='/checkout'>
-						<button className='checkout-btn'>PROCEED TO CHECKOUT</button>
+						<button className='checkout-btn' onClick={() => newCartTotal()}>
+							PROCEED TO CHECKOUT
+						</button>
 					</Link>
 				</div>
 			</div>

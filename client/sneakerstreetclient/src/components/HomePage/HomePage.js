@@ -20,7 +20,7 @@ function HomePage() {
 							<div className='showall-btn'>SHOW ALL</div>
 						</Link>
 					</div>
-					<Slider />
+					{/* <Slider /> */}
 				</div>
 				<GenderSection />
 				<ComingSoon />

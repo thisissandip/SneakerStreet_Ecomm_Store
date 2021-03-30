@@ -22,9 +22,7 @@ function LoginPage() {
 
 	useEffect(() => {
 		if (user) {
-			history.push({
-				pathname: '/',
-			});
+			history.goBack();
 		}
 		console.log(user);
 	}, [user]);

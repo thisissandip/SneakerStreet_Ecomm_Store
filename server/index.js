@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const productRouter = require('./routes/productroutes');
 const authRoutes = require('./routes/authROutes');
 const userRoutes = require('./routes/userRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 const bodyparser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -56,3 +57,4 @@ app.use(
 app.use(productRouter);
 app.use(userRoutes);
 app.use(authRoutes);
+app.use(paymentRoutes);

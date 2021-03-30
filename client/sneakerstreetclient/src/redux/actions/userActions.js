@@ -6,7 +6,7 @@ import {
 	FETCH_USER_DETAILS_SUCCESS,
 } from '../types';
 import axios from 'axios';
-import { fetchuserdata, updatecart } from '../../api/index';
+import { fetchuserdata, updatecart, newCartTotal } from '../../api/index';
 
 export const fetchUserDetails = (userid) => {
 	return async function (dispatch) {
@@ -60,6 +60,19 @@ export const RemovefromCart = (details) => {
 				'Content-Type': 'application/json',
 			};
 			const response = await axios.post(updatecart, details, headeroptions);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const NewCartTotal = (finalamt) => {
+	return async function (dispatch) {
+		try {
+			const headeroptions = {
+				'Content-Type': 'application/json',
+			};
+			const response = axios.post(newCartTotal, finalamt, headeroptions);
 		} catch (err) {
 			console.log(err);
 		}

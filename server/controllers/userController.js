@@ -1,5 +1,6 @@
 const axios = require('axios');
 const User = require('../models/UserModel');
+const Product = require('../models/ProductModel');
 
 module.exports.updateCart = async (req, res) => {
 	const uemail = req.body.uemail;
@@ -20,6 +21,7 @@ module.exports.updateCart = async (req, res) => {
 
 		if (type === 'ADD') {
 			let newcart = [...oldcart, productid];
+
 			const updateddata = await User.findOneAndUpdate(
 				{ email: uemail },
 				{ Cart: newcart },
@@ -27,6 +29,7 @@ module.exports.updateCart = async (req, res) => {
 			);
 		} else if (type === 'REMOVE') {
 			let newcart = oldcart.filter((item) => item !== productid);
+
 			const updateddata = await User.findOneAndUpdate(
 				{ email: uemail },
 				{ Cart: newcart },
@@ -53,4 +56,14 @@ module.exports.GetUserDetails = async (req, res) => {
 	} catch (err) {
 		res.send('User Does not Exist');
 	}
+};
+
+module.exports.NewCartTotal = async (req, res) => {
+	let { value, user } = req.body;
+
+	const updateddata = await User.findOneAndUpdate(
+		{ email: user },
+		{ CartTotal: Math.round(value) },
+		{ new: true }
+	);
 };

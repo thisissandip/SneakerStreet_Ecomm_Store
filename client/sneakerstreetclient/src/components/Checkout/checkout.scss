@@ -1,8 +1,110 @@
 @import '../../index.scss';
 
+$pageheight: 100vh;
+
 .checkout-page {
 	width: 100%;
-	height: 100vh;
+	height: calc(#{$pageheight} - 80px);
 	margin-top: 80px;
-	background-color: cadetblue;
+	display: flex;
+	font-family: $primary-font;
+	.checkout-container {
+		display: flex;
+		align-items: center;
+		width: 50%;
+		.form-container {
+			margin: 0 auto;
+			width: 80%;
+			min-width: 350px;
+			#payment-form {
+				.form-control {
+					width: 100%;
+					color: grey;
+					margin-bottom: 15px;
+					position: relative;
+					display: flex;
+					flex-direction: column;
+					overflow: hidden;
+
+					label {
+						font-family: $primary-font;
+						font-size: 0.8rem;
+					}
+					input {
+						font-family: $primary-font;
+						font-size: 1rem;
+						padding: 10px 0px 10px 0px;
+						background-color: transparent;
+						z-index: 1;
+						outline: none;
+						border: none;
+						border-bottom: 1px solid grey;
+						&:focus {
+							border-bottom: 1px solid $primary-color;
+						}
+						&:focus ~ .placeholder {
+							transform: translateY(-100%);
+							opacity: 0;
+						}
+					}
+					.placeholder {
+						position: absolute;
+						z-index: 0;
+						bottom: 2rem;
+						font-family: $primary-font;
+						font-size: 0.9rem;
+						color: rgb(189, 189, 189);
+						transition: transform 0.3s ease, opacity 0.2s ease;
+					}
+					.error {
+						font-family: $primary-font;
+						height: 20px;
+						//	background-color: turquoise;
+						font-size: 0.8rem;
+						font-style: italic;
+						color: brown;
+						padding: 5px 0px;
+					}
+				}
+				.error-card {
+					font-family: $primary-font;
+					height: 10px;
+					margin-top: 10px;
+					//	background-color: turquoise;
+					font-size: 0.9rem;
+					font-style: italic;
+					color: brown;
+				}
+				#submit {
+					width: 100%;
+					margin: 20px 0;
+					padding: 10px;
+					outline: none;
+					cursor: pointer;
+					font-family: $primary-font;
+					font-weight: 300;
+					font-size: 0.9rem;
+					padding: 8px 0;
+					border: 1px solid $accent-color;
+					border-radius: 30px;
+					color: white;
+					background-color: $accent-color;
+					transition: all 0.2s ease;
+					&:hover {
+						background-color: transparent;
+						color: $accent-color;
+						font-weight: 500;
+					}
+				}
+			}
+		}
+	}
+	.summary-container {
+		width: 50%;
+		height: 100vh;
+		background-color: yellowgreen;
+	}
+}
+
+@media screen and (max-width: 750px) {
 }
