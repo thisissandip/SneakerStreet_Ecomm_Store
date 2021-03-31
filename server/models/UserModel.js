@@ -26,6 +26,9 @@ const UserSchema = new mongoose.Schema({
 	CartTotal: {
 		type: Number,
 	},
+	Orders: {
+		type: Array,
+	},
 });
 
 UserSchema.pre('save', async function (next) {

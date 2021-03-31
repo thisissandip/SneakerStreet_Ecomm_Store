@@ -8,3 +8,5 @@ export const fetchuserdata = `${url}/user`;
 export const updatecart = `${url}/updatecart`;
 export const createPaymentIntent = `${url}/create-payment-intent`;
 export const newCartTotal = `${url}/newcarttotal`;
+export const updateMyOrders = `${url}/updatemyorders`;
+export const emptycart = `${url}/emptycart`;

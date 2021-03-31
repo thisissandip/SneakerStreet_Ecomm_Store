@@ -51,6 +51,7 @@ module.exports.GetUserDetails = async (req, res) => {
 				lname: userexist.lname,
 				email: userexist.email,
 				cart: userexist.Cart,
+				orders: userexist.Orders,
 			});
 		}
 	} catch (err) {
@@ -66,4 +67,53 @@ module.exports.NewCartTotal = async (req, res) => {
 		{ CartTotal: Math.round(value) },
 		{ new: true }
 	);
+};
+
+module.exports.EmptyCart = async (req, res) => {
+	let uemail = req.body.uemail;
+	const updateddata = await User.findOneAndUpdate(
+		{ email: uemail },
+		{ Cart: [], CartTotal: 0 },
+		{ new: true }
+	);
+	if (updateddata) {
+		if (updateddata.Cart.length === 0) {
+			res.status(201).json({
+				cartzero: true,
+			});
+		}
+	}
+};
+
+module.exports.updateMyOrders = async (req, res) => {
+	let uemail = req.body.uemail;
+	let ucart = req.body.ucart;
+	try {
+		let oldorders = [];
+		let neworders = [];
+
+		const userexist = await User.findOne({ email: uemail });
+		if (userexist) {
+			if (userexist.Orders.length !== 0) {
+				oldorders = userexist.Orders;
+				neworders = [...oldorders, ...ucart];
+			} else {
+				neworders = [...ucart];
+			}
+
+			const updateddata = await User.findOneAndUpdate(
+				{ email: uemail },
+				{ Orders: neworders },
+				{ new: true }
+			);
+
+			if (updateddata) {
+				res.json({
+					updateorders: true,
+				});
+			}
+		}
+	} catch (err) {
+		console.log(err);
+	}
 };

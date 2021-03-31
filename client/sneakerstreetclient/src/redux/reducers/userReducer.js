@@ -11,6 +11,7 @@ const initialstate = {
 	lname: '',
 	cart: [],
 	email: '',
+	orders: [],
 };
 
 export const userReducer = (state = initialstate, action) => {
@@ -42,6 +43,7 @@ export const userReducer = (state = initialstate, action) => {
 				lname: action.payload.lname,
 				email: action.payload.email,
 				cart: action.payload.cart,
+				orders: action.payload.orders,
 			};
 		case FETCH_USER_DETAILS_FAILURE:
 			return {

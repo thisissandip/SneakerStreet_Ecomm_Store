@@ -7,8 +7,22 @@ import GenderSection from './GenderSection/GenderSection';
 import ComingSoon from './ComingSoon/ComingSoon';
 import OurBrands from './Our Brands/OurBrands';
 import Footer from '../Footer/Footer';
+import { fetchUserDetails } from '../../redux/actions/userActions';
+import { useSelector, useDispatch } from 'react-redux';
 
 function HomePage() {
+	const user = useSelector((state) => state.authR.user);
+
+	const dispatch = useDispatch();
+
+	/* If User is Logged in, fetch User Details */
+	useEffect(() => {
+		//console.log('user', user);
+		if (user !== '') {
+			dispatch(fetchUserDetails(user));
+		}
+	}, [user]);
+
 	return (
 		<>
 			<div className='homepage'>

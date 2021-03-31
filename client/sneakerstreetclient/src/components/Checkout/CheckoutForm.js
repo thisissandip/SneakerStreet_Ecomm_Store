@@ -2,14 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { createPaymentIntent } from '../../api';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import useForm from '../../Hooks/useForm';
 import { useHistory } from 'react-router-dom';
+import {
+	UpdateMyOrders,
+	fetchUserDetails,
+} from '../../redux/actions/userActions';
 
 function CheckoutForm() {
 	const useremail = useSelector((state) => state.userR.email);
+	const ucart = useSelector((state) => state.userR.cart);
+	const user = useSelector((state) => state.authR.user);
 
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	/* Err Message for validation */
 	const [errmsg, setErrmsg] = useState('');
@@ -30,8 +37,6 @@ function CheckoutForm() {
 
 	/* onSubmit */
 	const finalsubmit = async () => {
-		console.log(inputs);
-
 		setErrmsg({});
 
 		if (inputs.name == null || inputs.name == '') {
@@ -62,17 +67,19 @@ function CheckoutForm() {
 			return;
 		}
 
-		setProcessing(true);
-
-		axios
-			.post(
-				createPaymentIntent,
-				{ useremail, inputs },
-				{ 'Content-Type': 'application/json' }
-			)
-			.then((res) => {
-				setClientSecret(res.data.clientSecret);
-			});
+		const response = await axios.post(
+			createPaymentIntent,
+			{ useremail, inputs },
+			{ 'Content-Type': 'application/json' }
+		);
+		const data = await response.data;
+		console.log(response);
+		if (response.data.clientSecret) {
+			setClientSecret(response.data.clientSecret);
+			setProcessing(true);
+		} else {
+			setError(`Your Card Data is Incomplete`);
+		}
 	};
 
 	const { inputs, handleSubmit, handleInputChange } = useForm(finalsubmit);
@@ -85,6 +92,8 @@ function CheckoutForm() {
 				},
 			});
 
+			console.log('secretkey');
+
 			if (payload.error) {
 				setError(`${payload.error.message}`);
 				setProcessing(false);
@@ -93,10 +102,16 @@ function CheckoutForm() {
 				setProcessing(false);
 				setSucceeded(true);
 
-				history.push('/');
+				dispatch(UpdateMyOrders(useremail, ucart, user));
 			}
 		}
 	}, [clientSecret]);
+
+	useEffect(() => {
+		if (ucart.length === 0) {
+			history.push('/');
+		}
+	}, [ucart]);
 
 	const cardStyle = {
 		style: {
@@ -223,7 +238,10 @@ function CheckoutForm() {
 					onChange={handleChange}
 				/>
 				<div className='error-card'>{error && error}</div>
-				<button id='submit' disabled={disabled || processing || succeeded}>
+				<button
+					type='submit'
+					id='submit'
+					disabled={disabled || processing || succeeded}>
 					<span>{processing ? 'PROCESSING' : 'PAY'}</span>
 				</button>
 			</form>

@@ -6,7 +6,13 @@ import {
 	FETCH_USER_DETAILS_SUCCESS,
 } from '../types';
 import axios from 'axios';
-import { fetchuserdata, updatecart, newCartTotal } from '../../api/index';
+import {
+	fetchuserdata,
+	updatecart,
+	newCartTotal,
+	updateMyOrders,
+	emptycart,
+} from '../../api/index';
 
 export const fetchUserDetails = (userid) => {
 	return async function (dispatch) {
@@ -73,6 +79,47 @@ export const NewCartTotal = (finalamt) => {
 				'Content-Type': 'application/json',
 			};
 			const response = axios.post(newCartTotal, finalamt, headeroptions);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const UpdateMyOrders = (uemail, ucart, user) => {
+	return async function (dispatch) {
+		try {
+			const headeroptions = {
+				'Content-Type': 'application/json',
+			};
+			const response = await axios.post(
+				updateMyOrders,
+				{ uemail, ucart },
+				headeroptions
+			);
+			console.log(response);
+			if (response.data.updateorders) {
+				dispatch(EmptyMyCart(uemail, user));
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const EmptyMyCart = (uemail, user) => {
+	return async function (dispatch) {
+		try {
+			const headeroptions = {
+				'Content-Type': 'application/json',
+			};
+			const response = await axios.post(emptycart, { uemail }, headeroptions);
+			const data = await response.data;
+			if (data.cartzero) {
+				dispatch({
+					type: EMPTY_CART,
+				});
+				dispatch(fetchUserDetails(user));
+			}
 		} catch (err) {
 			console.log(err);
 		}
