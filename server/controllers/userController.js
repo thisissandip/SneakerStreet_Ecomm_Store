@@ -52,6 +52,7 @@ module.exports.GetUserDetails = async (req, res) => {
 				email: userexist.email,
 				cart: userexist.Cart,
 				orders: userexist.Orders,
+				cTotal: userexist.CartTotal,
 			});
 		}
 	} catch (err) {
@@ -67,6 +68,11 @@ module.exports.NewCartTotal = async (req, res) => {
 		{ CartTotal: Math.round(value) },
 		{ new: true }
 	);
+	if (updateddata) {
+		res.status(201).json({
+			carttotal: updateddata.CartTotal,
+		});
+	}
 };
 
 module.exports.EmptyCart = async (req, res) => {

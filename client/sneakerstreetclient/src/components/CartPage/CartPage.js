@@ -98,8 +98,12 @@ function CartPage() {
 			<div className='cart-page'>
 				{cart?.length === 0 ? (
 					<div className='empty-cart'>
-						<img class='empty-cart-img' src={emptyCartImg} alt='Empty Cart' />
-						There no Items in your Cart
+						<img
+							className='empty-cart-img'
+							src={emptyCartImg}
+							alt='Empty Cart'
+						/>
+						<span>There no Items in your Cart</span>
 					</div>
 				) : (
 					<>

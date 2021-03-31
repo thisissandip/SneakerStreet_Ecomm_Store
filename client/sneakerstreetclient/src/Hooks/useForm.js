@@ -1,7 +1,14 @@
 import { useState } from 'react';
 
 const useForm = (callback) => {
-	const [inputs, setInputs] = useState({});
+	const [inputs, setInputs] = useState({
+		name: null,
+		address: null,
+		pcode: null,
+		city: null,
+		state: null,
+		country: null,
+	});
 	const handleSubmit = (event) => {
 		if (event) {
 			event.preventDefault();

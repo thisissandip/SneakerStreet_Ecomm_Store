@@ -4,6 +4,7 @@ import {
 	EMPTY_CART,
 	FETCH_USER_DETAILS_FAILURE,
 	FETCH_USER_DETAILS_SUCCESS,
+	NEW_CART_TOTAL,
 } from '../types';
 import axios from 'axios';
 import {
@@ -78,7 +79,14 @@ export const NewCartTotal = (finalamt) => {
 			const headeroptions = {
 				'Content-Type': 'application/json',
 			};
-			const response = axios.post(newCartTotal, finalamt, headeroptions);
+			const response = await axios.post(newCartTotal, finalamt, headeroptions);
+			const data = await response.data;
+			if (data.carttotal) {
+				dispatch({
+					type: NEW_CART_TOTAL,
+					payload: data.carttotal,
+				});
+			}
 		} catch (err) {
 			console.log(err);
 		}

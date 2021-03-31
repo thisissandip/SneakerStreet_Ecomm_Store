@@ -35,6 +35,7 @@ function CheckoutForm() {
 	/* onSubmit */
 	const finalsubmit = async () => {
 		setErrmsg({});
+		console.log(inputs);
 
 		if (inputs.name === null || inputs.name === '') {
 			setErrmsg((errmsg) => ({ ...errmsg, errname: 'Name is Required' }));
@@ -139,6 +140,7 @@ function CheckoutForm() {
 
 	return (
 		<div className='form-container'>
+			<div className='title'>Card Details</div>
 			<form id='payment-form' onSubmit={handleSubmit}>
 				<div className='form-control'>
 					<label htmlFor='name'>Name</label>
@@ -231,17 +233,26 @@ function CheckoutForm() {
 					</div>
 				</div>
 
-				<CardElement
-					id='card-element'
-					options={cardStyle}
-					onChange={handleChange}
-				/>
-				<div className='error-card'>{error && error}</div>
+				<div className='form-group'>
+					<CardElement
+						id='card-element'
+						options={cardStyle}
+						onChange={handleChange}
+					/>
+					<div className='error-card'>{error && error}</div>
+				</div>
+
 				<button
 					type='submit'
 					id='submit'
 					disabled={disabled || processing || succeeded}>
-					<span>{processing ? 'PROCESSING' : 'PAY'}</span>
+					<span>
+						{processing
+							? 'PROCESSING'
+							: succeeded
+							? 'PAYMENT SUCCESSFUL'
+							: 'PAY'}
+					</span>
 				</button>
 			</form>
 		</div>

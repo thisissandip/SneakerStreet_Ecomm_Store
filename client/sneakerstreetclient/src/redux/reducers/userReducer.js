@@ -4,6 +4,7 @@ import {
 	EMPTY_CART,
 	FETCH_USER_DETAILS_FAILURE,
 	FETCH_USER_DETAILS_SUCCESS,
+	NEW_CART_TOTAL,
 } from '../types';
 
 const initialstate = {
@@ -12,6 +13,7 @@ const initialstate = {
 	cart: [],
 	email: '',
 	orders: [],
+	cTotal: null,
 };
 
 export const userReducer = (state = initialstate, action) => {
@@ -36,6 +38,11 @@ export const userReducer = (state = initialstate, action) => {
 				...state,
 				cart: [],
 			};
+		case NEW_CART_TOTAL:
+			return {
+				...state,
+				cTotal: action.payload,
+			};
 		case FETCH_USER_DETAILS_SUCCESS:
 			return {
 				...state,
@@ -44,6 +51,7 @@ export const userReducer = (state = initialstate, action) => {
 				email: action.payload.email,
 				cart: action.payload.cart,
 				orders: action.payload.orders,
+				cTotal: action.payload.cTotal,
 			};
 		case FETCH_USER_DETAILS_FAILURE:
 			return {
