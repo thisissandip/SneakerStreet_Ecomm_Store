@@ -9,7 +9,21 @@
 	margin-top: 140px;
 	margin-bottom: 50px;
 	font-family: $primary-font;
-	min-height: 90vh;
+	min-height: 80vh;
+	.empty-cart {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		min-height: 80vh;
+		margin-top: -80px;
+		//border: 1px solid black;
+		.empty-cart-img {
+			width: 40%;
+			margin-bottom: 20px;
+		}
+	}
 	.cart-page-left {
 		width: 75%;
 		padding-right: 50px;
@@ -195,6 +209,13 @@
 @media screen and (max-width: 850px) {
 	.cart-page {
 		margin-top: 100px;
+		.empty-cart {
+			margin-top: -40px;
+			.empty-cart-img {
+				width: 90%;
+				margin-bottom: 20px;
+			}
+		}
 
 		.cart-page-left
 			.my-cart-container

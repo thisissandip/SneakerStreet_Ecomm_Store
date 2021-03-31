@@ -5,10 +5,7 @@ import { createPaymentIntent } from '../../api';
 import { useSelector, useDispatch } from 'react-redux';
 import useForm from '../../Hooks/useForm';
 import { useHistory } from 'react-router-dom';
-import {
-	UpdateMyOrders,
-	fetchUserDetails,
-} from '../../redux/actions/userActions';
+import { UpdateMyOrders } from '../../redux/actions/userActions';
 
 function CheckoutForm() {
 	const useremail = useSelector((state) => state.userR.email);
@@ -39,30 +36,30 @@ function CheckoutForm() {
 	const finalsubmit = async () => {
 		setErrmsg({});
 
-		if (inputs.name == null || inputs.name == '') {
+		if (inputs.name === null || inputs.name === '') {
 			setErrmsg((errmsg) => ({ ...errmsg, errname: 'Name is Required' }));
 			return;
 		}
-		if (inputs.address == null || inputs.address == '') {
+		if (inputs.address === null || inputs.address === '') {
 			setErrmsg((errmsg) => ({ ...errmsg, erraddress: 'Address is Required' }));
 			return;
 		}
-		if (inputs.pcode == null || inputs.pcode == '') {
+		if (inputs.pcode === null || inputs.pcode === '') {
 			setErrmsg((errmsg) => ({
 				...errmsg,
 				errpcode: 'Postal Code is Required',
 			}));
 			return;
 		}
-		if (inputs.city == null || inputs.city == '') {
+		if (inputs.city === null || inputs.city === '') {
 			setErrmsg((errmsg) => ({ ...errmsg, errcity: 'City is Required' }));
 			return;
 		}
-		if (inputs.state == null || inputs.state == '') {
+		if (inputs.state === null || inputs.state === '') {
 			setErrmsg((errmsg) => ({ ...errmsg, errstate: 'State is Required' }));
 			return;
 		}
-		if (inputs.country == null || inputs.country == '') {
+		if (inputs.country === null || inputs.country === '') {
 			setErrmsg((errmsg) => ({ ...errmsg, errcountry: 'Country is Required' }));
 			return;
 		}
@@ -72,7 +69,6 @@ function CheckoutForm() {
 			{ useremail, inputs },
 			{ 'Content-Type': 'application/json' }
 		);
-		const data = await response.data;
 		console.log(response);
 		if (response.data.clientSecret) {
 			setClientSecret(response.data.clientSecret);
@@ -84,27 +80,30 @@ function CheckoutForm() {
 
 	const { inputs, handleSubmit, handleInputChange } = useForm(finalsubmit);
 
-	useEffect(async () => {
-		if (clientSecret !== '' && clientSecret !== null) {
-			const payload = await stripe.confirmCardPayment(clientSecret, {
-				payment_method: {
-					card: elements.getElement(CardElement),
-				},
-			});
+	useEffect(() => {
+		async function checkClientSecret() {
+			if (clientSecret !== '' && clientSecret !== null) {
+				const payload = await stripe.confirmCardPayment(clientSecret, {
+					payment_method: {
+						card: elements.getElement(CardElement),
+					},
+				});
 
-			console.log('secretkey');
+				console.log('secretkey');
 
-			if (payload.error) {
-				setError(`${payload.error.message}`);
-				setProcessing(false);
-			} else {
-				setError(null);
-				setProcessing(false);
-				setSucceeded(true);
+				if (payload.error) {
+					setError(`${payload.error.message}`);
+					setProcessing(false);
+				} else {
+					setError(null);
+					setProcessing(false);
+					setSucceeded(true);
 
-				dispatch(UpdateMyOrders(useremail, ucart, user));
+					dispatch(UpdateMyOrders(useremail, ucart, user));
+				}
 			}
 		}
+		checkClientSecret();
 	}, [clientSecret]);
 
 	useEffect(() => {

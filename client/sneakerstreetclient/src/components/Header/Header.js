@@ -6,7 +6,7 @@ import './Header.scss';
 function Header({ pagename }) {
 	const styles = {
 		backgroundImage:
-			pagename == 'homepage' ? `url(${header2})` : `url(${header1})`,
+			pagename === 'homepage' ? `url(${header2})` : `url(${header1})`,
 	};
 
 	return <div style={styles} className='header'></div>;

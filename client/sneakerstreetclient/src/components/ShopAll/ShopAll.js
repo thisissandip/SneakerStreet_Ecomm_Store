@@ -112,8 +112,11 @@ function ShopAll() {
 	}, [isOpen]);
 
 	useEffect(() => {
-		const filtercont = document.querySelector('.filters-container');
-		filtercont.style.display = 'initial';
+		if (width > 800) {
+			console.log('width more than 800');
+			const filtercont = document.querySelector('.filters-container');
+			filtercont.style.display = 'initial';
+		}
 	}, [width]);
 
 	const ToggleFilterDIV = () => {

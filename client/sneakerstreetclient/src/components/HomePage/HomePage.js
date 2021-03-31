@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
 import Slider from './Slider/Slider';
@@ -34,7 +34,7 @@ function HomePage() {
 							<div className='showall-btn'>SHOW ALL</div>
 						</Link>
 					</div>
-					{/* <Slider /> */}
+					<Slider />
 				</div>
 				<GenderSection />
 				<ComingSoon />

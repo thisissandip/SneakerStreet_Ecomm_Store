@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function ItemPage() {
 	const { itemid } = useParams();
-	const user = useSelector((state) => state.authR.user);
+	//const user = useSelector((state) => state.authR.user);
 	const uemail = useSelector((state) => state.userR.email);
 	const cart = useSelector((state) => state.userR.cart);
 
@@ -34,17 +34,19 @@ function ItemPage() {
 		};
 	}, [didMount]);
 
-	useEffect(async () => {
-		try {
-			/* FETCH PRODUCTS DETAILS FROM SERVER (BENEFICIAL FOR LARGE APPLICTAIONS) */
-
-			const response = await axios.get(`${fetchsingleproduct}/${itemid}`);
-			if (response.data !== null) {
-				Setproductdata(response.data);
+	useEffect(() => {
+		/* FETCH PRODUCTS DETAILS FROM SERVER (BENEFICIAL FOR LARGE APPLICTAIONS) */
+		async function fetchTHISsingleproduct() {
+			try {
+				const response = await axios.get(`${fetchsingleproduct}/${itemid}`);
+				if (response.data !== null) {
+					Setproductdata(response.data);
+				}
+			} catch (err) {
+				console.log(err);
 			}
-		} catch (err) {
-			console.log(err);
 		}
+		fetchTHISsingleproduct();
 	}, []);
 
 	useEffect(() => {

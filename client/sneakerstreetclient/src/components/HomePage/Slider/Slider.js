@@ -91,7 +91,7 @@ function SliderHome() {
 	));
 
 	return (
-		<div className='slider-container'>
+		<div className='slider-wrapper'>
 			<div
 				className='slide-left-btn'
 				onClick={() => {
@@ -114,7 +114,7 @@ function SliderHome() {
 				}}>
 				<HiChevronRight />
 			</div>
-			<div className='slider-wrapper'>
+			<div className='slider-container'>
 				<div className='slider'>{allsliders}</div>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
 import SignupPage from './components/SignupPage/SignupPage';
@@ -11,7 +11,6 @@ import Checkout from './components/Checkout/Checkout';
 import ProtectedRoute from './ProtectedRoute';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { toast, ToastContainer } from 'react-toastify';
 
 gsap.registerPlugin(ScrollTrigger);
 

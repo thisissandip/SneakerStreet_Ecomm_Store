@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RemovefromCart, NewCartTotal } from '../../redux/actions/userActions';
 import { Link } from 'react-router-dom';
 import Footer from '../Footer/Footer';
+import emptyCartImg from '../../images/empty-cart.png';
 
 function CartPage() {
 	const uemail = useSelector((state) => state.userR.email);
@@ -22,7 +23,7 @@ function CartPage() {
 	useEffect(() => {
 		console.log(cart);
 		cart.forEach((productID) => {
-			allproducts.filter((item) => {
+			allproducts.forEach((item) => {
 				if (item._id === productID) {
 					allcartproducts.push(item);
 				}
@@ -95,37 +96,46 @@ function CartPage() {
 	return (
 		<>
 			<div className='cart-page'>
-				<div className='cart-page-left'>
-					<div className='my-cart-container'>
-						<div className='cart-title'>My Cart</div>
-						<div className='cart-all-products'>{displayALLproductDIV}</div>
+				{cart?.length === 0 ? (
+					<div className='empty-cart'>
+						<img class='empty-cart-img' src={emptyCartImg} alt='Empty Cart' />
+						There no Items in your Cart
 					</div>
-				</div>
-				<div className='cart-page-right'>
-					<div className='summary-title'>Order Summary</div>
+				) : (
+					<>
+						<div className='cart-page-left'>
+							<div className='my-cart-container'>
+								<div className='cart-title'>My Cart</div>
+								<div className='cart-all-products'>{displayALLproductDIV}</div>
+							</div>
+						</div>
+						<div className='cart-page-right'>
+							<div className='summary-title'>Order Summary</div>
 
-					<div className='order-details'>
-						<div>Order Value</div>
-						<div>Rs. {ordervalue}</div>
-					</div>
-					<div className='order-details'>
-						<div>Tax (18%)</div>
-						<div>Rs. {Math.round(tax)}</div>
-					</div>
-					<div className='order-details'>
-						<div>Shipping</div>
-						<div>FREE</div>
-					</div>
-					<div className='order-details TOTAL-DIV'>
-						<div className='total'>Total</div>
-						<div className='total'>Rs. {Math.round(totalorder)}</div>
-					</div>
-					<Link to='/checkout'>
-						<button className='checkout-btn' onClick={() => newCartTotal()}>
-							PROCEED TO CHECKOUT
-						</button>
-					</Link>
-				</div>
+							<div className='order-details'>
+								<div>Order Value</div>
+								<div>Rs. {ordervalue}</div>
+							</div>
+							<div className='order-details'>
+								<div>Tax (18%)</div>
+								<div>Rs. {Math.round(tax)}</div>
+							</div>
+							<div className='order-details'>
+								<div>Shipping</div>
+								<div>FREE</div>
+							</div>
+							<div className='order-details TOTAL-DIV'>
+								<div className='total'>Total</div>
+								<div className='total'>Rs. {Math.round(totalorder)}</div>
+							</div>
+							<Link to='/checkout'>
+								<button className='checkout-btn' onClick={() => newCartTotal()}>
+									PROCEED TO CHECKOUT
+								</button>
+							</Link>
+						</div>
+					</>
+				)}
 			</div>
 			<Footer />
 		</>
