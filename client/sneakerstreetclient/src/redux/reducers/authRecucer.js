@@ -12,7 +12,7 @@ const authState = {
 	user: '',
 	error: '',
 	regerror: '',
-	isloading: false,
+	isloading: true,
 };
 
 export const authReducer = (state = authState, action) => {

@@ -30,7 +30,7 @@ function CartPage() {
 			});
 		});
 		setCartproducts(allcartproducts);
-	}, [cart]);
+	}, [cart, allproducts]);
 
 	useEffect(() => {
 		console.log(Cartproducts);
@@ -96,49 +96,65 @@ function CartPage() {
 	return (
 		<>
 			<div className='cart-page'>
-				{cart?.length === 0 ? (
-					<div className='empty-cart'>
-						<img
-							className='empty-cart-img'
-							src={emptyCartImg}
-							alt='Empty Cart'
-						/>
-						<span>There no Items in your Cart</span>
-					</div>
-				) : (
-					<>
-						<div className='cart-page-left'>
-							<div className='my-cart-container'>
-								<div className='cart-title'>My Cart</div>
-								<div className='cart-all-products'>{displayALLproductDIV}</div>
-							</div>
+				{allproducts.length !== 0 ? (
+					cart?.length === 0 ? (
+						<div className='empty-cart'>
+							<img
+								className='empty-cart-img'
+								src={emptyCartImg}
+								alt='Empty Cart'
+							/>
+							<span>There no Items in your Cart</span>
 						</div>
-						<div className='cart-page-right'>
-							<div className='summary-title'>Order Summary</div>
+					) : (
+						<>
+							<div className='cart-page-left'>
+								<div className='my-cart-container'>
+									<div className='cart-title'>My Cart</div>
+									<div className='cart-all-products'>
+										{displayALLproductDIV}
+									</div>
+								</div>
+							</div>
+							<div className='cart-page-right'>
+								<div className='summary-title'>Order Summary</div>
 
-							<div className='order-details'>
-								<div>Order Value</div>
-								<div>Rs. {ordervalue}</div>
+								<div className='order-details'>
+									<div>Order Value</div>
+									<div>Rs. {ordervalue}</div>
+								</div>
+								<div className='order-details'>
+									<div>Tax (18%)</div>
+									<div>Rs. {Math.round(tax)}</div>
+								</div>
+								<div className='order-details'>
+									<div>Shipping</div>
+									<div>FREE</div>
+								</div>
+								<div className='order-details TOTAL-DIV'>
+									<div className='total'>Total</div>
+									<div className='total'>Rs. {Math.round(totalorder)}</div>
+								</div>
+								<Link to='/checkout'>
+									<button
+										className='checkout-btn'
+										onClick={() => newCartTotal()}>
+										PROCEED TO CHECKOUT
+									</button>
+								</Link>
 							</div>
-							<div className='order-details'>
-								<div>Tax (18%)</div>
-								<div>Rs. {Math.round(tax)}</div>
-							</div>
-							<div className='order-details'>
-								<div>Shipping</div>
-								<div>FREE</div>
-							</div>
-							<div className='order-details TOTAL-DIV'>
-								<div className='total'>Total</div>
-								<div className='total'>Rs. {Math.round(totalorder)}</div>
-							</div>
-							<Link to='/checkout'>
-								<button className='checkout-btn' onClick={() => newCartTotal()}>
-									PROCEED TO CHECKOUT
-								</button>
-							</Link>
-						</div>
-					</>
+						</>
+					)
+				) : (
+					<svg className='spinner' viewBox='0 0 50 50'>
+						<circle
+							className='path'
+							cx='25'
+							cy='25'
+							r='20'
+							fill='none'
+							strokeWidth='5'></circle>
+					</svg>
 				)}
 			</div>
 			<Footer />

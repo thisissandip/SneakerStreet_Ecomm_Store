@@ -4,15 +4,19 @@ import { useSelector } from 'react-redux';
 
 function ProtectedRoute({ component: Component, ...rest }) {
 	const user = useSelector((state) => state.authR.user);
+	const isloading = useSelector((state) => state.authR.isloading);
 
 	return (
 		<Route
 			{...rest}
 			render={(props) => {
-				if (user !== '') {
-					return <Component {...props} />;
+				if (isloading) {
 				} else {
-					return <Redirect to='login'></Redirect>;
+					if (user !== '') {
+						return <Component {...props} />;
+					} else {
+						return <Redirect to='/login'></Redirect>;
+					}
 				}
 			}}
 		/>

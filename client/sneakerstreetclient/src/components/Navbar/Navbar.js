@@ -195,7 +195,7 @@ function Navbar() {
 										</NavLink>
 									</li>
 									<li>
-										<NavLink activeClassName='is-active' to='/login'>
+										<NavLink exact activeClassName='is-active' to='/'>
 											<div
 												className='logout-btn'
 												onClick={(e) => {

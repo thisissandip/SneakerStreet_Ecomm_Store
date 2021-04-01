@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import emptyCartImg from '../../images/empty-cart.png';
+import emptyCartImg from '../../images/emptyorders.png';
 import Footer from '../Footer/Footer';
 import './myorders.scss';
 
@@ -12,8 +12,6 @@ function MyOrders() {
 
 	const [Cartproducts, setCartproducts] = useState([]);
 	let allcartproducts = [];
-
-	const dispatch = useDispatch();
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -29,7 +27,7 @@ function MyOrders() {
 			});
 		});
 		setCartproducts(allcartproducts);
-	}, [cart]);
+	}, [cart, allproducts]);
 
 	useEffect(() => {
 		console.log(Cartproducts);
@@ -62,24 +60,39 @@ function MyOrders() {
 	return (
 		<>
 			<div className='my-orders-page'>
-				{cart?.length === 0 ? (
-					<div className='empty-cart'>
-						<img
-							className='empty-cart-img'
-							src={emptyCartImg}
-							alt='Empty Cart'
-						/>
-						<span>There no Items in your Cart</span>
-					</div>
-				) : (
-					<>
-						<div className='cart-page-left'>
-							<div className='my-cart-container'>
-								<div className='cart-title'>My Orders</div>
-								<div className='cart-all-products'>{displayALLproductDIV}</div>
-							</div>
+				{allproducts.length !== 0 ? (
+					cart?.length === 0 ? (
+						<div className='empty-cart'>
+							<img
+								className='empty-cart-img'
+								src={emptyCartImg}
+								alt='Empty Cart'
+								style={{ opacity: 0.7 }}
+							/>
+							<span>You Haven't Ordered Anything Yet</span>
 						</div>
-					</>
+					) : (
+						<>
+							<div className='cart-page-left'>
+								<div className='my-cart-container'>
+									<div className='cart-title'>My Orders</div>
+									<div className='cart-all-products'>
+										{displayALLproductDIV}
+									</div>
+								</div>
+							</div>
+						</>
+					)
+				) : (
+					<svg className='spinner' viewBox='0 0 50 50'>
+						<circle
+							className='path'
+							cx='25'
+							cy='25'
+							r='20'
+							fill='none'
+							strokeWidth='5'></circle>
+					</svg>
 				)}
 			</div>
 			<Footer />

@@ -19,8 +19,8 @@ function ItemPage() {
 	const [didMount, SetdidMount] = useState(false);
 
 	const [productdata, Setproductdata] = useState({});
-	const [displayImgs, SetdisplayImgs] = useState();
-	const [displaydetails, Setdisplaydetails] = useState();
+	const [displayImgs, SetdisplayImgs] = useState(null);
+	const [displaydetails, Setdisplaydetails] = useState(null);
 	let allimagesarr;
 	let details;
 
@@ -121,34 +121,46 @@ function ItemPage() {
 	return (
 		<>
 			<div className='product-page'>
-				<div className='product-container'>
-					<div className='product-left'>
-						<div className='product-img-container'>{displayImgs}</div>
-					</div>
-					<div className='product-right'>
-						<div className='product-right-cont'>
-							<div className='product-main'>
-								<div className='product-name'>{productdata.Name}</div>
-								<div className='product-price'>Rs. {productdata.BuyNew}</div>
-								<button
-									className='add-to-cart'
-									onClick={(e) => {
-										AddToCart(itemid, productdata.Name);
-									}}>
-									ADD TO CART
-								</button>
-							</div>
-							<div className='product-details'>
-								<div className='details-title'>Details</div>
-								{displaydetails}
-							</div>
-							<div className='product-des'>
-								<div className='des-title'>Product Description</div>
-								{displaydetails && productdata.Details.des}
+				{displaydetails === null ? (
+					<svg className='spinner' viewBox='0 0 50 50'>
+						<circle
+							className='path'
+							cx='25'
+							cy='25'
+							r='20'
+							fill='none'
+							strokeWidth='5'></circle>
+					</svg>
+				) : (
+					<div className='product-container'>
+						<div className='product-left'>
+							<div className='product-img-container'>{displayImgs}</div>
+						</div>
+						<div className='product-right'>
+							<div className='product-right-cont'>
+								<div className='product-main'>
+									<div className='product-name'>{productdata.Name}</div>
+									<div className='product-price'>Rs. {productdata.BuyNew}</div>
+									<button
+										className='add-to-cart'
+										onClick={(e) => {
+											AddToCart(itemid, productdata.Name);
+										}}>
+										ADD TO CART
+									</button>
+								</div>
+								<div className='product-details'>
+									<div className='details-title'>Details</div>
+									{displaydetails}
+								</div>
+								<div className='product-des'>
+									<div className='des-title'>Product Description</div>
+									{displaydetails && productdata.Details.des}
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				)}
 			</div>
 			<ToastContainer />
 		</>
