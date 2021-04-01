@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { CgMenuLeftAlt } from 'react-icons/cg';
 import { MdClose } from 'react-icons/md';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { isUserloggedIn, logoutUser } from '../../redux/actions/authActions';
 import { fetchUserDetails } from '../../redux/actions/userActions';
 import { fetchall } from '../../redux/actions/productActions';
+import useWidth from '../../Hooks/useWidth';
 
 import './Navbar.scss';
 
@@ -14,6 +15,8 @@ function Navbar() {
 	const user = useSelector((state) => state.authR.user);
 	const cart = useSelector((state) => state.userR.cart);
 	const fname = useSelector((state) => state.userR.fname);
+
+	const [width] = useWidth();
 
 	const dispatch = useDispatch();
 
@@ -87,7 +90,7 @@ function Navbar() {
 						</div>
 					</li>
 					<li>
-						<Link to='/'>
+						<NavLink exact to='/'>
 							<div
 								className='logo'
 								onClick={(e) => {
@@ -96,10 +99,10 @@ function Navbar() {
 								}}>
 								LOGO
 							</div>
-						</Link>
+						</NavLink>
 					</li>
 					<li>
-						<Link to='/cart'>
+						<NavLink activeClassName='is-active' to='/cart'>
 							<div
 								className='cart-wrapper'
 								onClick={(e) => {
@@ -109,14 +112,14 @@ function Navbar() {
 								{/* For Time Being Display None it */}
 								<div className='cart-item-count'>{cart?.length}</div>
 							</div>
-						</Link>
+						</NavLink>
 					</li>
 				</ul>
 			</div>
 			<div className='navbar-inner'>
 				<ul className='left-nav'>
 					<li>
-						<Link to='/'>
+						<NavLink exact activeClassName='is-active' to='/'>
 							<div
 								className='logo'
 								onClick={(e) => {
@@ -125,10 +128,17 @@ function Navbar() {
 								}}>
 								Logo
 							</div>
-						</Link>
+						</NavLink>
 					</li>
+
+					{width > 850 ? null : (
+						<li>
+							<div className='nav-item hi-mobile'>Hi, {fname}</div>
+						</li>
+					)}
+
 					<li>
-						<Link to='/shopall'>
+						<NavLink activeClassName='is-active' to='/shopall'>
 							<div
 								className='nav-item'
 								onClick={(e) => {
@@ -136,21 +146,11 @@ function Navbar() {
 								}}>
 								Shop All
 							</div>
-						</Link>
+						</NavLink>
 					</li>
+
 					<li>
-						<Link to='/gallery'>
-							<div
-								className='nav-item'
-								onClick={(e) => {
-									CloseMobileMenu(e);
-								}}>
-								Gallery
-							</div>
-						</Link>
-					</li>
-					<li>
-						<Link to='/about'>
+						<NavLink activeClassName='is-active' to='/about'>
 							<div
 								className='nav-item'
 								onClick={(e) => {
@@ -158,14 +158,14 @@ function Navbar() {
 								}}>
 								About
 							</div>
-						</Link>
+						</NavLink>
 					</li>
 				</ul>
 				<ul className='right-nav'>
 					{user == '' ? (
 						<>
 							<li>
-								<Link to='/login'>
+								<NavLink activeClassName='is-active' to='/login'>
 									<div
 										className='nav-item'
 										onClick={(e) => {
@@ -173,17 +173,42 @@ function Navbar() {
 										}}>
 										Account
 									</div>
-								</Link>
+								</NavLink>
 							</li>
 						</>
 					) : (
 						<>
-							{/* 	<li>
-								<Link to='/login'>
+							<li className='my-profile'>
+								{width < 850 ? null : (
 									<div className='nav-item'>Hi, {fname}</div>
-								</Link>
-							</li> */}
-							<li>
+								)}
+
+								<ul className='dropdown-menu'>
+									<li className='my-orders'>
+										<NavLink activeClassName='is-active' to='/myorders'>
+											<div
+												onClick={(e) => {
+													CloseMobileMenu(e);
+												}}>
+												My Orders
+											</div>
+										</NavLink>
+									</li>
+									<li>
+										<NavLink activeClassName='is-active' to='/login'>
+											<div
+												className='logout-btn'
+												onClick={(e) => {
+													dispatch(logoutUser());
+													window.location.reload();
+												}}>
+												Logout
+											</div>
+										</NavLink>
+									</li>
+								</ul>
+							</li>
+							{/* 	<li>
 								<Link to='/'>
 									<div
 										className='nav-item'
@@ -194,12 +219,12 @@ function Navbar() {
 										Logout
 									</div>
 								</Link>
-							</li>
+							</li> */}
 						</>
 					)}
 
-					<li>
-						<Link to='/cart'>
+					<li className='cart-item-btn'>
+						<NavLink activeClassName='is-active' to='/cart'>
 							<div
 								className='nav-item'
 								onClick={(e) => {
@@ -210,7 +235,7 @@ function Navbar() {
 									<div className='cart-item-count'>{cart?.length}</div>
 								</div>
 							</div>
-						</Link>
+						</NavLink>
 					</li>
 				</ul>
 			</div>

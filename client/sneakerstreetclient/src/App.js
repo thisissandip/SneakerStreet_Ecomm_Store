@@ -8,6 +8,7 @@ import ShopAll from './components/ShopAll/ShopAll';
 import CartPage from './components/CartPage/CartPage';
 import ItemPage from './components/ItemPage/ItemPage';
 import Checkout from './components/Checkout/Checkout';
+import MyOrders from './components/MyOrders/MyOrders';
 import ProtectedRoute from './ProtectedRoute';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -33,6 +34,7 @@ function App() {
 						<SignupPage />
 					</Route>
 					<ProtectedRoute exact path='/cart' component={CartPage} />
+					<ProtectedRoute exact path='/myorders' component={MyOrders} />
 					<Route exact path='/sneaker/:itemid'>
 						<ItemPage />
 					</Route>

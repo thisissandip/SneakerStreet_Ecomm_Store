@@ -95,6 +95,7 @@ function CheckoutForm() {
 				if (payload.error) {
 					setError(`${payload.error.message}`);
 					setProcessing(false);
+					setDisabled(false);
 				} else {
 					setError(null);
 					setProcessing(false);

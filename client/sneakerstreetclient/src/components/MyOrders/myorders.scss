@@ -1,8 +1,8 @@
 @import '../../index.scss';
 
-.cart-page {
+.my-orders-page {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	margin-top: 80px;
 	width: 92%;
 	margin: 0 auto;
@@ -26,8 +26,8 @@
 		}
 	}
 	.cart-page-left {
-		width: 75%;
-		padding-right: 50px;
+		width: 100%;
+		padding-right: 0px;
 		.my-cart-container {
 			width: 100%;
 			padding: 20px;
@@ -89,62 +89,10 @@
 			}
 		}
 	}
-	.cart-page-right {
-		width: 25%;
-		min-width: 300px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding: 20px;
-		height: 100%;
-		border: 1px solid rgba(216, 216, 216, 1);
-		.summary-title {
-			font-size: 2rem;
-			font-weight: 600;
-			margin-bottom: 20px;
-		}
-
-		.order-details {
-			width: 95%;
-			display: flex;
-			justify-content: space-between;
-			padding: 25px 0;
-			font-weight: 300;
-			border-bottom: 1px solid rgba(216, 216, 216, 1);
-			.total {
-				font-weight: 600;
-			}
-		}
-		a {
-			width: 100%;
-			button {
-				width: 100%;
-				margin-bottom: 20px;
-				margin-top: 40px;
-				padding: 10px;
-				outline: none;
-				cursor: pointer;
-				font-family: $primary-font;
-				font-weight: 300;
-				font-size: 0.8rem;
-				padding: 12px 0;
-				border: 1px solid $accent-color;
-				border-radius: 30px;
-				color: white;
-				background-color: $accent-color;
-				transition: all 0.2s ease;
-				&:hover {
-					background-color: transparent;
-					color: $accent-color;
-					font-weight: 500;
-				}
-			}
-		}
-	}
 }
 
-@media screen and (max-width: 950px) {
-	.cart-page {
+@media screen and (max-width: 850px) {
+	.my-orders-page {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -194,21 +142,11 @@
 				}
 			}
 		}
-		.cart-page-right {
-			width: 100%;
-			min-width: auto;
-			padding: 20px;
-			.summary-title {
-				font-size: 1.5rem;
-				font-weight: 600;
-				margin-bottom: 20px;
-			}
-		}
 	}
 }
 
 @media screen and (max-width: 850px) {
-	.cart-page {
+	.my-orders-page {
 		margin-top: 100px;
 		.empty-cart {
 			margin-top: -40px;
@@ -218,19 +156,28 @@
 			}
 		}
 
+		.cart-page-left .my-cart-container .cart-all-products .product-container {
+			display: flex;
+			flex-direction: column;
+			.order-details {
+				margin-top: 10px;
+			}
+		}
+
 		.cart-page-left
 			.my-cart-container
 			.cart-all-products
 			.product-container
 			.product-left
 			.product-deets {
-			max-width: 140px;
+			width: 100%;
+			//max-width: 140px;
 		}
 	}
 }
 
 @media screen and (max-width: 350px) {
-	.cart-page {
+	.my-orders-page {
 		margin-top: 100px;
 		.cart-page-left
 			.my-cart-container
