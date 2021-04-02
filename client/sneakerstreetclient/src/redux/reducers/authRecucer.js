@@ -9,10 +9,10 @@ import {
 } from '../types/authTypes';
 
 const authState = {
-	user: '',
+	user: null,
 	error: '',
 	regerror: '',
-	isloading: true,
+	isloading: false,
 };
 
 export const authReducer = (state = authState, action) => {

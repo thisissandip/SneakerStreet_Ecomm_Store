@@ -1,4 +1,4 @@
-@import "../../../index.scss";
+@import '../../../index.scss';
 
 .coming-soon-container {
 	font-family: $primary-font;
@@ -35,7 +35,7 @@
 			justify-content: center;
 			font-size: 3rem;
 			font-weight: 700;
-			transition: 0.7s opacity cubic-bezier(0.165, 0.84, 0.44, 1),
+			transition: 0.03s opacity initial,
 				1s bottom cubic-bezier(0.165, 0.84, 0.44, 1);
 			div:first-child {
 				font-size: 2rem;
@@ -101,7 +101,7 @@
 			justify-content: center;
 			font-size: 3rem;
 			font-weight: 700;
-			transition: 0.7s opacity cubic-bezier(0.165, 0.84, 0.44, 1),
+			transition: 0.03s opacity initial,
 				1s bottom cubic-bezier(0.165, 0.84, 0.44, 1);
 			div:first-child {
 				font-size: 2rem;

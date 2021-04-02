@@ -32,8 +32,8 @@ function Navbar() {
 
 	/* If User is Logged in, fetch User Details */
 	useEffect(() => {
-		//console.log('user', user);
-		if (user !== '') {
+		console.log('user', user);
+		if (user !== '' && user !== null) {
 			dispatch(fetchUserDetails(user));
 		}
 	}, [user]);
@@ -162,7 +162,7 @@ function Navbar() {
 					</li>
 				</ul>
 				<ul className='right-nav'>
-					{user == '' ? (
+					{user == null ? (
 						<>
 							<li>
 								<NavLink activeClassName='is-active' to='/login'>

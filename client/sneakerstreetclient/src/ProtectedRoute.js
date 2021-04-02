@@ -10,13 +10,10 @@ function ProtectedRoute({ component: Component, ...rest }) {
 		<Route
 			{...rest}
 			render={(props) => {
-				if (isloading) {
+				if (user !== '' && user && !isloading) {
+					return <Component {...props} />;
 				} else {
-					if (user !== '') {
-						return <Component {...props} />;
-					} else {
-						return <Redirect to='/login'></Redirect>;
-					}
+					return <Redirect to='/login'></Redirect>;
 				}
 			}}
 		/>
