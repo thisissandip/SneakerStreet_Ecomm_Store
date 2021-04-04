@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchall, stopfetch } from '../../redux/actions/productActions';
 import Header from '../Header/Header';
 import Productitem from '../ProductItem/ProductItem';
-import Filter from './Filter/Filter';
 import useWidth from '../../Hooks/useWidth';
 import Footer from '../Footer/Footer';
 
@@ -34,7 +33,8 @@ function ShopAll() {
 		if (isloading) {
 			console.log('loading');
 		} else {
-			let popularity = allproducts.sort(
+			let popularityarray = [...allproducts];
+			let popularity = popularityarray.sort(
 				(a, b) =>
 					parseInt(a.Details.releasedate) - parseInt(b.Details.releasedate)
 			);
@@ -94,57 +94,12 @@ function ShopAll() {
 		SetpriceOrderopt(e.target.value);
 	};
 
-	useEffect(() => {
-		const filtercont = document.querySelector('.filters-container');
-		if (width > 1000) {
-			if (isOpen) {
-				filtercont.style.width = '0px';
-				filtercont.style.marginRight = '0px';
-				filtercont.style.border = 'none';
-				/* filtercont.style.display = 'none'; */
-			} else {
-				filtercont.style.width = '400px';
-				filtercont.style.display = 'initial';
-				filtercont.style.marginRight = '20px';
-				filtercont.style.border = '1px solid rgb(218, 218, 218)';
-			}
-		}
-	}, [isOpen]);
-
-	useEffect(() => {
-		if (width > 800) {
-			console.log('width more than 800');
-			const filtercont = document.querySelector('.filters-container');
-			filtercont.style.display = 'initial';
-		}
-	}, [width]);
-
-	const ToggleFilterDIV = () => {
-		if (width > 1000) {
-			SetisOpen(!isOpen);
-		} else {
-			const filtercont = document.querySelector('.filters-container');
-			filtercont.style.width = '100%';
-			filtercont.style.marginRight = '0px';
-		}
-	};
-
 	return (
 		<div className='shopall'>
 			<Header pagename={'shopall'} />
 			<div className='shopall-content'>
 				<div className='row1-filter-cont'>
-					<div
-						onClick={() => {
-							ToggleFilterDIV();
-							if (width < 1000) {
-								const filtercont = document.querySelector('.filters-container');
-								filtercont.style.display = 'initial';
-							}
-						}}
-						className='filters-title'>
-						Customize Search
-					</div>
+					<div className='filters-title'>Customize Search</div>
 					<div className='no-of-results'>
 						Showing {arrayToMap.length} Results
 					</div>
@@ -163,11 +118,6 @@ function ShopAll() {
 				</div>
 				<div className='row-2-filter-content'>
 					<div className='all-products-container'>
-						<Filter
-							OptionChanged={OptionChanged}
-							arrayToMap={arrayToMap}
-							SetarrayToMap={SetarrayToMap}
-						/>
 						<div className='all-products-wrapper'>{displayProducts}</div>
 					</div>
 				</div>

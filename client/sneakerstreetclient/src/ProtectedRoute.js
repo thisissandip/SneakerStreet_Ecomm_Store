@@ -6,6 +6,8 @@ function ProtectedRoute({ component: Component, ...rest }) {
 	const user = useSelector((state) => state.authR.user);
 	const isloading = useSelector((state) => state.authR.isloading);
 
+	const isAuthenticated = localStorage.getItem('ssauth');
+
 	return (
 		<Route
 			{...rest}
@@ -13,7 +15,9 @@ function ProtectedRoute({ component: Component, ...rest }) {
 				if (user !== '' && user && !isloading) {
 					return <Component {...props} />;
 				} else {
-					return <Redirect to='/login'></Redirect>;
+					if (isAuthenticated == null) {
+						return <Redirect to='/login'></Redirect>;
+					}
 				}
 			}}
 		/>

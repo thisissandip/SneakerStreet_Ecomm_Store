@@ -16,7 +16,7 @@ function ComingSoon() {
 		SetdidMount(true);
 
 		if (didMount) {
-			if (width > 750) {
+			if (width > 800) {
 				gsap.to(TravisRef.current, {
 					css: {
 						opacity: 1,

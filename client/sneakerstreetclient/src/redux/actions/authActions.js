@@ -102,10 +102,13 @@ export const logoutUser = () => {
 	return async function (dispatch) {
 		try {
 			const logoutres = await axios.get(logoutuser, { withCredentials: true });
+			const data = logoutres.data;
+			localStorage.removeItem('ssauth');
 			localStorage.removeItem('ss_cart');
 			dispatch({
 				type: LOGOUT_USER,
 			});
+			window.location.reload();
 		} catch (err) {
 			console.log(err);
 		}

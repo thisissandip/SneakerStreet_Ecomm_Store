@@ -17,6 +17,8 @@ const initialstate = {
 };
 
 export const userReducer = (state = initialstate, action) => {
+	let localcart = JSON.parse(localStorage.getItem('ss_cart'));
+
 	switch (action.type) {
 		case ADD_TO_CART:
 			let lscart = [...state.cart, action.payload];
@@ -44,12 +46,16 @@ export const userReducer = (state = initialstate, action) => {
 				cTotal: action.payload,
 			};
 		case FETCH_USER_DETAILS_SUCCESS:
+			let mycart = [];
+			if (localcart.length > 1) {
+				mycart = [...localcart, ...action.payload.cart];
+			}
 			return {
 				...state,
 				fname: action.payload.fname,
 				lname: action.payload.lname,
 				email: action.payload.email,
-				cart: action.payload.cart,
+				cart: mycart,
 				orders: action.payload.orders,
 				cTotal: action.payload.cTotal,
 			};

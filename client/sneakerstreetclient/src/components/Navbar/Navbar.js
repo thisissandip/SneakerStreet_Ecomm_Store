@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { CgMenuLeftAlt } from 'react-icons/cg';
 import { MdClose } from 'react-icons/md';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -20,6 +20,8 @@ function Navbar() {
 
 	const dispatch = useDispatch();
 
+	const history = useHistory();
+
 	/* 	Fetch all products to Display */
 	useEffect(() => {
 		dispatch(fetchall());
@@ -35,6 +37,10 @@ function Navbar() {
 		console.log('user', user);
 		if (user !== '' && user !== null) {
 			dispatch(fetchUserDetails(user));
+		} else {
+			history.push({
+				pathname: '/',
+			});
 		}
 	}, [user]);
 
@@ -200,7 +206,6 @@ function Navbar() {
 												className='logout-btn'
 												onClick={(e) => {
 													dispatch(logoutUser());
-													window.location.reload();
 												}}>
 												Logout
 											</div>

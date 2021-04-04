@@ -12,17 +12,24 @@ function SliderHome() {
 
 	const [width] = useWidth();
 
+	const [count, setCount] = useState(1);
+	const [count800, setCount800] = useState(1);
+
+	const [displayProducts, SetdisplayProducts] = useState();
+
 	useEffect(() => {
-		if (isloading == true) {
-			console.log('Loading');
+		if (isloading) {
 		} else {
-			//console.log(allproducts);
-			console.log('home loaded');
+			console.log('home slider', allproducts);
 		}
 	}, [isloading]);
 
-	const [count, setCount] = useState(1);
-	const [count800, setCount800] = useState(1);
+	useEffect(() => {
+		return () => {
+			setCount(1);
+			setCount800(1);
+		};
+	}, []);
 
 	const SlideRight = () => {
 		const slider = document.querySelector('.slider');
@@ -115,7 +122,19 @@ function SliderHome() {
 				<HiChevronRight />
 			</div>
 			<div className='slider-container'>
-				<div className='slider'>{allsliders}</div>
+				{isloading ? (
+					<svg className='spinner' viewBox='0 0 50 50'>
+						<circle
+							className='path'
+							cx='25'
+							cy='25'
+							r='20'
+							fill='none'
+							strokeWidth='5'></circle>
+					</svg>
+				) : (
+					<div className='slider'>{allsliders}</div>
+				)}
 			</div>
 		</div>
 	);

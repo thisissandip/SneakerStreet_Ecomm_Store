@@ -78,5 +78,7 @@ module.exports.checkUser = async (req, res) => {
 
 module.exports.logoutUser = async (req, res) => {
 	res.clearCookie('jwt');
-	res.status(201).send('logout successful');
+	res.status(201).json({
+		logout: true,
+	});
 };

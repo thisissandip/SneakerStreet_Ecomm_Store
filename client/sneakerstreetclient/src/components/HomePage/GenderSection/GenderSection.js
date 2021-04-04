@@ -21,7 +21,7 @@ function GenderSection() {
 		SetdidMount(true);
 
 		if (didMount) {
-			if (width > 750) {
+			if (width > 800) {
 				allcolwrappersRef.current.forEach((el) => {
 					gsap.fromTo(
 						el,
