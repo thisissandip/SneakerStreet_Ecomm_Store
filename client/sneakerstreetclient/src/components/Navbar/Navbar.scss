@@ -147,6 +147,8 @@ nav {
 @media screen and (max-width: 850px) {
 	nav {
 		min-height: 70px; // for mobile
+		border-left: none;
+		border-right: none;
 		border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
 		.mobile-nav {
 			font-size: 1.1rem;
@@ -190,7 +192,7 @@ nav {
 		.navbar-inner {
 			position: absolute;
 			top: 60px;
-			left: -100%;
+			left: -150%;
 			height: 100vh;
 			background-color: white;
 			width: 100%;
@@ -263,6 +265,7 @@ nav {
 						transition: 0.2s opacity ease, 0.1s visibility ease;
 						.logout-btn {
 							display: initial;
+							font-weight: 400;
 						}
 					}
 					.dropdown-menu::before {
@@ -294,6 +297,14 @@ nav {
 		}
 	}
 }
+
+@media screen and (min-width: 1800px) {
+	nav {
+		border-left: 1px solid rgb(186, 186, 186);
+		border-right: 1px solid rgb(186, 186, 186);
+	}
+}
+
 /* FOR STAGGERING ANIMATION */
 /* .left-nav {
 	li {

@@ -7,5 +7,6 @@ router.get('/user/:id', userController.GetUserDetails);
 router.post('/newcarttotal', userController.NewCartTotal);
 router.post('/emptycart', userController.EmptyCart);
 router.post('/updatemyorders', userController.updateMyOrders);
+router.post('/newsletter', userController.NewsLetter);
 
 module.exports = router;

@@ -112,7 +112,7 @@
 			.filters-container {
 				font-family: $primary-font;
 				height: 100%;
-				width: 400px;
+				max-width: 400px;
 				display: initial;
 				padding: 20px 0;
 				margin-right: 20px;
@@ -166,7 +166,7 @@
 					margin-left: 0px;
 				}
 				.no-of-results {
-					display: none;
+					display: initial;
 				}
 				.select {
 					position: relative;

@@ -42,6 +42,10 @@ function ShopAll() {
 			SetpriceOrderopt('Popularity');
 			console.log('shop all loaded', allproducts);
 		}
+
+		return () => {
+			SetarrayToMap([]);
+		};
 	}, [isloading]);
 
 	useEffect(() => {
@@ -55,17 +59,17 @@ function ShopAll() {
 
 	const OptionChanged = () => {
 		if (priceOrderopt === 'LowToHigh') {
-			const lowtohigh = arrayToMap.sort(
+			const lowtohigh = [...arrayToMap].sort(
 				(a, b) => parseInt(a.BuyNew) - parseInt(b.BuyNew)
 			);
 			SetarrayToMap(lowtohigh);
 		} else if (priceOrderopt === 'HighToLow') {
-			const hightolow = arrayToMap.sort(
+			const hightolow = [...arrayToMap].sort(
 				(a, b) => parseInt(b.BuyNew) - parseInt(a.BuyNew)
 			);
 			SetarrayToMap(hightolow);
 		} else if (priceOrderopt === 'Popularity') {
-			let popularity = arrayToMap.sort(
+			let popularity = [...arrayToMap].sort(
 				(a, b) =>
 					parseInt(a.Details.releasedate) - parseInt(b.Details.releasedate)
 			);
@@ -74,7 +78,7 @@ function ShopAll() {
 	};
 
 	const ChangeDisplayProducts = () => {
-		let todisplay = arrayToMap.map((item) => (
+		let todisplay = [...arrayToMap].map((item) => (
 			<div key={item._id} className='single-product-container'>
 				<div className='single-product-wrapper'>
 					<Productitem
@@ -99,9 +103,10 @@ function ShopAll() {
 			<Header pagename={'shopall'} />
 			<div className='shopall-content'>
 				<div className='row1-filter-cont'>
-					<div className='filters-title'>Customize Search</div>
+					{/* 					<div className='filters-title'>Customize Search</div>
+					 */}{' '}
 					<div className='no-of-results'>
-						Showing {arrayToMap.length} Results
+						Showing all {arrayToMap.length} Results
 					</div>
 					<div className='select'>
 						<label htmlFor='#OrderOfPrice'>Sort By</label>
@@ -118,7 +123,21 @@ function ShopAll() {
 				</div>
 				<div className='row-2-filter-content'>
 					<div className='all-products-container'>
-						<div className='all-products-wrapper'>{displayProducts}</div>
+						<div className='all-products-wrapper'>
+							{isloading ? (
+								<svg className='spinner' viewBox='0 0 50 50'>
+									<circle
+										className='path'
+										cx='25'
+										cy='25'
+										r='20'
+										fill='none'
+										strokeWidth='5'></circle>
+								</svg>
+							) : (
+								displayProducts
+							)}
+						</div>
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,8 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	scroll-behavior: smooth;
+	scroll-padding-top: 80px;
+	//scroll-behavior: smooth;
 }
 
 a {
@@ -12,11 +13,24 @@ a {
 }
 
 #root {
-	margin: 0 auto;
+	width: 100%;
 	max-width: 1800px;
 	overflow: hidden;
-	border-left: 1px solid rgb(186, 186, 186);
-	border-right: 1px solid rgb(186, 186, 186);
+}
+
+@media screen and (min-width: 1800px) {
+	#root {
+		margin: 0 auto;
+		border-left: 1px solid rgb(186, 186, 186);
+		border-right: 1px solid rgb(186, 186, 186);
+	}
+}
+
+@media screen and(max-width: 850px) {
+	#root {
+		width: 100%;
+		border: none;
+	}
 }
 
 $primary-font: 'Raleway', sans-serif;

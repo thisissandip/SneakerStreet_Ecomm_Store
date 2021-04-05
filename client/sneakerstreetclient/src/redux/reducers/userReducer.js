@@ -47,15 +47,13 @@ export const userReducer = (state = initialstate, action) => {
 			};
 		case FETCH_USER_DETAILS_SUCCESS:
 			let mycart = [];
-			if (localcart.length > 1) {
-				mycart = [...localcart, ...action.payload.cart];
-			}
+
 			return {
 				...state,
 				fname: action.payload.fname,
 				lname: action.payload.lname,
 				email: action.payload.email,
-				cart: mycart,
+				cart: action.payload.cart,
 				orders: action.payload.orders,
 				cTotal: action.payload.cTotal,
 			};

@@ -89,7 +89,7 @@ $pageheight: 100vh;
 				}
 				.error-card {
 					font-family: $primary-font;
-					height: 10px;
+					min-height: 10px;
 					margin-top: 10px;
 					//	background-color: turquoise;
 					font-size: 0.9rem;
@@ -273,8 +273,8 @@ $pageheight: 100vh;
 						margin-bottom: 20px;
 						&:disabled {
 							color: white;
-							background-color: rgb(52, 52, 255);
-							border: 1px solid rgb(52, 52, 255);
+							background-color: rgb(155, 155, 155);
+							border: 1px solid rgb(155, 155, 155);
 						}
 					}
 				}

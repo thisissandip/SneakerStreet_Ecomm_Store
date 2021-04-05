@@ -110,15 +110,14 @@
 				border-right: 0px solid rgb(216, 216, 216);
 				.product-img-container {
 					position: relative;
+					display: flex;
 					.product-img-wrapper {
 						display: flex;
-						flex-direction: column;
 						/* 	Try making a slider here */
-						align-items: center;
-						justify-content: center;
 						height: 400px;
-						img {
-							width: 70%;
+						min-width: 100%;
+						&::-webkit-scrollbar {
+							display: none;
 						}
 					}
 				}

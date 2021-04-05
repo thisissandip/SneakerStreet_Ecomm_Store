@@ -1,10 +1,10 @@
-import React from "react";
-import "./ourbrands.scss";
+import React from 'react';
+import './ourbrands.scss';
 
 function OurBrands() {
 	return (
 		<>
-			<section className='others-section'>
+			<section id='information' className='others-section'>
 				<hr />
 				<div className='others-container'>
 					<div className='others-col'>

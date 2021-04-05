@@ -22,6 +22,8 @@ function Navbar() {
 
 	const history = useHistory();
 
+	const isAuthenticated = localStorage.getItem('ssauth');
+
 	/* 	Fetch all products to Display */
 	useEffect(() => {
 		dispatch(fetchall());
@@ -37,7 +39,7 @@ function Navbar() {
 		console.log('user', user);
 		if (user !== '' && user !== null) {
 			dispatch(fetchUserDetails(user));
-		} else {
+		} else if (isAuthenticated == null) {
 			history.push({
 				pathname: '/',
 			});
@@ -67,7 +69,7 @@ function Navbar() {
 		const hamburger = document.querySelector('.hamburger-icon');
 		const closemenu = document.querySelector('.close-btn');
 		const navitems = document.querySelectorAll('.nav-item');
-		mobilemenu.style.left = '-100%';
+		mobilemenu.style.left = '-150%';
 		hamburger.style.display = 'initial';
 		closemenu.style.display = 'none';
 		navitems.forEach((item) => {
@@ -201,7 +203,7 @@ function Navbar() {
 										</NavLink>
 									</li>
 									<li>
-										<NavLink exact activeClassName='is-active' to='/'>
+										<NavLink exact to='/'>
 											<div
 												className='logout-btn'
 												onClick={(e) => {

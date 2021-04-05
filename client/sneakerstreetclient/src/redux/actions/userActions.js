@@ -13,6 +13,7 @@ import {
 	newCartTotal,
 	updateMyOrders,
 	emptycart,
+	newsletter,
 } from '../../api/index';
 
 export const fetchUserDetails = (userid) => {

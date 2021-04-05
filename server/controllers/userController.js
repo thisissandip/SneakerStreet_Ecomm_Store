@@ -1,6 +1,7 @@
 const axios = require('axios');
 const User = require('../models/UserModel');
 const Product = require('../models/ProductModel');
+const nodemailer = require('nodemailer');
 
 module.exports.updateCart = async (req, res) => {
 	const uemail = req.body.uemail;
@@ -120,6 +121,42 @@ module.exports.updateMyOrders = async (req, res) => {
 			}
 		}
 	} catch (err) {
+		console.log(err);
+	}
+};
+
+module.exports.NewsLetter = async (req, res) => {
+	try {
+		let email = req.body.email;
+		let transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				user: 'sneakerstreet789@gmail.com',
+				pass: 'sandip@25',
+			},
+		});
+
+		var mailOptions = {
+			from: 'sneakerstreet789@gmail.com',
+			to: `${email}`,
+			subject: 'Welcome To Sneaker Street NewsLetter',
+			text: 'Thank You for Subscribing To Us!',
+		};
+
+		transporter.sendMail(mailOptions, function (error, info) {
+			if (error) {
+				console.log(error);
+			} else {
+				res.status(201).json({
+					msg: 'Success',
+				});
+				console.log('Email sent: ' + info.response);
+			}
+		});
+	} catch (err) {
+		res.status(401).json({
+			msg: 'Error Occured',
+		});
 		console.log(err);
 	}
 };

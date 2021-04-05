@@ -4,8 +4,17 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { gsap } from 'gsap';
 import useWidth from '../../Hooks/useWidth';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { newsletter } from '../../api/index';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Footer() {
+	const uemail = useSelector((state) => state.userR.email);
+	const dispatch = useDispatch();
+
 	const initialValues = {
 		NewsEmail: '',
 	};
@@ -26,7 +35,7 @@ function Footer() {
 					},
 					scrollTrigger: {
 						trigger: FooterMailRef.current,
-						start: 'top-=400 center',
+						start: 'top-=500 center',
 					},
 				});
 			}
@@ -43,9 +52,39 @@ function Footer() {
 			.required('Email is Required');
 	};
 
-	const onSubmit = (values) => {
+	const onSubmit = async (values) => {
 		console.log(values.NewsEmail);
 		console.log(formik.errors);
+
+		let email = values.NewsEmail;
+
+		try {
+			const response = await axios.post(
+				newsletter,
+				{ email },
+				{
+					'Content-Type': 'application/json',
+				}
+			);
+			const data = response.data;
+			if (data.msg === 'Success') {
+				SubNotify();
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const SubNotify = () => {
+		toast.info(`Thank You For Subscribing To Us! Check your Email!`, {
+			position: 'bottom-left',
+			autoClose: 6000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
 	};
 
 	const formik = useFormik({
@@ -55,57 +94,85 @@ function Footer() {
 	});
 
 	return (
-		<footer>
-			<div className='footer-wrapper'>
-				<section className='footer-left'>
-					<div className='footer-logo'>Logo</div>
-					<div className='footer-links'>
-						<ul className='footer-links-col'>
-							<li>Browse</li>
-							<li>Shop All</li>
-							<li>Gallery</li>
-							<li>About</li>
-							<li>Account</li>
-						</ul>
-						<ul className='footer-links-col'>
-							<li>Information</li>
-							<li>Shipping</li>
-							<li>Returns</li>
-							<li>Payment</li>
-							<li>Pre-Booking</li>
-						</ul>
-						<ul className='footer-links-col'>
-							<li>Social</li>
-							<li>Facebook</li>
-							<li>Instagram</li>
-							<li>Twitter</li>
-						</ul>
-					</div>
-				</section>
-				<section className='footer-right'>
-					<div className='newsletter-wrapper'>
-						<div className='letter-title'>Newsletter</div>
-						<div ref={FooterMailRef} className='footer-letter-container'>
-							<form
-								onSubmit={formik.handleSubmit}
-								className='footer-input-wrapper'>
-								<label htmlFor='#footer-email'>Email</label>
-								<input
-									type='email'
-									id='footer-email'
-									name='NewsEmail'
-									value={formik.values.NewsEmail}
-									onChange={formik.handleChange}
-								/>
-								<button className='sub-button' type='submit'>
-									Subscribe
-								</button>
-							</form>
+		<>
+			<footer>
+				<div className='footer-wrapper'>
+					<section className='footer-left'>
+						<div className='footer-logo'>Logo</div>
+						<div className='footer-links'>
+							<ul className='footer-links-col'>
+								<li>Browse</li>
+								<Link to='/shopall'>
+									<li>Shop All</li>
+								</Link>
+								<Link to='/about'>
+									<li>About</li>
+								</Link>
+								{uemail === '' || uemail === null ? (
+									<Link to='/shopall'>
+										<li>Account</li>
+									</Link>
+								) : (
+									<Link to='/myorders'>
+										<li>My Orders</li>
+									</Link>
+								)}
+							</ul>
+							<ul className='footer-links-col'>
+								<li>Information</li>
+								<a href='/#information'>
+									<li>Shipping</li>
+								</a>
+								<a href='/#information'>
+									<li>Returns</li>
+								</a>
+								<a href='/#information'>
+									<li>Payment</li>
+								</a>
+								<a href='/#information'>
+									<li>Pre-Booking</li>
+								</a>
+							</ul>
+							<ul className='footer-links-col'>
+								<li>Social</li>
+								<a target='_blank' href='https://www.facebook.com/'>
+									<li>Facebook</li>
+								</a>
+								<a target='_blank' href='https://www.instagram.com/'>
+									<li>Instagram</li>
+								</a>
+								<a target='_blank' href='https://www.twitter.com/'>
+									<li>Twitter</li>
+								</a>
+							</ul>
 						</div>
-					</div>
-				</section>
-			</div>
-		</footer>
+					</section>
+					<section className='footer-right'>
+						<div className='newsletter-wrapper'>
+							<div className='letter-title'>Newsletter</div>
+							<div ref={FooterMailRef} className='footer-letter-container'>
+								<form
+									onSubmit={formik.handleSubmit}
+									className='footer-input-wrapper'>
+									<label htmlFor='#footer-email'>Email</label>
+									<input
+										type='email'
+										id='NewsEmail'
+										name='NewsEmail'
+										value={formik.values.NewsEmail}
+										onChange={formik.handleChange}
+									/>
+									<button className='sub-button' type='submit'>
+										Subscribe
+									</button>
+								</form>
+							</div>
+						</div>
+					</section>
+				</div>
+			</footer>
+			<ToastContainer />
+		</>
 	);
 }
 

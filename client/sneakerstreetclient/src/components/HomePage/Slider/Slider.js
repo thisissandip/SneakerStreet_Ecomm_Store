@@ -6,7 +6,7 @@ import ProductItem from '../../ProductItem/ProductItem';
 import './slider.scss';
 import useWidth from '../../../Hooks/useWidth';
 
-function SliderHome() {
+function Slider() {
 	const allproducts = useSelector((state) => state.productR.allproducts);
 	const isloading = useSelector((state) => state.productR.isloading);
 
@@ -15,21 +15,26 @@ function SliderHome() {
 	const [count, setCount] = useState(1);
 	const [count800, setCount800] = useState(1);
 
-	const [displayProducts, SetdisplayProducts] = useState();
+	const [displayProducts, SetdisplayProducts] = useState([]);
+	const [slider, setSlider] = useState();
 
 	useEffect(() => {
 		if (isloading) {
 		} else {
-			console.log('home slider', allproducts);
+			let products = [...allproducts];
+			SetdisplayProducts([...products]);
+			console.log('home slider', products);
 		}
+
+		return () => {
+			setSlider([]);
+			SetdisplayProducts([]);
+		};
 	}, [isloading]);
 
 	useEffect(() => {
-		return () => {
-			setCount(1);
-			setCount800(1);
-		};
-	}, []);
+		DisplayProducts();
+	}, [displayProducts]);
 
 	const SlideRight = () => {
 		const slider = document.querySelector('.slider');
@@ -86,16 +91,20 @@ function SliderHome() {
 		}
 	};
 
-	const allsliders = allproducts.map((item) => (
-		<ProductItem
-			key={item._id}
-			id={item._id}
-			allimages={item.Images}
-			Name={item.Name}
-			Price={item.BuyNew}
-			pagename='homepage'
-		/>
-	));
+	const DisplayProducts = () => {
+		const allsliders = [...displayProducts].map((item) => (
+			<ProductItem
+				key={item._id}
+				id={item._id}
+				allimages={item.Images}
+				Name={item.Name}
+				Price={item.BuyNew}
+				pagename='homepage'
+			/>
+		));
+
+		setSlider(allsliders);
+	};
 
 	return (
 		<div className='slider-wrapper'>
@@ -133,11 +142,11 @@ function SliderHome() {
 							strokeWidth='5'></circle>
 					</svg>
 				) : (
-					<div className='slider'>{allsliders}</div>
+					<div className='slider'>{slider}</div>
 				)}
 			</div>
 		</div>
 	);
 }
 
-export default SliderHome;
+export default Slider;

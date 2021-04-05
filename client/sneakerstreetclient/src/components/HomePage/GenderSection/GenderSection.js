@@ -5,6 +5,7 @@ import Gender_Uni from '../../../images/gender_unisex.jpg';
 import './gendersection.scss';
 import { gsap } from 'gsap';
 import useWidth from '../../../Hooks/useWidth';
+import { Link } from 'react-router-dom';
 
 function GenderSection() {
 	const genderSectionRef = useRef(null);
@@ -69,29 +70,37 @@ function GenderSection() {
 	return (
 		<section ref={genderSectionRef} className='gender-section'>
 			<div ref={TitleRef} className='gender-section-title-wrapper'>
-				<div className='gender-section-title'>Sneakers that Stand Out</div>
+				<div className='gender-section-title'>Brands that Stand Out</div>
 			</div>
 
 			<div className='all-genders'>
 				<div ref={addToRefs} className='gender-col-wrapper'>
-					<div className='gender-col gender-men'>
-						<h3>MEN</h3>
-						<img src={Gender_Men} alt='Men' />
-					</div>
+					<Link to='/shopall'>
+						<div className='gender-col gender-men'>
+							<h3>NIKE</h3>
+							<img src={Gender_Men} alt='Men' />
+						</div>
+					</Link>
 				</div>
 
 				<div ref={addToRefs} className='gender-col-wrapper'>
-					<div className='gender-col gender-unisex'>
-						<h3>WOMEN</h3>
-						<img src={Gender_Women} alt='Women' />
-					</div>
+					<Link to='/shopall'>
+						<div
+							className='gender-col gender-women'
+							style={{ textAlign: 'center' }}>
+							<h3>AIR JORDAN</h3>
+							<img src={Gender_Uni} alt='Unisex' />
+						</div>
+					</Link>
 				</div>
 
 				<div ref={addToRefs} className='gender-col-wrapper'>
-					<div className='gender-col gender-women'>
-						<h3>UNISEX</h3>
-						<img src={Gender_Uni} alt='Unisex' />
-					</div>
+					<Link to='/shopall'>
+						<div className='gender-col gender-unisex'>
+							<h3>ADIDAS</h3>
+							<img src={Gender_Women} alt='Women' />
+						</div>
+					</Link>
 				</div>
 			</div>
 		</section>
