@@ -17,9 +17,7 @@ nav {
 	background-color: rgba(255, 255, 255, 0.72);
 	border-left: 1px solid rgb(186, 186, 186);
 	border-right: 1px solid rgb(186, 186, 186);
-	//
-	//	max-width: 1800px;
-	//background-color: lawngreen;
+
 	.mobile-nav {
 		display: none;
 		a.is-active {
@@ -28,8 +26,7 @@ nav {
 	}
 	.navbar-inner {
 		font-family: $primary-font;
-		width: 100%;
-		margin: 0 80px;
+		width: 90%;
 		display: flex;
 		justify-content: space-between;
 		ul {
@@ -45,6 +42,10 @@ nav {
 				list-style: none;
 				margin-right: 40px;
 				cursor: pointer;
+				.logo {
+					font-size: 1.3rem;
+					font-weight: 600;
+				}
 				&:last-child {
 					margin-right: 0px;
 				}

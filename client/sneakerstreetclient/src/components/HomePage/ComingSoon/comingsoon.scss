@@ -35,7 +35,7 @@
 			justify-content: center;
 			font-size: 3rem;
 			font-weight: 700;
-			transition: 0.03s opacity initial,
+			transition: 0.3s opacity ease,
 				1s bottom cubic-bezier(0.165, 0.84, 0.44, 1);
 			div:first-child {
 				font-size: 2rem;

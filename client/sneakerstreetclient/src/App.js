@@ -9,6 +9,7 @@ import CartPage from './components/CartPage/CartPage';
 import ItemPage from './components/ItemPage/ItemPage';
 import Checkout from './components/Checkout/Checkout';
 import MyOrders from './components/MyOrders/MyOrders';
+import Err404 from './components/Err404/Err404';
 import ProtectedRoute from './ProtectedRoute';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -39,6 +40,7 @@ function App() {
 						<ItemPage />
 					</Route>
 					<ProtectedRoute exact path='/checkout' component={Checkout} />
+					<Route path='*' component={Err404} />
 				</Switch>
 			</BrowserRouter>
 		</>

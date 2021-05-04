@@ -68,16 +68,15 @@
 		margin-top: 70px; // space for navbar in mobile
 		.home-slider-section {
 			position: relative;
+			padding: 10px 0;
 			width: 100%;
-			//border: 1px solid red;
-			padding: 20px 0;
-			padding-bottom: 20px;
 			.home-slider-title-section {
 				width: 90%;
 				margin: 0 auto;
 				.home-slider-title {
 					font-size: 1.5rem;
 					margin: 10px 0;
+					margin-bottom: 20px;
 				}
 				.showall-btn {
 					cursor: pointer;

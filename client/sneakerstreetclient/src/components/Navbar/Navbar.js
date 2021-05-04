@@ -39,11 +39,11 @@ function Navbar() {
 		console.log('user', user);
 		if (user !== '' && user !== null) {
 			dispatch(fetchUserDetails(user));
-		} else if (isAuthenticated == null) {
+		} /* else if (isAuthenticated == null) {
 			history.push({
 				pathname: '/',
 			});
-		}
+		} */
 	}, [user]);
 
 	/* User Cart Console Log */
@@ -105,7 +105,7 @@ function Navbar() {
 									CloseMobileMenu(e);
 									window.scrollTo(0, 0);
 								}}>
-								LOGO
+								SneakerStreet
 							</div>
 						</NavLink>
 					</li>
@@ -134,14 +134,16 @@ function Navbar() {
 									CloseMobileMenu(e);
 									window.scrollTo(0, 0);
 								}}>
-								Logo
+								SneakerStreet
 							</div>
 						</NavLink>
 					</li>
 
 					{width > 850 ? null : (
 						<li>
-							<div className='nav-item hi-mobile'>Hi, {fname}</div>
+							<div className='nav-item hi-mobile'>
+								Hi, {user ? fname : 'Guest'}
+							</div>
 						</li>
 					)}
 
@@ -188,7 +190,7 @@ function Navbar() {
 						<>
 							<li className='my-profile'>
 								{width < 850 ? null : (
-									<div className='nav-item'>Hi, {fname}</div>
+									<div className='nav-item'>Hi, {user ? fname : 'Guest'}</div>
 								)}
 
 								<ul className='dropdown-menu'>

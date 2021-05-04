@@ -30,9 +30,8 @@
 	.slider-container {
 		position: relative;
 		min-height: 340px;
+		padding-left: 20px;
 		overflow: hidden;
-		//border: 2px dotted green;
-		//padding-left: 50px;
 		.slider {
 			position: absolute;
 			display: flex;
@@ -47,10 +46,15 @@
 	}
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 850px) {
 	.slider-wrapper {
 		.slider-container {
-			min-height: 290px;
+			padding-left: 0px;
+			.slider {
+				&:first-child {
+					margin-left: 0px;
+				}
+			}
 		}
 	}
 }
@@ -94,6 +98,7 @@
 		.slider-container {
 			position: relative;
 			overflow: hidden;
+			min-height: auto;
 
 			.slider {
 				//	border: 1px solid peru;
@@ -103,6 +108,7 @@
 				overflow-x: auto;
 				.product-item {
 					width: 85%;
+					height: auto;
 				}
 			}
 		}

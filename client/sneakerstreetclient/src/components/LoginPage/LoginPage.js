@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -19,6 +19,18 @@ function LoginPage() {
 		Email: '',
 		loginpassword: '',
 	};
+
+	const [didMount, SetdidMount] = useState(false);
+
+	useEffect(() => {
+		SetdidMount(true);
+		if (didMount) {
+			window.scrollTo(0, 0);
+		}
+		return () => {
+			SetdidMount(false);
+		};
+	}, [didMount]);
 
 	useEffect(() => {
 		if (user) {

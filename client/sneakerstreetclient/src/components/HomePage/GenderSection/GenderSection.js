@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Gender_Men from '../../../images/gender_men.jpg';
-import Gender_Women from '../../../images/gender_women.jpg';
-import Gender_Uni from '../../../images/gender_unisex.jpg';
+import Gender_Men from '../../../images/tinified/nike.jpg';
+import Gender_Women from '../../../images/tinified/adidas.jpg';
+import Gender_Uni from '../../../images/tinified/jordan.jpg';
 import './gendersection.scss';
 import { gsap } from 'gsap';
 import useWidth from '../../../Hooks/useWidth';
@@ -60,6 +60,10 @@ function GenderSection() {
 			SetdidMount(false);
 		};
 	}, [width, didMount]);
+
+	useEffect(() => {
+		let gendersection = document.querySelector('.gender-section');
+	}, []);
 
 	const addToRefs = (el) => {
 		if (el && !allcolwrappersRef.current.includes(el)) {

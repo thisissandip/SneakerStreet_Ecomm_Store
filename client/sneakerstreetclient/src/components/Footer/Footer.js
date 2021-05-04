@@ -95,7 +95,7 @@ function Footer() {
 
 	return (
 		<>
-			<footer>
+			<footer id='footer'>
 				<div className='footer-wrapper'>
 					<section className='footer-left'>
 						<div className='footer-logo'>Logo</div>
@@ -109,7 +109,7 @@ function Footer() {
 									<li>About</li>
 								</Link>
 								{uemail === '' || uemail === null ? (
-									<Link to='/shopall'>
+									<Link to='/login'>
 										<li>Account</li>
 									</Link>
 								) : (
