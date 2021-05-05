@@ -1,26 +1,35 @@
 @import '../../index.scss';
 
 .product-item {
-	cursor: pointer;
-	width: 340px;
+	//cursor: pointer;
 	height: 320px;
 	min-width: 340px;
 	min-height: 320px;
+	margin: 10px 0;
 	margin-right: 50px;
 	border: 1px solid transparent;
 	text-decoration: none;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 	font-family: $primary-font;
 	overflow: hidden;
-	transition: 0.05s all cubic-bezier(0.55, 0.085, 0.68, 0.53);
-	/* 	&:hover .product-item-img-wrapper > img {
-		transform: scale(1.06);
-	} */
+	box-shadow: 0px 0px 10px rgba($color: #6d6d6d, $alpha: 0.1);
+	transition: 0.1s all cubic-bezier(0.55, 0.085, 0.68, 0.53);
+	background-color: #fff;
+	border-radius: 10px;
 
+	&:hover {
+		//border: 1px solid black;
+		box-shadow: 0px 0px 20px rgba($color: #6d6d6d, $alpha: 0.2);
+		.product-item-details {
+			color: $accent-color;
+		}
+	}
 	.product-item-img-wrapper {
 		position: relative;
+		pointer-events: none;
 		overflow: hidden;
 		display: flex;
 		justify-content: center;
@@ -34,6 +43,7 @@
 		}
 	}
 	.product-item-details {
+		pointer-events: none;
 		display: flex;
 		width: 85%;
 		font-weight: 600;
@@ -43,25 +53,21 @@
 			max-width: 70%;
 		}
 	}
-
-	&:hover {
-		border: 1px solid black;
-		.product-item-details {
-			color: $accent-color;
-		}
-	}
 }
 
 @media screen and(max-width: 460px) {
 	.product-item {
 		cursor: pointer;
-		min-width: 91vw;
-		min-height: auto;
-		margin: 0 10px;
+		margin: 0px 0;
+		margin-top: 10px;
+		margin-bottom: -10px;
+		min-width: 90vw;
+		width: 90%;
+		padding: 0 10px;
 		border: 1px solid transparent;
 
 		&:first-child {
-			margin-left: 4vw;
+			margin-left: 5vw;
 		}
 		&:last-child {
 			margin-right: 20px;
@@ -71,22 +77,15 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			min-height: auto;
+			min-height: 180px;
+			height: 180px;
 			margin-bottom: 20px;
 			img {
-				width: 250px;
+				width: 220px;
 				height: auto;
 				margin: 30px 0;
 				object-fit: contain;
 			}
-		}
-	}
-}
-
-@media screen and(max-width: 390px) {
-	.product-item {
-		&:first-child {
-			margin-left: 1vw;
 		}
 	}
 }

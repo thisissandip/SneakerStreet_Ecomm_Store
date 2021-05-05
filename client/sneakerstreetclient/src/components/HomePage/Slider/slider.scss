@@ -2,8 +2,9 @@
 
 .slider-wrapper {
 	position: relative;
-	//padding: 0 80px;
 	width: 100%;
+	overflow: hidden;
+	//padding: 0 80px;
 	//	border: 1px solid blue;
 	.slide-left-btn,
 	.slide-right-btn {
@@ -25,20 +26,24 @@
 		right: 1rem;
 	}
 	.slide-left-btn {
+		display: none;
 		left: 1rem;
 	}
 	.slider-container {
 		position: relative;
-		min-height: 340px;
-		padding-left: 20px;
-		overflow: hidden;
+		min-height: 360px;
+		padding-bottom: 10px;
+
 		.slider {
 			position: absolute;
 			display: flex;
 			align-items: center;
+			/* 	display: grid;
+			grid-template-columns: repeat(11, 380px); */
+			margin-left: 3.5vw;
 			//	border: 1px solid peru;
-			transform: translateX(1%);
-			transition: 2s transform ease;
+			//transform: translateX(1%);
+			transition: 1s transform ease;
 			&::-webkit-scrollbar {
 				width: 0px;
 			}
@@ -59,7 +64,7 @@
 	}
 }
 
-@media screen and (max-width: 768px) and (min-height: 1024px) {
+@media screen and (max-width: 850px) {
 	.slider-wrapper {
 		position: relative;
 		//padding: 0 80px;
@@ -73,11 +78,13 @@
 			overflow: hidden;
 
 			.slider {
-				//	border: 1px solid peru;
 				transform: translateX(0%);
 				position: relative;
+				min-height: auto;
 				flex-wrap: nowrap;
 				overflow-x: auto;
+				padding-bottom: 0px;
+				height: auto;
 				.product-item {
 					width: 75%;
 				}
@@ -89,8 +96,6 @@
 @media screen and (max-width: 480px) {
 	.slider-wrapper {
 		position: relative;
-		//padding: 0 80px;
-		width: 100%;
 		.slide-right-btn,
 		.slide-left-btn {
 			display: none;
@@ -99,6 +104,7 @@
 			position: relative;
 			overflow: hidden;
 			min-height: auto;
+			padding-bottom: 0px;
 
 			.slider {
 				//	border: 1px solid peru;
@@ -107,8 +113,7 @@
 				flex-wrap: nowrap;
 				overflow-x: auto;
 				.product-item {
-					width: 85%;
-					height: auto;
+					margin-bottom: 10px;
 				}
 			}
 		}
@@ -133,9 +138,6 @@
 				position: relative;
 				flex-wrap: nowrap;
 				overflow-x: auto;
-				.product-item {
-					width: 100%;
-				}
 			}
 		}
 	}

@@ -12,9 +12,6 @@ function Slider() {
 
 	const [width] = useWidth();
 
-	const [count, setCount] = useState(1);
-	const [count800, setCount800] = useState(1);
-
 	const [displayProducts, SetdisplayProducts] = useState([]);
 	const [slider, setSlider] = useState();
 
@@ -24,6 +21,8 @@ function Slider() {
 			let products = [...allproducts];
 			SetdisplayProducts([...products]);
 			console.log('home slider', products);
+			// Add the Touch Slider Feature after products are loaded
+			/* 	TouchSlider(); */
 		}
 
 		return () => {
@@ -32,64 +31,60 @@ function Slider() {
 		};
 	}, [isloading]);
 
-	useEffect(() => {
-		DisplayProducts();
-	}, [displayProducts]);
+	let currentSlideNum = 1;
 
 	const SlideRight = () => {
-		const slider = document.querySelector('.slider');
-		if (count < 4) {
-			setCount(count + 1);
-		}
-		if (count === 4) {
-			slider.style.transform = `translate(-80%)`;
-		} else {
-			let slideamt = count * 20;
-			//	console.log(slideamt);
-			slider.style.transform = `translate(-${slideamt}%)`;
-		}
-	};
+		const innerslider = document.querySelector('.slider');
+		const sliderWidth = innerslider.getBoundingClientRect().width;
+		let TotalsliderParts = Math.ceil(sliderWidth / width);
+		let eachPartWidth = sliderWidth / TotalsliderParts;
 
-	const SlideRightOne = () => {
-		const slider = document.querySelector('.slider');
-		let slideamt;
-		if (width < 600) {
-			slideamt = count800 * 8;
-		} else {
-			slideamt = count800 * 7;
+		const rightbtn = document.querySelector('.slide-right-btn');
+		const leftbtn = document.querySelector('.slide-left-btn');
+		if (currentSlideNum < TotalsliderParts) {
+			let slideamt = (eachPartWidth + 30) * currentSlideNum;
+			console.log(slideamt);
+			innerslider.style.transform = `translateX(-${slideamt}px)`;
+			currentSlideNum++;
 		}
-		if (slideamt < 95) {
-			console.log(count800);
-			slider.style.transform = `translate(-${slideamt}%)`;
-			setCount800(count800 + 1);
+
+		leftbtn.style.display = 'flex';
+
+		if (currentSlideNum === TotalsliderParts) {
+			rightbtn.style.display = 'none';
+		} else {
+			rightbtn.style.display = 'flex';
 		}
 	};
 
 	const SlideLeft = () => {
-		const slider = document.querySelector('.slider');
-		let slideamt = (count - 2) * 20;
-		if (count === 2) {
-			slider.style.transform = `translate(1%)`;
+		const innerslider = document.querySelector('.slider');
+		const sliderWidth = innerslider.getBoundingClientRect().width;
+		let TotalsliderParts = Math.ceil(sliderWidth / width);
+		let eachPartWidth = sliderWidth / TotalsliderParts;
+
+		const rightbtn = document.querySelector('.slide-right-btn');
+		const leftbtn = document.querySelector('.slide-left-btn');
+		if (currentSlideNum > 1) {
+			let slideamt = (eachPartWidth + 30) * (currentSlideNum - 2);
+			console.log(slideamt);
+			innerslider.style.transform = `translateX(-${slideamt}px)`;
+			currentSlideNum--;
+		}
+
+		rightbtn.style.display = 'flex';
+
+		if (currentSlideNum === 1) {
+			leftbtn.style.display = 'none';
 		} else {
-			slider.style.transform = `translate(-${slideamt}%)`;
+			leftbtn.style.display = 'flex';
 		}
-		if (count !== 2) {
-			setCount(count - 1);
-		}
+		//	console.log(currentSlideNum);
 	};
 
-	const SlideLeftOne = () => {
-		const slider = document.querySelector('.slider');
-		let slideamt = (count800 - 2) * 7;
-		console.log(count800);
-		if (slideamt > 0) {
-			slider.style.transform = `translate(-${slideamt}%)`;
-			setCount800(count800 - 1);
-		} else if (slideamt == 0) {
-			slider.style.transform = `translate(0%)`;
-			setCount800(count800 - 1);
-		}
-	};
+	useEffect(() => {
+		DisplayProducts();
+	}, [displayProducts]);
 
 	const DisplayProducts = () => {
 		const allsliders = [...displayProducts].map((item) => (
@@ -106,27 +101,63 @@ function Slider() {
 		setSlider(allsliders);
 	};
 
+	const TouchSlider = () => {
+		const sliderwrapper = document.querySelector('.slider-wrapper');
+		const slider = document.querySelector('.slider');
+		let pressed = false;
+		let startX;
+		let dragAmt;
+		let alreadyscrolled = 0;
+		console.log(slider.getBoundingClientRect().width);
+
+		slider.addEventListener('mousedown', (e) => {
+			pressed = true;
+			startX = e.pageX - slider.offsetLeft;
+		});
+
+		slider.addEventListener('mouseup', () => {
+			pressed = false;
+			alreadyscrolled = dragAmt + alreadyscrolled;
+		});
+
+		slider.addEventListener('mouseleave', () => {
+			pressed = false;
+		});
+
+		slider.addEventListener('mousemove', (e) => {
+			if (!pressed) return;
+			e.preventDefault();
+
+			let sliderActualoffsetRight =
+				slider.getBoundingClientRect().width + slider.offsetLeft;
+
+			let currentX = e.pageX - slider.offsetLeft;
+			dragAmt = currentX - startX;
+			let finalScrollAmt = alreadyscrolled + dragAmt;
+
+			slider.style.transform = `translateX(${finalScrollAmt}px)`;
+
+			console.log(
+				finalScrollAmt,
+				slider.getBoundingClientRect().width,
+				slider.getBoundingClientRect().right - window.innerWidth
+			);
+		});
+	};
+
 	return (
 		<div className='slider-wrapper'>
 			<div
 				className='slide-left-btn'
 				onClick={() => {
-					if (width > 800) {
-						SlideLeft();
-					} else {
-						SlideLeftOne();
-					}
+					SlideLeft();
 				}}>
 				<HiOutlineChevronLeft />{' '}
 			</div>
 			<div
 				className='slide-right-btn'
 				onClick={() => {
-					if (width > 800) {
-						SlideRight();
-					} else {
-						SlideRightOne();
-					}
+					SlideRight();
 				}}>
 				<HiChevronRight />
 			</div>

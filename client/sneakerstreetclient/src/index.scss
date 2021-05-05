@@ -7,6 +7,13 @@
 	//scroll-behavior: smooth;
 }
 
+$primary-font: 'Raleway', sans-serif;
+$secondary-font: 'Open Sans', sans-serif;
+$primary-color: #dbb289;
+$secondary-color: #f1eeec;
+$accent-color: #a87652;
+$main-bg-color: rgb(247, 247, 247);
+
 a {
 	text-decoration: none;
 	color: black;
@@ -16,6 +23,7 @@ a {
 	width: 100%;
 	max-width: 1800px;
 	overflow: hidden;
+	background: $main-bg-color;
 }
 
 @media screen and (min-width: 1800px) {
@@ -32,12 +40,6 @@ a {
 		border: none;
 	}
 }
-
-$primary-font: 'Raleway', sans-serif;
-$secondary-font: 'Open Sans', sans-serif;
-$primary-color: #dbb289;
-$secondary-color: #f1eeec;
-$accent-color: #a87652;
 
 .spinner {
 	animation: rotate 2s linear infinite;
