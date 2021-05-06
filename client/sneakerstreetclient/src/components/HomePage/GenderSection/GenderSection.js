@@ -39,7 +39,7 @@ function GenderSection() {
 							},
 							scrollTrigger: {
 								trigger: genderSectionRef.current,
-								start: 'top-=300 top+=150',
+								start: 'top top+=450',
 							},
 						}
 					);
