@@ -54,6 +54,12 @@ function GenderSection() {
 						},
 					});
 				});
+			} else {
+				allcolwrappersRef.current.forEach((el) => {
+					gsap.killTweensOf(el.current);
+				});
+
+				gsap.killTweensOf(TitleRef.current);
 			}
 		}
 		return () => {

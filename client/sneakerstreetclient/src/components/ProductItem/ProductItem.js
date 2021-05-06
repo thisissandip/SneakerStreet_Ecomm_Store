@@ -9,19 +9,19 @@ function ProductItem({ allimages, Name, Price, pagename, id }) {
 		pagename === 'homepage' ? 'product-item' : 'shop-item';
 
 	return (
-		<Link to={`/sneaker/${id}`}>
-			<div
-				onMouseOver={() => {
-					if (pagename === 'shopall') {
-						setImg(allimages[2]);
-					}
-				}}
-				onMouseLeave={() => {
-					if (pagename === 'shopall') {
-						setImg(allimages[0]);
-					}
-				}}
-				className={`${productClassname}`}>
+		<div
+			onMouseOver={() => {
+				if (pagename === 'shopall') {
+					setImg(allimages[2]);
+				}
+			}}
+			onMouseLeave={() => {
+				if (pagename === 'shopall') {
+					setImg(allimages[0]);
+				}
+			}}
+			className={`${productClassname}`}>
+			<Link to={`/sneaker/${id}`}>
 				<div className='product-item-img-wrapper'>
 					<img src={Img} alt={Name} />
 				</div>
@@ -29,8 +29,8 @@ function ProductItem({ allimages, Name, Price, pagename, id }) {
 					<div className='product-item-name'>{Name}</div>
 					<div className='product-item-price'>Rs. {Price}</div>
 				</div>
-			</div>
-		</Link>
+			</Link>
+		</div>
 	);
 }
 

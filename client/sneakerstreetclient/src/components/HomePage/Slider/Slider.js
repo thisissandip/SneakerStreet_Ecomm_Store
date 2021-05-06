@@ -1,28 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { HiOutlineChevronLeft, HiChevronRight } from 'react-icons/hi';
-import { fetchall, stopfetch } from '../../../redux/actions/productActions';
 import ProductItem from '../../ProductItem/ProductItem';
-import './slider.scss';
 import useWidth from '../../../Hooks/useWidth';
+import './slider.scss';
 
 function Slider() {
 	const allproducts = useSelector((state) => state.productR.allproducts);
 	const isloading = useSelector((state) => state.productR.isloading);
 
-	const [width] = useWidth();
-
 	const [displayProducts, SetdisplayProducts] = useState([]);
 	const [slider, setSlider] = useState();
+
+	const [width] = useWidth();
+
+	const MobileStyles = {
+		transform: width < 480 && 'translateX(0px)',
+	};
+
+	useEffect(() => {
+		if (width < 480) {
+			const innerslider = document.querySelector('.slider');
+			innerslider.scrollLeft = 0;
+			setScrollAmt(0);
+		}
+	}, [width]);
 
 	useEffect(() => {
 		if (isloading) {
 		} else {
 			let products = [...allproducts];
 			SetdisplayProducts([...products]);
-			console.log('home slider', products);
-			// Add the Touch Slider Feature after products are loaded
-			/* 	TouchSlider(); */
+			//			console.log('home slider', products);
 		}
 
 		return () => {
@@ -31,56 +40,41 @@ function Slider() {
 		};
 	}, [isloading]);
 
-	let currentSlideNum = 1;
+	const [scrollAmt, setScrollAmt] = useState(0);
 
-	const SlideRight = () => {
+	const Slide = (side) => {
 		const innerslider = document.querySelector('.slider');
-		const sliderWidth = innerslider.getBoundingClientRect().width;
-		let TotalsliderParts = Math.ceil(sliderWidth / width);
-		let eachPartWidth = sliderWidth / TotalsliderParts;
+		const productitemWidth = document.querySelector('.product-item')
+			.clientWidth;
 
-		const rightbtn = document.querySelector('.slide-right-btn');
-		const leftbtn = document.querySelector('.slide-left-btn');
-		if (currentSlideNum < TotalsliderParts) {
-			let slideamt = (eachPartWidth + 30) * currentSlideNum;
-			console.log(slideamt);
-			innerslider.style.transform = `translateX(-${slideamt}px)`;
-			currentSlideNum++;
-		}
+		switch (side) {
+			case 'left':
+				if (scrollAmt > 0) {
+					setScrollAmt(scrollAmt - productitemWidth * 1.5);
+				} else {
+					setScrollAmt(0);
+				}
 
-		leftbtn.style.display = 'flex';
+				break;
+			case 'right':
+				if (
+					scrollAmt <=
+					innerslider.scrollWidth - innerslider.clientWidth + 10
+				) {
+					setScrollAmt(scrollAmt + productitemWidth * 1.5);
+				}
+				break;
 
-		if (currentSlideNum === TotalsliderParts) {
-			rightbtn.style.display = 'none';
-		} else {
-			rightbtn.style.display = 'flex';
+			default:
+				break;
 		}
 	};
 
-	const SlideLeft = () => {
+	useEffect(() => {
 		const innerslider = document.querySelector('.slider');
-		const sliderWidth = innerslider.getBoundingClientRect().width;
-		let TotalsliderParts = Math.ceil(sliderWidth / width);
-		let eachPartWidth = sliderWidth / TotalsliderParts;
-
-		const rightbtn = document.querySelector('.slide-right-btn');
-		const leftbtn = document.querySelector('.slide-left-btn');
-		if (currentSlideNum > 1) {
-			let slideamt = (eachPartWidth + 30) * (currentSlideNum - 2);
-			console.log(slideamt);
-			innerslider.style.transform = `translateX(-${slideamt}px)`;
-			currentSlideNum--;
-		}
-
-		rightbtn.style.display = 'flex';
-
-		if (currentSlideNum === 1) {
-			leftbtn.style.display = 'none';
-		} else {
-			leftbtn.style.display = 'flex';
-		}
-		//	console.log(currentSlideNum);
-	};
+		innerslider.style.transform = `translateX(-${scrollAmt}px)`;
+		//		console.log(scrollAmt);
+	}, [scrollAmt]);
 
 	useEffect(() => {
 		DisplayProducts();
@@ -97,52 +91,7 @@ function Slider() {
 				pagename='homepage'
 			/>
 		));
-
 		setSlider(allsliders);
-	};
-
-	const TouchSlider = () => {
-		const sliderwrapper = document.querySelector('.slider-wrapper');
-		const slider = document.querySelector('.slider');
-		let pressed = false;
-		let startX;
-		let dragAmt;
-		let alreadyscrolled = 0;
-		console.log(slider.getBoundingClientRect().width);
-
-		slider.addEventListener('mousedown', (e) => {
-			pressed = true;
-			startX = e.pageX - slider.offsetLeft;
-		});
-
-		slider.addEventListener('mouseup', () => {
-			pressed = false;
-			alreadyscrolled = dragAmt + alreadyscrolled;
-		});
-
-		slider.addEventListener('mouseleave', () => {
-			pressed = false;
-		});
-
-		slider.addEventListener('mousemove', (e) => {
-			if (!pressed) return;
-			e.preventDefault();
-
-			let sliderActualoffsetRight =
-				slider.getBoundingClientRect().width + slider.offsetLeft;
-
-			let currentX = e.pageX - slider.offsetLeft;
-			dragAmt = currentX - startX;
-			let finalScrollAmt = alreadyscrolled + dragAmt;
-
-			slider.style.transform = `translateX(${finalScrollAmt}px)`;
-
-			console.log(
-				finalScrollAmt,
-				slider.getBoundingClientRect().width,
-				slider.getBoundingClientRect().right - window.innerWidth
-			);
-		});
 	};
 
 	return (
@@ -150,14 +99,14 @@ function Slider() {
 			<div
 				className='slide-left-btn'
 				onClick={() => {
-					SlideLeft();
+					Slide('left');
 				}}>
 				<HiOutlineChevronLeft />{' '}
 			</div>
 			<div
 				className='slide-right-btn'
 				onClick={() => {
-					SlideRight();
+					Slide('right');
 				}}>
 				<HiChevronRight />
 			</div>
@@ -173,7 +122,9 @@ function Slider() {
 							strokeWidth='5'></circle>
 					</svg>
 				) : (
-					<div className='slider'>{slider}</div>
+					<div className='slider' style={MobileStyles}>
+						{slider}
+					</div>
 				)}
 			</div>
 		</div>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './comingsoon.scss';
 import useWidth from '../../../Hooks/useWidth';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,6 +42,9 @@ function ComingSoon() {
 						start: 'top-=300 center',
 					},
 				});
+			} else {
+				gsap.killTweensOf(RunRef.current);
+				gsap.killTweensOf(TravisRef.current);
 			}
 		}
 

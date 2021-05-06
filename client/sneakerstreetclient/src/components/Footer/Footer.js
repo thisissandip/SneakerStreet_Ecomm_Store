@@ -27,7 +27,7 @@ function Footer() {
 	useEffect(() => {
 		SetdidMount(true);
 		if (didMount) {
-			if (width > 750) {
+			if (width > 850) {
 				gsap.to(FooterMailRef.current, {
 					css: {
 						opacity: 1,
@@ -38,6 +38,8 @@ function Footer() {
 						start: 'top-=500 center',
 					},
 				});
+			} else {
+				gsap.killTweensOf(FooterMailRef.current);
 			}
 		}
 
