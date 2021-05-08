@@ -105,7 +105,7 @@ function Navbar() {
 									CloseMobileMenu(e);
 									window.scrollTo(0, 0);
 								}}>
-								SneakerStreet
+								SNEAKER STREET
 							</div>
 						</NavLink>
 					</li>
@@ -134,7 +134,7 @@ function Navbar() {
 									CloseMobileMenu(e);
 									window.scrollTo(0, 0);
 								}}>
-								SneakerStreet
+								SNEAKER STREET
 							</div>
 						</NavLink>
 					</li>

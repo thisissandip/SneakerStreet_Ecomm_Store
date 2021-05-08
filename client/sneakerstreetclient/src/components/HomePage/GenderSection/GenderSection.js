@@ -24,25 +24,16 @@ function GenderSection() {
 		if (didMount) {
 			if (width > 800) {
 				allcolwrappersRef.current.forEach((el) => {
-					gsap.fromTo(
-						el,
-						{
-							css: {
-								opacity: 0,
-								marginTop: 120,
-							},
+					gsap.to(el, {
+						css: {
+							opacity: 1,
+							marginTop: 0,
 						},
-						{
-							css: {
-								opacity: 1,
-								marginTop: 0,
-							},
-							scrollTrigger: {
-								trigger: genderSectionRef.current,
-								start: 'top top+=450',
-							},
-						}
-					);
+						scrollTrigger: {
+							trigger: genderSectionRef.current,
+							start: 'top bottom-=300',
+						},
+					});
 
 					gsap.to(TitleRef.current, {
 						css: {
@@ -67,10 +58,6 @@ function GenderSection() {
 		};
 	}, [width, didMount]);
 
-	useEffect(() => {
-		let gendersection = document.querySelector('.gender-section');
-	}, []);
-
 	const addToRefs = (el) => {
 		if (el && !allcolwrappersRef.current.includes(el)) {
 			allcolwrappersRef.current.push(el);
@@ -79,8 +66,10 @@ function GenderSection() {
 
 	return (
 		<section ref={genderSectionRef} className='gender-section'>
-			<div ref={TitleRef} className='gender-section-title-wrapper'>
-				<div className='gender-section-title'>Brands that Stand Out</div>
+			<div className='gender-section-title-wrapper'>
+				<div ref={TitleRef} className='gender-section-title'>
+					Brands that Stand Out
+				</div>
 			</div>
 
 			<div className='all-genders'>

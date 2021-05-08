@@ -3,7 +3,7 @@
 .slider-wrapper {
 	position: relative;
 	width: 100%;
-	overflow: hidden;
+	//overflow: hidden;
 	//padding: 0 80px;
 	//	border: 1px solid blue;
 	.slide-left-btn,
@@ -38,7 +38,7 @@
 			position: relative;
 			display: flex;
 			align-items: center;
-			margin-left: 3.5vw;
+			margin-left: 5vw;
 			transition: 1s transform ease;
 			&::-webkit-scrollbar {
 				width: 0px;
@@ -93,6 +93,16 @@
 				position: relative;
 				flex-wrap: nowrap;
 				overflow-x: auto;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1800px) {
+	.slider-wrapper {
+		.slider-container {
+			.slider {
+				margin-left: 90px;
 			}
 		}
 	}

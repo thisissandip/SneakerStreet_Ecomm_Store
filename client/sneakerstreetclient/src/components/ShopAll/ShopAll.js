@@ -101,7 +101,9 @@ function ShopAll() {
 	return (
 		<div className='shopall'>
 			<Header pagename={'shopall'} />
+
 			<div className='shopall-content'>
+				<div className='shop-all-top-title'>Shop All</div>
 				<div className='row1-filter-cont'>
 					{/* 					<div className='filters-title'>Customize Search</div>
 					 */}{' '}

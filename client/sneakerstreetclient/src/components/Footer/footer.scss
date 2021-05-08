@@ -20,8 +20,9 @@ footer {
 		.footer-left {
 			.footer-logo {
 				font-size: 2rem;
-				font-weight: 800;
+				font-weight: 600;
 				margin-bottom: 30px;
+				color: $primary-color;
 			}
 			flex: 1 0 45%;
 			height: 100%;
@@ -192,14 +193,12 @@ footer {
 					overflow: hidden;
 					position: relative;
 					width: 100%;
+
 					.footer-letter-container {
-						width: 100%;
+						opacity: 1 !important;
+						width: 100% !important;
 						max-width: none;
 						margin-top: 30px;
-					}
-					.footer-letter-container {
-						opacity: 1;
-						width: 100%;
 						.footer-input-wrapper {
 							position: relative;
 							display: flex;

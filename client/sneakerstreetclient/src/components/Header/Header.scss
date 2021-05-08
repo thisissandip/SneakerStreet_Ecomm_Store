@@ -4,27 +4,64 @@
 	position: relative;
 	margin-top: 80px; // space for navbar in desktops
 	width: 100%;
-	min-height: 70vh;
-	//background-image: url('../../images/header1.jpg');
+	height: 600px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: center top;
 	background-size: cover;
 	transition: 0.2s background-image ease;
-	//	animation: crossfade 20s infinite forwards;
+
+	.header-title-container {
+		width: 90%;
+		//background-color: turquoise;
+		.header-title {
+			text-align: center;
+			font-family: $wide-font;
+			font-size: 4rem;
+			font-weight: 800;
+			background-image: linear-gradient(
+				to left,
+				#ff5233,
+				#f37335,
+				#ffb12b,
+				#ff8d14,
+				#e94057,
+				#f12711
+			);
+			background-size: 400%;
+			background-clip: text;
+			color: transparent;
+			background-position: left;
+			animation: headertext 6s infinite alternate;
+		}
+	}
 }
 
-@keyframes crossfade {
+@keyframes headertext {
 	0% {
-		background-image: url('../../images/header1.jpg');
+		background-position: left;
 	}
-	40% {
-		background-image: url('../../images/header1.jpg');
+	100% {
+		background-position: right;
 	}
-	50% {
-		background-image: url('../../images/header2.jpg');
-	}
-	90% {
-		background-image: url('../../images/header2.jpg');
+}
+
+.shop-all-header {
+	margin-top: 80px; // space for navbar in desktops
+	height: 200px;
+	background-color: #facbad;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	.marquee-header {
+		text-align: center;
+		font-family: $wide-font;
+		font-size: 4rem;
+		font-weight: 800;
 	}
 }
 
@@ -39,6 +76,35 @@
 
 @media screen and (max-width: 850px) {
 	.header {
+		padding: 60px 0;
 		margin-top: 70px;
+		height: auto;
+		justify-content: center;
+		//@function: #f4cedb;
+		img {
+			width: 80%;
+			margin-bottom: 40px;
+		}
+
+		.header-title-container {
+			width: 90%;
+			.header-title {
+				font-size: 3rem;
+			}
+		}
+	}
+	.shop-all-header {
+		margin-top: 70px; // space for navbar in mobile
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.header {
+		padding: 40px 0;
+		.header-title-container {
+			.header-title {
+				font-size: 2rem;
+			}
+		}
 	}
 }

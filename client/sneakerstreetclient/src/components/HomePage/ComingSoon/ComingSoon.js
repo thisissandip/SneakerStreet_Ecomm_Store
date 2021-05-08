@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Travis_Img from '../../../images/home_travis.jpg';
 import Run_Img from '../../../images/home_run.jpg';
-import { Link } from 'react-router-dom';
 import './comingsoon.scss';
 import useWidth from '../../../Hooks/useWidth';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,7 +26,7 @@ function ComingSoon() {
 					},
 					scrollTrigger: {
 						trigger: TravisRef.current,
-						start: 'top-=300 center',
+						start: 'top-=400 center',
 					},
 				});
 
@@ -73,15 +71,13 @@ function ComingSoon() {
 					<div ref={TravisRef} className='travis-box'>
 						<div>Air Jordan VI</div>
 						<div>Travis Scott</div>
-						<a href='/#footer'>
-							<button
-								className='pre-book'
-								onClick={() => {
-									SubNotify();
-								}}>
-								NOTIFY ME
-							</button>{' '}
-						</a>
+						<button
+							className='pre-book'
+							onClick={() => {
+								SubNotify();
+							}}>
+							NOTIFY ME
+						</button>
 					</div>
 					<img src={Travis_Img} alt='Travis Coming Soon' />
 				</div>
@@ -92,15 +88,13 @@ function ComingSoon() {
 					<div ref={RunRef} className='run-box'>
 						<div>Brooks</div>
 						<div>Space Run</div>
-						<a href='/#footer'>
-							<button
-								className='pre-book'
-								onClick={() => {
-									SubNotify();
-								}}>
-								NOTIFY ME
-							</button>{' '}
-						</a>
+						<button
+							className='pre-book'
+							onClick={() => {
+								SubNotify();
+							}}>
+							NOTIFY ME
+						</button>{' '}
 					</div>
 
 					<img src={Run_Img} alt='Run Like Never Before' />

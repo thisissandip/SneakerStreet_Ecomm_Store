@@ -54,13 +54,26 @@ function Footer() {
 			.required('Email is Required');
 	};
 
-	const onSubmit = async (values) => {
-		console.log(values.NewsEmail);
-		console.log(formik.errors);
+	const ErrorNotify = () => {
+		toast.error(`Please Enter your email address!`, {
+			position: 'bottom-left',
+			autoClose: 6000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+	};
 
+	const onSubmit = async (values) => {
 		let email = values.NewsEmail;
 
 		try {
+			if (!email) {
+				ErrorNotify();
+				return;
+			}
 			const response = await axios.post(
 				newsletter,
 				{ email },
@@ -100,7 +113,7 @@ function Footer() {
 			<footer id='footer'>
 				<div className='footer-wrapper'>
 					<section className='footer-left'>
-						<div className='footer-logo'>Logo</div>
+						<div className='footer-logo'>SNEAKER STREET</div>
 						<div className='footer-links'>
 							<ul className='footer-links-col'>
 								<li>Browse</li>

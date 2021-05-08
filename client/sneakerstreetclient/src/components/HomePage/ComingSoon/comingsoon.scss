@@ -6,12 +6,12 @@
 	width: 90%;
 	.coming-soon-title {
 		width: 100%;
-		//text-align: center;
+		opacity: 1;
 		margin: 5px 0;
 		margin-bottom: 60px;
 		font-size: 3rem;
 		font-weight: 700;
-		transition: 0.5s all cubic-bezier(0.55, 0.085, 0.68, 0.53);
+		transition: 0.1s all ease;
 	}
 	.travis-container {
 		position: relative;
@@ -26,7 +26,7 @@
 			bottom: -9rem;
 			width: 45%;
 			height: 40%;
-			background-color: rgba($color: rgb(0, 3, 19), $alpha: 1);
+			background-color: rgba($color: rgb(0, 0, 0), $alpha: 1);
 			font-family: $primary-font;
 			color: white;
 			display: flex;
@@ -64,7 +64,7 @@
 			}
 		}
 		.travis-img-wrappper {
-			background-color: yellow;
+			//background-color: yellow;
 			width: 90%;
 			height: 80vh;
 			min-height: 300px;

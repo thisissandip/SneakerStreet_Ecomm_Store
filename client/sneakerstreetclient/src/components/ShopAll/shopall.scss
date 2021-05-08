@@ -2,15 +2,24 @@
 
 .shopall {
 	width: 100%;
+
 	.shopall-content {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		font-family: $primary-font;
 		padding: 20px;
+		margin: 0 auto;
 		margin-bottom: 20px;
+		.shop-all-top-title {
+			text-align: center;
+			font-size: 2rem;
+			font-weight: 400;
+			margin: 10px 0;
+		}
 		.row1-filter-cont {
 			width: 100%;
-			font-family: $primary-font;
+
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -55,6 +64,7 @@
 				width: 100%;
 				//	border: 3px solid green;
 				display: flex;
+				min-height: 500px;
 				justify-content: center;
 
 				.all-products-wrapper {
@@ -159,6 +169,10 @@
 		.shopall-content {
 			padding: 0px;
 			margin-bottom: 0px;
+			.shop-all-top-title {
+				font-size: 1.5rem;
+				margin: 20px 0;
+			}
 			.row1-filter-cont {
 				padding-top: 10px;
 				padding: 7px 10px;

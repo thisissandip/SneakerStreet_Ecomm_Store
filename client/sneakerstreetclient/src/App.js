@@ -21,6 +21,7 @@ function App() {
 		<>
 			<BrowserRouter>
 				<Navbar />
+
 				<Switch>
 					<Route exact path='/'>
 						<HomePage />
