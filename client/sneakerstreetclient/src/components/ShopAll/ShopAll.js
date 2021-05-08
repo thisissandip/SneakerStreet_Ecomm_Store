@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './shopall.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchall, stopfetch } from '../../redux/actions/productActions';
+import { fetchall } from '../../redux/actions/productActions';
 import Header from '../Header/Header';
 import Productitem from '../ProductItem/ProductItem';
-import useWidth from '../../Hooks/useWidth';
 import Footer from '../Footer/Footer';
 
 function ShopAll() {
@@ -16,9 +15,8 @@ function ShopAll() {
 	const [priceOrderopt, SetpriceOrderopt] = useState('');
 	const [arrayToMap, SetarrayToMap] = useState([]);
 	const [displayProducts, SetdisplayProducts] = useState();
-	const [isOpen, SetisOpen] = useState(false);
-	const [width] = useWidth();
 
+	// When Component Mounts, Move to TOP
 	useEffect(() => {
 		SetdidMount(true);
 		if (didMount) {
@@ -29,10 +27,16 @@ function ShopAll() {
 		};
 	}, [didMount]);
 
+	/* 	Fetch all products to Display */
 	useEffect(() => {
-		if (isloading) {
-			console.log('loading');
-		} else {
+		if (allproducts.length === 0) {
+			dispatch(fetchall());
+		}
+	}, []);
+
+	// When all products are fetched, Sort them according to their Popularity
+	useEffect(() => {
+		if (!isloading && allproducts.length > 0) {
 			let popularityarray = [...allproducts];
 			let popularity = popularityarray.sort(
 				(a, b) =>
@@ -42,21 +46,14 @@ function ShopAll() {
 			SetpriceOrderopt('Popularity');
 			console.log('shop all loaded', allproducts);
 		}
-
 		return () => {
 			SetarrayToMap([]);
 		};
 	}, [isloading]);
 
-	useEffect(() => {
-		OptionChanged();
-		ChangeDisplayProducts();
-	}, [priceOrderopt]);
+	// Sorting Code Starts Here
 
-	useEffect(() => {
-		ChangeDisplayProducts();
-	}, [arrayToMap]);
-
+	// update the array to map according to selected option
 	const OptionChanged = () => {
 		if (priceOrderopt === 'LowToHigh') {
 			const lowtohigh = [...arrayToMap].sort(
@@ -77,6 +74,16 @@ function ShopAll() {
 		}
 	};
 
+	// Whenever Selected Option is Changed Update the Array to map
+	useEffect(() => {
+		OptionChanged();
+	}, [priceOrderopt]);
+
+	// Whenever Array to Map of is Chnaged Update the Display Prodcucts Array
+	useEffect(() => {
+		ChangeDisplayProducts();
+	}, [arrayToMap]);
+
 	const ChangeDisplayProducts = () => {
 		let todisplay = [...arrayToMap].map((item) => (
 			<div key={item._id} className='single-product-container'>
@@ -94,6 +101,7 @@ function ShopAll() {
 		SetdisplayProducts(todisplay);
 	};
 
+	// handle chande of select input
 	const handleChange = (e) => {
 		SetpriceOrderopt(e.target.value);
 	};

@@ -14,6 +14,7 @@ import {
 	updateMyOrders,
 	emptycart,
 	newsletter,
+	updatecartOnLogin,
 } from '../../api/index';
 
 export const fetchUserDetails = (userid) => {
@@ -22,11 +23,19 @@ export const fetchUserDetails = (userid) => {
 			const response = await axios.get(`${fetchuserdata}/${userid}`);
 			const userdata = await response.data;
 
+			let guestcart = localStorage.getItem('ss_cart_guest');
+
 			if (userdata !== 'User Does not Exist') {
-				dispatch({
-					type: FETCH_USER_DETAILS_SUCCESS,
-					payload: userdata,
-				});
+				// if guest cart is there then first update the cart of the user then fetch
+				if (guestcart) {
+					dispatch(updatecartLogin(userid, JSON.parse(guestcart)));
+				} else {
+					dispatch({
+						type: FETCH_USER_DETAILS_SUCCESS,
+						payload: userdata,
+					});
+				}
+
 				console.log(userdata);
 			} else {
 				console.log('failed to fetch user data');
@@ -50,7 +59,9 @@ export const addToCart = (details) => {
 			const headeroptions = {
 				'Content-Type': 'application/json',
 			};
-			const response = await axios.post(updatecart, details, headeroptions);
+			if (details.uemail) {
+				const response = await axios.post(updatecart, details, headeroptions);
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -128,6 +139,28 @@ export const EmptyMyCart = (uemail, user) => {
 					type: EMPTY_CART,
 				});
 				dispatch(fetchUserDetails(user));
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const updatecartLogin = (userid, guestcart) => {
+	return async function (dispatch) {
+		try {
+			let data = {
+				userid,
+				guestcart,
+			};
+			const headeroptions = {
+				'Content-Type': 'application/json',
+			};
+			const response = await axios.post(updatecartOnLogin, data, headeroptions);
+			const result = response.data;
+			if (result.updatedcart) {
+				localStorage.removeItem('ss_cart_guest');
+				dispatch(fetchUserDetails(userid));
 			}
 		} catch (err) {
 			console.log(err);

@@ -22,14 +22,16 @@ function CartPage() {
 
 	useEffect(() => {
 		console.log(cart);
-		cart.forEach((productID) => {
-			allproducts.forEach((item) => {
-				if (item._id === productID) {
-					allcartproducts.push(item);
-				}
+		if (uemail && cart !== null) {
+			cart.forEach((productID) => {
+				allproducts.forEach((item) => {
+					if (item._id === productID) {
+						allcartproducts.push(item);
+					}
+				});
 			});
-		});
-		setCartproducts(allcartproducts);
+			setCartproducts(allcartproducts);
+		}
 	}, [cart, allproducts]);
 
 	useEffect(() => {

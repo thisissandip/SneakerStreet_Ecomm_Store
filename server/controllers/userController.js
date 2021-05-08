@@ -160,3 +160,28 @@ module.exports.NewsLetter = async (req, res) => {
 		console.log(err);
 	}
 };
+
+module.exports.UpdateCartLogin = async (req, res) => {
+	let userid = req.body.userid;
+	let guestcart = req.body.guestcart;
+	try {
+		const userexist = await User.findById(userid);
+		if (userexist) {
+			let existingcart = userexist.Cart;
+
+			const updatedcart = await User.findOneAndUpdate(
+				{ _id: userid },
+				{ Cart: [...existingcart, ...guestcart] },
+				{ new: true }
+			);
+
+			if (updatedcart) {
+				res.json({
+					updatedcart: true,
+				});
+			}
+		}
+	} catch (err) {
+		console.log(err);
+	}
+};

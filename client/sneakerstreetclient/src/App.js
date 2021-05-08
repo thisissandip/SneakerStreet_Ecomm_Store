@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
 import SignupPage from './components/SignupPage/SignupPage';
@@ -13,15 +13,29 @@ import Err404 from './components/Err404/Err404';
 import ProtectedRoute from './ProtectedRoute';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchall } from './redux/actions/productActions';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+	const dispatch = useDispatch();
+
+	const allproducts = useSelector((state) => state.productR.allproducts);
+
+	// Fetching Products
+
+	/* If All products are not already fetched then Fetch all products */
+	useEffect(() => {
+		if (allproducts.length === 0) {
+			dispatch(fetchall());
+		}
+	}, []);
+
 	return (
 		<>
 			<BrowserRouter>
 				<Navbar />
-
 				<Switch>
 					<Route exact path='/'>
 						<HomePage />

@@ -1,37 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { HiOutlineChevronLeft, HiChevronRight } from 'react-icons/hi';
 import ProductItem from '../../ProductItem/ProductItem';
 import useWidth from '../../../Hooks/useWidth';
+import { fetchall } from '../../../redux/actions/productActions';
 import './slider.scss';
 
 function Slider() {
 	const allproducts = useSelector((state) => state.productR.allproducts);
 	const isloading = useSelector((state) => state.productR.isloading);
+	const dispatch = useDispatch();
 
 	const [displayProducts, SetdisplayProducts] = useState([]);
 	const [slider, setSlider] = useState();
 
 	const [width] = useWidth();
 
-	const MobileStyles = {
-		transform: width < 480 && 'translateX(0px)',
-	};
+	// Fetch Products Starts Here
 
+	// If is loading is false that means all products are fetched then update the display products array
 	useEffect(() => {
-		if (width < 480) {
-			const innerslider = document.querySelector('.slider');
-			innerslider.scrollLeft = 0;
-			setScrollAmt(0);
-		}
-	}, [width]);
-
-	useEffect(() => {
-		if (isloading) {
-		} else {
+		if (!isloading) {
 			let products = [...allproducts];
 			SetdisplayProducts([...products]);
-			//			console.log('home slider', products);
 		}
 
 		return () => {
@@ -40,8 +31,30 @@ function Slider() {
 		};
 	}, [isloading]);
 
+	// As the Display products changes update the slider
+	useEffect(() => {
+		DisplayProducts();
+	}, [displayProducts]);
+
+	const DisplayProducts = () => {
+		const allsliders = [...displayProducts].map((item) => (
+			<ProductItem
+				key={item._id}
+				id={item._id}
+				allimages={item.Images}
+				Name={item.Name}
+				Price={item.BuyNew}
+				pagename='homepage'
+			/>
+		));
+		setSlider(allsliders);
+	};
+
+	// Code for Slider Starts Here
+
 	const [scrollAmt, setScrollAmt] = useState(0);
 
+	// According to the button clicked update the scrollAmt
 	const Slide = (side) => {
 		const innerslider = document.querySelector('.slider');
 		const productitemWidth = document.querySelector('.product-item')
@@ -70,28 +83,25 @@ function Slider() {
 		}
 	};
 
+	// As the Scroll Amount Changes Update the transform translate
 	useEffect(() => {
 		const innerslider = document.querySelector('.slider');
 		innerslider.style.transform = `translateX(-${scrollAmt}px)`;
-		//		console.log(scrollAmt);
 	}, [scrollAmt]);
 
+	// In Mobile Set the Scroll Amount to 0 and Move to the First Product
 	useEffect(() => {
-		DisplayProducts();
-	}, [displayProducts]);
+		if (width < 480) {
+			const innerslider = document.querySelector('.slider');
+			innerslider.scrollLeft = 0;
+			setScrollAmt(0);
+		}
+	}, [width]);
 
-	const DisplayProducts = () => {
-		const allsliders = [...displayProducts].map((item) => (
-			<ProductItem
-				key={item._id}
-				id={item._id}
-				allimages={item.Images}
-				Name={item.Name}
-				Price={item.BuyNew}
-				pagename='homepage'
-			/>
-		));
-		setSlider(allsliders);
+	/* 	Move the Slider to the First Product by updating the translate
+	 If Width changes to Mobile */
+	const MobileStyles = {
+		transform: width < 480 && 'translateX(0px)',
 	};
 
 	return (

@@ -72,6 +72,9 @@
 					grid-template-columns: repeat(auto-fit, 33.33%);
 					width: 100%;
 					//border: 3px solid red;
+					.spinner {
+						margin-top: 90px;
+					}
 					.single-product-container {
 						cursor: pointer;
 						overflow: hidden;

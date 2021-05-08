@@ -10,7 +10,9 @@ import {
 const initialstate = {
 	fname: '',
 	lname: '',
-	cart: [],
+	cart: localStorage.getItem('ss_cart_guest')
+		? JSON.parse(localStorage.getItem('ss_cart_guest'))
+		: [],
 	email: '',
 	orders: [],
 	cTotal: null,
@@ -21,8 +23,11 @@ export const userReducer = (state = initialstate, action) => {
 
 	switch (action.type) {
 		case ADD_TO_CART:
-			let lscart = [...state.cart, action.payload];
-			localStorage.setItem('ss_cart', JSON.stringify(lscart));
+			if (!state.email) {
+				let lscart = [...state.cart, action.payload];
+				localStorage.setItem('ss_cart_guest', JSON.stringify(lscart));
+			}
+
 			return {
 				...state,
 				cart: [...state.cart, action.payload],
@@ -46,14 +51,12 @@ export const userReducer = (state = initialstate, action) => {
 				cTotal: action.payload,
 			};
 		case FETCH_USER_DETAILS_SUCCESS:
-			let mycart = [];
-
 			return {
 				...state,
 				fname: action.payload.fname,
 				lname: action.payload.lname,
 				email: action.payload.email,
-				cart: action.payload.cart,
+				cart: [...action.payload.cart],
 				orders: action.payload.orders,
 				cTotal: action.payload.cTotal,
 			};

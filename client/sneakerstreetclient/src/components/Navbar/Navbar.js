@@ -24,11 +24,6 @@ function Navbar() {
 
 	const isAuthenticated = localStorage.getItem('ssauth');
 
-	/* 	Fetch all products to Display */
-	useEffect(() => {
-		dispatch(fetchall());
-	}, []);
-
 	/* 	Check if the User is logged In */
 	useEffect(() => {
 		dispatch(isUserloggedIn());
@@ -39,14 +34,10 @@ function Navbar() {
 		console.log('user', user);
 		if (user !== '' && user !== null) {
 			dispatch(fetchUserDetails(user));
-		} /* else if (isAuthenticated == null) {
-			history.push({
-				pathname: '/',
-			});
-		} */
+		}
 	}, [user]);
 
-	/* User Cart Console Log */
+	/* User Cart  */
 	useEffect(() => {
 		console.log('Cart', cart);
 	}, [cart]);
@@ -217,18 +208,6 @@ function Navbar() {
 									</li>
 								</ul>
 							</li>
-							{/* 	<li>
-								<Link to='/'>
-									<div
-										className='nav-item'
-										onClick={(e) => {
-											dispatch(logoutUser());
-											window.location.reload();
-										}}>
-										Logout
-									</div>
-								</Link>
-							</li> */}
 						</>
 					)}
 
