@@ -86,7 +86,7 @@ function Footer() {
 				SubNotify();
 			}
 		} catch (err) {
-			console.log(err);
+			ErrorNotify();
 		}
 	};
 
@@ -120,9 +120,9 @@ function Footer() {
 								<Link to='/shopall'>
 									<li>Shop All</li>
 								</Link>
-								<Link to='/about'>
+								{/* 		<Link to='/about'>
 									<li>About</li>
-								</Link>
+								</Link> */}
 								{uemail === '' || uemail === null ? (
 									<Link to='/login'>
 										<li>Account</li>

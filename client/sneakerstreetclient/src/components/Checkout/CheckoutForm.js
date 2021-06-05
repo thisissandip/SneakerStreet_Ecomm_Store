@@ -35,7 +35,7 @@ function CheckoutForm() {
 	/* onSubmit */
 	const finalsubmit = async () => {
 		setErrmsg({});
-		console.log(inputs);
+		//console.log(inputs);
 
 		if (inputs.name === null || inputs.name === '') {
 			setErrmsg((errmsg) => ({ ...errmsg, errname: 'Name is Required' }));
@@ -70,7 +70,7 @@ function CheckoutForm() {
 			{ useremail, inputs },
 			{ 'Content-Type': 'application/json' }
 		);
-		console.log(response);
+		//console.log(response);
 		if (response.data.clientSecret) {
 			setClientSecret(response.data.clientSecret);
 			setProcessing(true);
@@ -89,8 +89,6 @@ function CheckoutForm() {
 						card: elements.getElement(CardElement),
 					},
 				});
-
-				console.log('secretkey');
 
 				if (payload.error) {
 					setError(`${payload.error.message}`);

@@ -6,7 +6,6 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
 import { isUserloggedIn, logoutUser } from '../../redux/actions/authActions';
 import { fetchUserDetails } from '../../redux/actions/userActions';
-import { fetchall } from '../../redux/actions/productActions';
 import useWidth from '../../Hooks/useWidth';
 
 import './Navbar.scss';
@@ -20,10 +19,6 @@ function Navbar() {
 
 	const dispatch = useDispatch();
 
-	const history = useHistory();
-
-	const isAuthenticated = localStorage.getItem('ssauth');
-
 	/* 	Check if the User is logged In */
 	useEffect(() => {
 		dispatch(isUserloggedIn());
@@ -31,17 +26,17 @@ function Navbar() {
 
 	/* If User is Logged in, fetch User Details */
 	useEffect(() => {
-		console.log('user', user);
+		//console.log('user', user);
 		if (user !== '' && user !== null) {
 			dispatch(fetchUserDetails(user));
 		}
 	}, [user]);
 
 	/* User Cart  */
-	useEffect(() => {
+	/* 	useEffect(() => {
 		console.log('Cart', cart);
 	}, [cart]);
-
+ */
 	const OpenmMobileMenu = () => {
 		const mobilemenu = document.querySelector('.navbar-inner');
 		const hamburger = document.querySelector('.hamburger-icon');
@@ -150,7 +145,7 @@ function Navbar() {
 						</NavLink>
 					</li>
 
-					<li>
+					{/* 			<li>
 						<NavLink activeClassName='is-active' to='/about'>
 							<div
 								className='nav-item'
@@ -160,7 +155,7 @@ function Navbar() {
 								About
 							</div>
 						</NavLink>
-					</li>
+					</li> */}
 				</ul>
 				<ul className='right-nav'>
 					{user == null ? (

@@ -1,20 +1,26 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const productRouter = require('./routes/productroutes');
-const authRoutes = require('./routes/authROutes');
+const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const bodyparser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const dotEnv = require('dotenv');
+
+dotEnv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-const mydomain = 'http://localhost:3000';
+const mydomain = 'https://sneakerstreet.netlify.app';
+/* 
+const mydomain = 'http://localhost:3000'; */
 
 /* DB CONNECTION */
-const DB_URL =
-	'mongodb+srv://SandipSneakerStore:123SneakerStore123@cluster0.no5ds.mongodb.net/SneakerStore?retryWrites=true&w=majority';
+const DB_URL = process.env.DB_URL;
+
+app.set('trust proxy', 1);
 
 mongoose
 	.connect(DB_URL, {
@@ -25,20 +31,11 @@ mongoose
 	})
 	.then((result) =>
 		app.listen(port, () => {
-			console.log('Connection established and listening to Port');
+			console.log(`Connection established ${port}`);
 		})
 	);
 
-/* MIDDLEWARES */
-// enabling CORS without npm package
-/* app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin, X-Requested-With, Content-Type, Accept"
-	);
-	next();
-}); */
+app.set('trust proxy', 1);
 
 // support parsing of application/json type post data
 app.use(bodyparser.json());

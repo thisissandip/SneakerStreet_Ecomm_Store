@@ -35,8 +35,6 @@ export const fetchUserDetails = (userid) => {
 						payload: userdata,
 					});
 				}
-
-				console.log(userdata);
 			} else {
 				console.log('failed to fetch user data');
 			}
@@ -116,7 +114,7 @@ export const UpdateMyOrders = (uemail, ucart, user) => {
 				{ uemail, ucart },
 				headeroptions
 			);
-			console.log(response);
+
 			if (response.data.updateorders) {
 				dispatch(EmptyMyCart(uemail, user));
 			}

@@ -18,7 +18,7 @@ function MyOrders() {
 	}, []);
 
 	useEffect(() => {
-		console.log(cart);
+		//console.log(cart);
 		if (uemail && cart) {
 			cart.forEach((productID) => {
 				allproducts.forEach((item) => {
@@ -30,10 +30,6 @@ function MyOrders() {
 			setCartproducts(allcartproducts);
 		}
 	}, [cart, allproducts]);
-
-	useEffect(() => {
-		console.log(Cartproducts);
-	}, [Cartproducts]);
 
 	const displayALLproductDIV = Cartproducts.map((product, i) => (
 		<div key={i} className='product-container'>

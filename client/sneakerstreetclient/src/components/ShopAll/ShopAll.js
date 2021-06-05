@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './shopall.scss';
+import header1 from '../../images/cool.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchall } from '../../redux/actions/productActions';
-import Header from '../Header/Header';
 import Productitem from '../ProductItem/ProductItem';
 import Footer from '../Footer/Footer';
 
@@ -44,7 +44,7 @@ function ShopAll() {
 			);
 			SetarrayToMap(popularity);
 			SetpriceOrderopt('Popularity');
-			console.log('shop all loaded', allproducts);
+			//console.log('shop all loaded', allproducts);
 		}
 		return () => {
 			SetarrayToMap([]);
@@ -108,7 +108,9 @@ function ShopAll() {
 
 	return (
 		<div className='shopall'>
-			<Header pagename={'shopall'} />
+			<div className='shop-all-header'>
+				<img className='shopall-banner' src={header1} alt='Shop All Banner' />
+			</div>
 
 			<div className='shopall-content'>
 				<div className='shop-all-top-title'>Shop All</div>

@@ -13,8 +13,11 @@ function Slider() {
 
 	const [displayProducts, SetdisplayProducts] = useState([]);
 	const [slider, setSlider] = useState();
-
 	const [width] = useWidth();
+
+	useEffect(() => {
+		dispatch(fetchall());
+	}, []);
 
 	// Fetch Products Starts Here
 
@@ -57,36 +60,40 @@ function Slider() {
 	// According to the button clicked update the scrollAmt
 	const Slide = (side) => {
 		const innerslider = document.querySelector('.slider');
-		const productitemWidth = document.querySelector('.product-item')
-			.clientWidth;
+		if (innerslider) {
+			const productitemWidth =
+				document.querySelector('.product-item').clientWidth;
 
-		switch (side) {
-			case 'left':
-				if (scrollAmt > 0) {
-					setScrollAmt(scrollAmt - productitemWidth * 1.5);
-				} else {
-					setScrollAmt(0);
-				}
+			switch (side) {
+				case 'left':
+					if (scrollAmt > 0) {
+						setScrollAmt(scrollAmt - productitemWidth * 1.5);
+					} else {
+						setScrollAmt(0);
+					}
 
-				break;
-			case 'right':
-				if (
-					scrollAmt <=
-					innerslider.scrollWidth - innerslider.clientWidth + 10
-				) {
-					setScrollAmt(scrollAmt + productitemWidth * 1.5);
-				}
-				break;
+					break;
+				case 'right':
+					if (
+						scrollAmt <=
+						innerslider.scrollWidth - innerslider.clientWidth + 10
+					) {
+						setScrollAmt(scrollAmt + productitemWidth * 1.5);
+					}
+					break;
 
-			default:
-				break;
+				default:
+					break;
+			}
 		}
 	};
 
 	// As the Scroll Amount Changes Update the transform translate
 	useEffect(() => {
 		const innerslider = document.querySelector('.slider');
-		innerslider.style.transform = `translateX(-${scrollAmt}px)`;
+		if (innerslider) {
+			innerslider.style.transform = `translateX(-${scrollAmt}px)`;
+		}
 	}, [scrollAmt]);
 
 	// In Mobile Set the Scroll Amount to 0 and Move to the First Product

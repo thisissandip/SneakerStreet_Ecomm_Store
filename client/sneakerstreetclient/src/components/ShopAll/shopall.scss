@@ -2,6 +2,13 @@
 
 .shopall {
 	width: 100%;
+	.shop-all-header {
+		display: flex;
+		justify-content: center;
+		background-color: #facbad;
+		margin-top: 80px; // space for navbar in desktops
+		height: 200px;
+	}
 
 	.shopall-content {
 		width: 100%;
@@ -269,5 +276,10 @@
 		.all-products-container
 		.filters-container {
 		top: 70px;
+	}
+	.shopall {
+		.shop-all-header {
+			margin-top: 70px; // space for navbar in mobile
+		}
 	}
 }

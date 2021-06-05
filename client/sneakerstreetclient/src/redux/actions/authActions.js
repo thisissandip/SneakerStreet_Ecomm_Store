@@ -73,7 +73,7 @@ export const registerUser = (userdata) => {
 			body: JSON.stringify(userdata),
 		});
 		const data = await response.json();
-		console.log(data);
+		//console.log(data);
 		if (data.errors) {
 			dispatch(registeruserfailure(data.errors.email));
 		} else if (data.userid) {

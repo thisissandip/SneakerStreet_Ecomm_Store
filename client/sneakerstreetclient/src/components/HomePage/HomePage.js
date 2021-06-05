@@ -36,7 +36,7 @@ function HomePage() {
 	return (
 		<>
 			<div className='homepage'>
-				<Header pagename={'homepage'} />
+				<Header />
 				<div className='home-slider-section'>
 					<div className='home-slider-title-section'>
 						<div className='home-slider-title'>Just Dropped</div>

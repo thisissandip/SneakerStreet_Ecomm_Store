@@ -21,7 +21,7 @@ function CartPage() {
 	}, []);
 
 	useEffect(() => {
-		console.log(cart);
+		//console.log(cart);
 		if (uemail && cart !== null) {
 			cart.forEach((productID) => {
 				allproducts.forEach((item) => {
@@ -35,7 +35,7 @@ function CartPage() {
 	}, [cart, allproducts]);
 
 	useEffect(() => {
-		console.log(Cartproducts);
+		//console.log(Cartproducts);
 	}, [Cartproducts]);
 
 	const Remove = (itemid) => {

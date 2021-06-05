@@ -40,40 +40,6 @@
 	}
 }
 
-@keyframes headertext {
-	0% {
-		background-position: left;
-	}
-	100% {
-		background-position: right;
-	}
-}
-
-.shop-all-header {
-	margin-top: 80px; // space for navbar in desktops
-	height: 200px;
-	background-color: #facbad;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-
-	.marquee-header {
-		text-align: center;
-		font-family: $wide-font;
-		font-size: 4rem;
-		font-weight: 800;
-	}
-}
-
-.header::before {
-	position: absolute;
-	overflow: hidden;
-	width: 0px;
-	height: 0px;
-	z-index: -1;
-	content: url('../../images/header2.jpg');
-}
-
 @media screen and (max-width: 850px) {
 	.header {
 		padding: 60px 0;
@@ -92,9 +58,6 @@
 				font-size: 3rem;
 			}
 		}
-	}
-	.shop-all-header {
-		margin-top: 70px; // space for navbar in mobile
 	}
 }
 

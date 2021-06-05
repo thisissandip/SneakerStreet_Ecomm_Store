@@ -23,7 +23,6 @@ export const authReducer = (state = authState, action) => {
 				isloading: true,
 			};
 		case FETCH_USER_SUCCESS:
-			localStorage.setItem('ssauth', 'isAuthenticated');
 			return {
 				...state,
 				user: action.payload,
@@ -51,8 +50,6 @@ export const authReducer = (state = authState, action) => {
 				isloading: false,
 			};
 		case REGISTER_USER_SUCCESS:
-			localStorage.setItem('ssauth', 'isAuthenticated');
-
 			return {
 				...state,
 				user: action.payload,
@@ -60,7 +57,6 @@ export const authReducer = (state = authState, action) => {
 				isloading: false,
 			};
 		case LOGOUT_USER:
-			localStorage.removeItem('ssauth');
 			localStorage.removeItem('ss_cart');
 			return {
 				...state,

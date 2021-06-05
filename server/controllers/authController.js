@@ -29,7 +29,12 @@ module.exports.signupPost = async (req, res) => {
 		const userid = newuser._id;
 		//console.log(newuser);
 		const token = createToken(userid);
-		res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+		res.cookie('jwt', token, {
+			httpOnly: true,
+			maxAge: maxAge * 1000,
+			sameSite: 'none',
+			secure: true,
+		});
 		res.status(201).json({
 			userid,
 		});
@@ -45,10 +50,15 @@ module.exports.loginPost = async (req, res) => {
 	let password = logindata.loginpassword;
 	try {
 		const user = await User.login(email, password);
-		if (user) {
+		if (user !== undefined && user !== null) {
 			const userid = user._id;
 			const token = createToken(userid);
-			res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+			res.cookie('jwt', token, {
+				httpOnly: true,
+				maxAge: maxAge * 1000,
+				sameSite: 'none',
+				secure: true,
+			});
 			res.status(201).json({
 				userid,
 			});
@@ -67,7 +77,6 @@ module.exports.checkUser = async (req, res) => {
 	try {
 		const decoded = jwt.verify(token, 'sneakerstoreserver');
 		const userid = decoded.id;
-
 		res.status(201).json({
 			userid,
 		});
@@ -77,7 +86,12 @@ module.exports.checkUser = async (req, res) => {
 };
 
 module.exports.logoutUser = async (req, res) => {
-	res.clearCookie('jwt');
+	res.cookie('jwt', '', {
+		httpOnly: true,
+		maxAge: -1000,
+		sameSite: 'none',
+		secure: true,
+	});
 	res.status(201).json({
 		logout: true,
 	});
