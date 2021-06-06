@@ -7,6 +7,10 @@ footer {
 	font-family: $primary-font;
 	color: white;
 	padding: 70px 0;
+	padding-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	.footer-wrapper {
 		margin: 0px auto;
 		padding: 2px;
@@ -145,6 +149,15 @@ footer {
 					}
 				}
 			}
+		}
+	}
+	.github-link {
+		margin-top: 25px;
+		color: #fff;
+		a {
+			margin-left: 5px;
+			text-decoration: underline;
+			color: $primary-color;
 		}
 	}
 }

@@ -185,7 +185,14 @@ function Footer() {
 						</div>
 					</section>
 				</div>
+				<div className='github-link'>
+					Made with ❤️️ by
+					<a href='https://github.com/thisissandip' target='_blank'>
+						Sandip Mondal
+					</a>
+				</div>
 			</footer>
+
 			<ToastContainer />
 		</>
 	);
