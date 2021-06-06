@@ -96,6 +96,11 @@ $pageheight: 100vh;
 					font-style: italic;
 					color: brown;
 				}
+				.card-number-hint {
+					display: flex;
+					justify-content: space-between;
+					color: rgba(157, 157, 157, 0.5);
+				}
 				#submit {
 					width: 100%;
 					margin: 20px 0;
@@ -252,14 +257,15 @@ $pageheight: 100vh;
 		padding: 0px 10px;
 		.checkout-container {
 			display: flex;
+
 			width: 100%;
-			overflow-y: scroll;
 			&::-webkit-scrollbar {
 				background: transparent;
 				display: none;
 			}
 			.form-container {
 				width: 100%;
+				min-width: 300px;
 				padding-top: 0px;
 				padding-right: 0px;
 				.title {

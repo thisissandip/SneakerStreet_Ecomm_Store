@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
 import SignupPage from './components/SignupPage/SignupPage';
 import HomePage from './components/HomePage/HomePage';
@@ -34,7 +34,7 @@ function App() {
 
 	return (
 		<>
-			<HashRouter>
+			<BrowserRouter>
 				<Navbar />
 				<Switch>
 					<Route exact path='/'>
@@ -57,7 +57,7 @@ function App() {
 					<ProtectedRoute exact path='/checkout' component={Checkout} />
 					<Route path='*' component={Err404} />
 				</Switch>
-			</HashRouter>
+			</BrowserRouter>
 		</>
 	);
 }

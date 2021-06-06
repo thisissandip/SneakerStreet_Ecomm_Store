@@ -13,9 +13,8 @@ dotEnv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-const mydomain = 'https://sneakerstreet.netlify.app';
-/* 
-const mydomain = 'http://localhost:3000'; */
+
+/* const mydomain = 'http://localhost:3000'; */
 
 /* DB CONNECTION */
 const DB_URL = process.env.DB_URL;
@@ -45,7 +44,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
 	cors({
-		origin: mydomain,
+		origin: process.env.HOST,
 		credentials: true,
 	})
 );

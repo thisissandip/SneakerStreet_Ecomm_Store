@@ -239,6 +239,9 @@ function CheckoutForm() {
 						onChange={handleChange}
 					/>
 					<div className='error-card'>{error && error}</div>
+					<div className='card-number-hint'>
+						<div> Use 4242 4242 4242 4242 4242</div>
+					</div>
 				</div>
 
 				<button
