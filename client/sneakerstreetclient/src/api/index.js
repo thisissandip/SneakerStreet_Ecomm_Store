@@ -1,6 +1,6 @@
 export const url = 'https://sneaker-street-server.herokuapp.com';
 
-/* export const url = 'http://localhost:7000'; */
+/* export const url = 'http://localhost:5000'; */
 export const fetchallproducts = `${url}/products`;
 export const fetchsingleproduct = `${url}/products`;
 export const checkuser = `${url}/checkuser`;
@@ -13,3 +13,4 @@ export const newCartTotal = `${url}/newcarttotal`;
 export const updateMyOrders = `${url}/updatemyorders`;
 export const emptycart = `${url}/emptycart`;
 export const newsletter = `${url}/newsletter`;
+export const loginFacebook = `${url}/login/facebook`;

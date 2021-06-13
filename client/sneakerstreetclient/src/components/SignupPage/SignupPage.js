@@ -7,6 +7,8 @@ import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../redux/actions/authActions';
 import Footer from '../Footer/Footer';
+import { loginFacebook } from '../../api';
+import { FaFacebookF } from 'react-icons/fa';
 
 function SignupPage() {
 	const dispatch = useDispatch();
@@ -222,6 +224,17 @@ function SignupPage() {
 								</button>
 							</div>
 						</form>
+						<div className='divider'></div>
+						<div className='oauth-container'>
+							<div className='facebook'>
+								<a href={loginFacebook}>
+									<button className='facebook-signin-btn'>
+										<FaFacebookF />{' '}
+										<div className='fb-text'>Sign Up with Facebook</div>
+									</button>
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

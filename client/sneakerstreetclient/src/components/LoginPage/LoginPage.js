@@ -4,15 +4,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './login.scss';
 import { Link, useHistory } from 'react-router-dom';
+import { loginFacebook } from '../../api';
 import Footer from '../Footer/Footer';
-
+import { FaFacebookF } from 'react-icons/fa';
 import { fetchUser } from '../../redux/actions/authActions';
 
 function LoginPage() {
 	const user = useSelector((state) => state.authR.user);
 	const authError = useSelector((state) => state.authR.error);
 	const dispatch = useDispatch();
-
 	const history = useHistory();
 
 	let initialValues = {
@@ -123,19 +123,24 @@ function LoginPage() {
 
 							<div className='form-last-row'>
 								<div className='terms'>
-									<a
-										rel='noreferrer'
-										href='https://www.google.com/'
-										target='_blank'>
-										Forgot Your Password?
-									</a>
-									{<div className='error'>{authError}</div>}
+									<div className='error error-login'>{authError}</div>
 								</div>
 								<button className='submit-button' type='submit'>
 									LOGIN
 								</button>
 							</div>
 						</form>
+						<div className='divider'></div>
+						<div className='oauth-container'>
+							<div className='facebook'>
+								<a href={loginFacebook}>
+									<button className='facebook-signin-btn'>
+										<FaFacebookF />{' '}
+										<div className='fb-text'>Sign In with Facebook</div>
+									</button>
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

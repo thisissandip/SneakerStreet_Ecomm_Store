@@ -44,7 +44,7 @@
 			}
 		}
 		.login-right-cont {
-			flex: 1 0 300px;
+			flex: 1 0 270px;
 			padding: 0 40px;
 			//border: 2px solid rebeccapurple;
 			.form-first-row {
@@ -109,12 +109,11 @@
 					color: brown;
 					padding: 5px 0px;
 				}
+				&:nth-child(2) {
+					margin-bottom: 0px;
+				}
 			}
 			.form-last-row {
-				margin-top: 50px;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
 				.terms {
 					font-size: 0.9rem;
 					label {
@@ -132,15 +131,18 @@
 						color: brown;
 						padding: 5px 0px;
 					}
+					.error-login {
+						margin: 10px 0;
+					}
 				}
 				.submit-button {
 					cursor: pointer;
 					outline: none;
-					width: 40%;
+					width: 100%;
 					font-family: $primary-font;
 					font-weight: 300;
 					font-size: 0.8rem;
-					padding: 12px 0;
+					padding: 11px 0;
 					border: 1px solid $accent-color;
 					border-radius: 30px;
 					color: white;
@@ -150,6 +152,47 @@
 						background-color: transparent;
 						color: $accent-color;
 						font-weight: 500;
+					}
+				}
+			}
+			.divider {
+				position: relative;
+				margin: 40px 0;
+				border-top: 1px solid rgb(196, 196, 196);
+				&::after {
+					content: 'OR';
+					position: absolute;
+					background-color: #fff;
+					color: rgb(72, 72, 72);
+					padding: 5px 20px;
+					top: -15px;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+			.oauth-container {
+				width: 100%;
+				.facebook {
+					width: 100%;
+					a {
+						width: 100%;
+						.facebook-signin-btn {
+							cursor: pointer;
+							display: flex;
+							justify-content: center;
+							width: 100%;
+							font-size: 0.8rem;
+							padding: 13px 0;
+							border: 1px solid transparent;
+							color: #fff;
+							border-radius: 30px;
+							background-color: #104fb4;
+							transition: all 0.2s ease;
+							.fb-text {
+								margin-top: -1px;
+								margin-left: 5px;
+							}
+						}
 					}
 				}
 			}
@@ -212,13 +255,13 @@
 					margin-bottom: 10px;
 				}
 				.form-last-row {
-					margin-top: 10px;
+					//margin-top: 10px;
 					display: flex;
 					flex-direction: column;
 					align-items: initial;
 					.submit-button {
 						width: 100%;
-						margin-top: 20px;
+						margin-top: 0px;
 					}
 				}
 			}

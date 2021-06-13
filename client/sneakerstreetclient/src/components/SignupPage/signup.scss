@@ -5,7 +5,6 @@
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	min-height: 80vh;
 	background-color: white;
 	margin-top: 80px;
 
@@ -13,6 +12,8 @@
 		font-family: $primary-font;
 		display: flex;
 		width: 80%;
+		margin: 40px 0;
+		margin-top: 60px;
 		max-width: 1300px;
 		.signup-left-cont {
 			flex: 1 0 200px;
@@ -33,7 +34,7 @@
 				font-size: 0.7rem;
 				margin-top: 35px;
 				margin-left: 2px;
-				padding: 12px 0;
+				padding: 11px 0;
 				border: 1px solid grey;
 				border-radius: 30px;
 				color: black;
@@ -114,7 +115,7 @@
 				}
 			}
 			.form-last-row {
-				margin-top: 50px;
+				margin-top: 10px;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
@@ -153,6 +154,48 @@
 					}
 				}
 			}
+			.divider {
+				position: relative;
+				margin: 40px 0;
+				border-top: 1px solid rgb(196, 196, 196);
+				&::after {
+					content: 'OR';
+					position: absolute;
+					background-color: #fff;
+					color: rgb(72, 72, 72);
+					padding: 5px 20px;
+					top: -15px;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+			.oauth-container {
+				margin-bottom: 50px;
+				width: 100%;
+				.facebook {
+					width: 100%;
+					a {
+						width: 100%;
+						.facebook-signin-btn {
+							cursor: pointer;
+							display: flex;
+							justify-content: center;
+							width: 100%;
+							font-size: 0.8rem;
+							padding: 13px 0;
+							border: 1px solid transparent;
+							color: #fff;
+							border-radius: 30px;
+							background-color: #104fb4;
+							transition: all 0.2s ease;
+							.fb-text {
+								margin-top: -1px;
+								margin-left: 5px;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -175,10 +218,11 @@
 @media screen and (max-width: 750px) {
 	.signup-page {
 		height: auto;
-		padding-bottom: 50px;
+		padding-bottom: 0px;
 		margin-top: 0px;
 		.signup-container {
 			width: 90%;
+			margin: 0px;
 			margin-top: 80px; //space for navbar
 			align-items: initial;
 			flex-direction: column;

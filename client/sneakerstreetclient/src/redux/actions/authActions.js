@@ -8,7 +8,7 @@ import {
 	LOGOUT_USER,
 } from '../types';
 import { url } from '../../api';
-import { checkuser, logoutuser } from '../../api';
+import { checkuser, logoutuser, loginFacebook } from '../../api';
 import axios from 'axios';
 
 export const fetchUserLoading = () => {
