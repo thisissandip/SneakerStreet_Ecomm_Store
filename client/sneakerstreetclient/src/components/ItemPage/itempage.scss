@@ -3,12 +3,17 @@
 .product-page {
 	width: 100%;
 	margin-top: 80px;
+
 	.product-container {
 		display: flex;
 		margin: 0 auto;
 		width: 100%;
 		font-family: $primary-font;
 		//	border: 1px solid red;
+		::-webkit-scrollbar {
+			width: 0;
+			background: transparent;
+		}
 		.product-left,
 		.product-right {
 			width: 50%;
@@ -39,6 +44,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+
 			.product-right-cont {
 				margin-top: 80px;
 				width: 80%;
