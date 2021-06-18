@@ -4,8 +4,6 @@ Sneaker Street is a JavaScript-based Full-Stack e-commerce web application built
 
 ### [Live Website](https://sneakerstreet.netlify.app/)
 
-<br />
-
 ### 🧰 &nbsp;Built with
 
 - Frontend:
