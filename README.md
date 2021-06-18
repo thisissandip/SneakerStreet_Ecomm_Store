@@ -6,8 +6,6 @@ Sneaker Street is a JavaScript-based Full-Stack e-commerce web application built
 
 <br />
 
-![sneakerstreet](sneakerstreet.gif)
-
 ### 🧰 &nbsp;Built with
 
 - Frontend:
