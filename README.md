@@ -2,9 +2,13 @@
 
 Sneaker Street is a JavaScript-based Full-Stack e-commerce web application built for amazing digital shopping experience with animations, interactivity and smooth payment process.
 
-##### [Live Demo](https://sneakerstreet.netlify.app/)
+### [Live Website](https://sneakerstreet.netlify.app/)
 
-### 🧰 Built with
+<br />
+
+![sneakerstreet](sneakerstreet.gif)
+
+### 🧰 &nbsp;Built with
 
 - Frontend:
   - <a target="_blank" href="https://reactjs.org/" >React</a>
@@ -21,7 +25,7 @@ Sneaker Street is a JavaScript-based Full-Stack e-commerce web application built
   - <a target="_blank" href="https://stripe.com" >Stripe Payments</a>
   - <a target="_blank" href="https://www.heroku.com/" >Heroku</a>
 
-### :bulb: Features
+### :bulb:&nbsp; Features
 
 - Frontend:
   - Landing page with animations and modern minimilistic design.
@@ -37,7 +41,7 @@ Sneaker Street is a JavaScript-based Full-Stack e-commerce web application built
   - MongoDB is used to store the user data and product data.
   - NodeMailer is used for to send mail to the users who subscribe to newsletter.
 
-### 🚀 Development setup
+### 🚀 &nbsp;Development setup
 
 #### Prerequisites
 
@@ -97,7 +101,7 @@ git clone https://github.com/thisissandip/what-should-i-watch-next.git
 
 4. Start Playing!
 
-### 🤝 Contributing
+### 🤝 &nbsp;Contributing
 
 1. Fork it
 2. Create your feature branch (`git checkout -b feature/fooBar`)
